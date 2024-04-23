@@ -1,0 +1,96 @@
+Idée : 
+    D'abord commencer 1c1 
+    2 joueurs qui s'affrontent (village avec troupes)
+    Village avec pts de vie 
+
+
+    classes: 
+        - Jeu
+
+        - Joueur 
+
+        - Batiment (abstract)
+        - Base (Batiment) (A voir) 
+        - Forteresse (Batiment) (Crée des soldats)
+        - École de magie (Batiment) (Crée des magiciens)
+
+        - Troupe (abstract)
+        - Travailleurs (Troupe)
+        - Soldats (Troupe)
+        - Magiciens (Troupe)
+
+-Jeu:
+    Attributs:
+        - Joueur1
+        - Joueur2
+
+- Joueur:
+    Attributs: 
+        - Village 
+        - Troupes
+        - Ressources
+    
+    Méthodes:
+        - Former_Troupes (Consommation de ressources)
+        - Mobiliser_Troupes (Pour chaque troupe effectuer une action)
+        - Construire_Batiment (Consommation de ressources)
+        - Améliorer_Batiment (Consommation de ressources)
+
+- Batiment:
+    Attributs:
+        - Vie
+        - Niveau
+        - TypeBatiment
+        - Liste_Défenseurs (Liste des défenseurs du batiment (les défenseurs encaissent dégats à la place))
+    Méthodes:
+        - Former_Troupes
+        - Se_Fait_Réparer (Se fait réparer par un travailleur)
+        - Se_Fait_Attaquer (utilise la liste de défenseurs pour encaisser dégats)
+    
+- Base:
+    Méthode:
+        - Former_Troupes -> Crée des Travailleurs
+
+- Forteresse:
+    Méthode:
+        - Former_Troupes -> Crée des Soldats
+    
+- École de Magie:
+    Méthode:
+        - Former_Troupes -> Crée des Magiciens
+
+- Troupe:
+    Attributs:
+        - Niveau
+        - TypeTroupe
+
+- Travailleurs:
+    Méthodes:
+        - Chercher_Ressources (Dépend niveau)
+        - Réparer_Batiment (Consommation Ressources)
+
+- TroupeGuerre (Troupe):
+    Attributs:
+        - Points de Vie
+    Méthodes : 
+        - Attaquer_Troupe (dépend niveau)
+        - Attaquer_Batiment (dépend niveau)
+
+
+- Soldats (TroupeGuerre):
+    Méthode:
+        - Défendre_Batiment 
+
+- Magiciens (TroupeGuerre):
+    Méthode:
+        - Soigner (Dépend niveau et soigne troupes)
+
+
+
+travailleurs : nombre_max dépend du niveau et de la vie du village, Chercher_Ressources -> niveau * 5,  Réparer_Batiment -> niveau * 2 ET coute niveau * 5 ressources
+soldat : vie : niveau / 2 * 100 , dégats = niveau / 2 * 20 
+magicien : vie : niveau / 2 * 40, dégats = niveau / 2 * 25, soins = niveau / 2 * 10
+
+
+Interface Graphique (chaque troupe surlignée quand son tour et clic pour choisir action)
+
