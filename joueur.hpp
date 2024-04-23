@@ -2,6 +2,9 @@
 #include "batiment.hpp"
 #include "troupe.hpp"
 
+#ifndef JOUEUR_HPP
+#define JOUEUR_HPP
+
 class Joueur{
     private:
         std::vector<Batiment> _village;
@@ -15,3 +18,5 @@ class Joueur{
 };
 
 class IA : Joueur{}; // IA a definir
+
+#endif

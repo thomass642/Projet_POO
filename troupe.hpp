@@ -1,6 +1,9 @@
 #include <string>
 #include "batiment.hpp"
 
+#ifndef TROUPE_HPP
+#define TROUPE_HPP
+
 class Troupe{
     protected:
         int _niveau;
@@ -22,12 +25,14 @@ class TroupeDeGuerre{
         void se_fait_soigner(int qtt_soin){ _vie += qtt_soin;} // La troupe se fait soigner d'une quantité définie
 };
 
-class Soldat : TroupeDeGuerre{
+class Soldat : public TroupeDeGuerre{
     public:
         void defendre_batiment(Batiment batiment); // La troupe défend un batiment
 };
 
-class Magicien : TroupeDeGuerre{
+class Magicien : public TroupeDeGuerre{
     public:
         void soigner(Troupe &troupe); // On soigne la troupe en parametre (dépend du niveau du magicien)
 };
+
+#endif
