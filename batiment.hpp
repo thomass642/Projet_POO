@@ -8,7 +8,7 @@
 class Batiment{
     protected: 
         int _vie;
-        int _niveau = 0;
+        int _niveau;
         std::string _type_batiment;
         std::vector<Troupe> _defenseurs;
     public:
@@ -19,16 +19,19 @@ class Batiment{
 
 class Base : public Batiment{
     public:
+        Base();
         Travailleur former_troupes(); // Renvoie un travailleur 
 };
 
 class Forteresse : public Batiment{
     public:
+        Forteresse();
         Soldat former_troupes(); // Renvoie un soldat
 };
 
 class EcoleDeMagie : public Batiment{
     public:
+        EcoleDeMagie();
         Magicien former_troupes(); // Renvoie un magicien 
 };
 

@@ -8,10 +8,13 @@ class Troupe{
     protected:
         int _niveau;
         std::string _type_troupe;
+    public : 
+        Troupe(int niv);
 };
 
 class Travailleur{
     public:
+        Travailleur(int niveau) : Troupe(niveau){} // Constructeur de travailleur (on affecte le niveau)
         int chercher_ressources(); // Renvoie le nombre de ressources collectées (en fonction de son niveau)
         void reparer_batiment(int ressources); // Répare un batiment en fonction des ressources du joueur
 };
@@ -27,6 +30,7 @@ class TroupeDeGuerre{
 
 class Soldat : public TroupeDeGuerre{
     public:
+        Soldat(int niveau);
         void defendre_batiment(Batiment batiment); // La troupe défend un batiment
 };
 
