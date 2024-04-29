@@ -8,15 +8,15 @@
 // }
 
 void Batiment::se_fait_attaquer(int degats){ // Le batiment perd de la vie, a moins qu'il soit défendu. Dans ce cas c'est un défenseur qui prend les dégats
-    if (_defenseurs.size() = 0){
+    if (_defenseurs.size() == 0){
         _vie -= degats;
         std::cout << "La " << _type_batiment << " n'a pas de defenseur et a subi " << degats << ". Il lui reste " << _vie << " points de vie..." << std::endl;
     } else {
         int vie_apres_degats = _defenseurs[0].se_fait_attaquer(degats); // Défenseur mort si degats <= 0
         std::cout << "Le defenseur a subi " << degats << " degats.. Il lui reste donc " << vie_apres_degats << "points de vie..." << std::endl; 
         while (vie_apres_degats <=0){ // Tant que les degats infliges excedent les degats du defenseur courant
-            _defenseurs.pop(0); // On supprime le defenseur courant (car mort)
-            if (_defenseurs.size() = 0){ // S'il n'y a plus de defenseur le batiment est attaque
+            _defenseurs.erase(_defenseurs.begin()); // On supprime le defenseur courant (car mort)
+            if (_defenseurs.size() == 0){ // S'il n'y a plus de defenseur le batiment est attaque
                 std::cout << "Le dernier defenseur est mort et le batiment encaisse " << -vie_apres_degats << ".Il lui reste " << _vie << " points de vie..." << std::endl;
                 _vie -= -vie_apres_degats;
                 vie_apres_degats = 0;
@@ -35,7 +35,7 @@ void Batiment::se_fait_attaquer(int degats){ // Le batiment perd de la vie, a mo
     }
 }
 
-void Batiment::se_fait_defendre(Troupe troupe){ // Le batiment se fait défendre par un défenseur
+void Batiment::se_fait_defendre(TroupeDeGuerre troupe){ // Le batiment se fait défendre par un défenseur
     _defenseurs.push_back(troupe);
     std::cout << "Le batiment se fait defendre par " << troupe << "!" << std::endl;
 }

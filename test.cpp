@@ -1,5 +1,6 @@
 #include <iostream>
 #include "troupe.hpp"
+#include "batiment.hpp"
 
 int main(){
 
@@ -25,6 +26,12 @@ int main(){
     mag.soigner(sold);
 
     std::cout << "SOIN" << std::endl << sold;
+
+    // Base base;
+
+    // base.setniveau(3);
+    // std::cout<<base.former_troupes();
+
 
     return 0;
 }
