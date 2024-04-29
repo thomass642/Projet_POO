@@ -47,7 +47,7 @@ void Batiment::se_fait_defendre(Troupe troupe){ // Le batiment se fait défendre
 Base::Base(){ // Constructeur base
     _vie = 500;
     _niveau = 1;
-    _type_batiment = "Base"
+    _type_batiment = "Base";
 }
 
 Travailleur Base::former_troupes(){ // Renvoie un travailleur 
@@ -62,7 +62,7 @@ Travailleur Base::former_troupes(){ // Renvoie un travailleur
 Forteresse::Forteresse(){ // Constructeur forteresse
     _vie = 0;
     _niveau = 0;
-    _type_batiment = "Forteresse"
+    _type_batiment = "Forteresse";
 }
 
 Soldat Forteresse::former_troupes(){ // Renvoie un soldat
@@ -77,7 +77,7 @@ Soldat Forteresse::former_troupes(){ // Renvoie un soldat
 EcoleDeMagie::EcoleDeMagie(){ // Constructeur forteresse
     _vie = 0;
     _niveau = 0;
-    _type_batiment = "Ecole de Magie"
+    _type_batiment = "Ecole de Magie";
 }
 
 Magicien EcoleDeMagie::former_troupes(){ // Renvoie un magicien 
