@@ -35,7 +35,7 @@ void Batiment::se_fait_attaquer(int degats){ // Le batiment perd de la vie, a mo
     }
 }
 
-void Batiment::se_fait_defendre(TroupeDeGuerre troupe){ // Le batiment se fait défendre par un défenseur
+void Batiment::se_fait_defendre(Soldat troupe){ // Le batiment se fait défendre par un défenseur
     _defenseurs.push_back(troupe);
     std::cout << "Le batiment se fait defendre par " << troupe << "!" << std::endl;
 }

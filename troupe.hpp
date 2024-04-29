@@ -16,11 +16,12 @@ class Troupe{
         Troupe(int niv);
         int getniveau(){return _niveau;}
         int getniveau() const {return _niveau;}
+        std::string gettroupe(){return _type_troupe;}
 };
 
 class Travailleur : public Troupe{
     public:
-        Travailleur(int niveau) : Troupe(niveau){} // Constructeur de travailleur (on affecte le niveau)
+        Travailleur(int niveau) : Troupe(niveau){_type_troupe = "Travailleur";} // Constructeur de travailleur (on affecte le niveau)
         int chercher_ressources(); // Renvoie le nombre de ressources collectées (en fonction de son niveau)
         void reparer_batiment(int ressources, Batiment& batiment); // Répare un batiment en fonction des ressources du joueur
 };

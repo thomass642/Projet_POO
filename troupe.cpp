@@ -54,6 +54,7 @@ int TroupeDeGuerre::se_fait_attaquer(int degats){ // Renvoie le nombre de vie qu
 // SOLDAT
 
 Soldat::Soldat(int niveau){
+    _type_troupe = "Soldat";
     _niveau = niveau;
     _vie = _niveau/2*60;
     std::cout << "Les soldats ont une vie de " << _vie << std::endl ;
@@ -82,6 +83,7 @@ void Soldat::defendre_batiment(Batiment batiment){ // La troupe défend un batim
 // MAGICIEN
 
 Magicien::Magicien(int niveau){
+    _type_troupe = "Magicien";
     _niveau = niveau;
     _vie = _niveau/2*30;
     std::cout << "Les magiciens ont une vie de " << _vie << std::endl;

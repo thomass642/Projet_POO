@@ -27,10 +27,19 @@ int main(){
 
     std::cout << "SOIN" << std::endl << sold;
 
-    // Base base;
+    std::cout << "Creation d'une base" << std::endl; 
 
-    // base.setniveau(3);
-    // std::cout<<base.former_troupes();
+    Base base;
+
+    base.setniveau(3);
+    std::cout<<base.former_troupes();
+
+    std::cout << "Creation d'une ecole de magie" << std::endl; 
+
+    EcoleDeMagie ec;
+
+    ec.setniveau(5);
+    std::cout<<ec.former_troupes();
 
 
     return 0;
