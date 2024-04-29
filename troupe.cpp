@@ -19,30 +19,37 @@ int Travailleur::chercher_ressources(){ // Renvoie le nombre de ressources colle
 }
 
 void Travailleur::reparer_batiment(int ressources, Batiment& batiment){ // Répare un batiment en fonction des ressources du joueur
-    if (ressources >= _niveau * FACTO_RESSOURCES && batiment.getvie() < VIE_MAX_BAT) {
-        batiment.setvie(batiment.getvie()+ _niveau * FACTO_VIE_BAT) ;
+    batiment.setvie(batiment.getvie() + ressources * FACTO_REPAR);
+
+    if (batiment.getbatiment() == "Base") {
+        if (batiment.getvie() > batiment.getniveau() * FACTO_VIE_BASE) {
+            batiment.setvie(batiment.getniveau() * FACTO_VIE_BASE);
+        }
     }
+
+    else if (batiment.getbatiment() == "Forteresse") {
+        if (batiment.getvie() > batiment.getniveau() * FACTO_VIE_FORTERESSE) {
+            batiment.setvie(batiment.getvie()+ _niveau * FACTO_VIE_FORTERESSE);
+        }
+    }
+
+    else if (batiment.getbatiment() == "Ecole de magie") {
+        if (batiment.getvie() > batiment.getniveau() * FACTO_VIE_ECOLE_MAGIE) {
+            batiment.setvie(batiment.getvie()+ _niveau * FACTO_VIE_ECOLE_MAGIE);
+        }
+    }
+
     else {
-        std::cout << "Le batiment a atteint son niveau max ou le nombre de ressources n'est pas suffisant" << std::endl ;
+        std::cout << "Mauvaise type de batiment" << std::endl;
     }
+
 }
 
 // ----------------------------------------------------------------
 // TROUPE DE GUERRE
 
 void TroupeDeGuerre::attaquer_batiment(Batiment &batiment){ // On attaque un batiment (dépend du niveau de la troupe)
-    std::cout << "Le batiment avait une vie de " << batiment.getvie() << std::endl;
-    batiment.setvie(batiment.getvie()+ -(_niveau / FACTO_VIE_BAT * FACTO_BAT_GUERRE)) ;
-    
-    if (batiment.getvie() <= 0 ){
-        batiment.setvie(0) ;
-        std::cout << "Le batiment a été detruit." << std::endl;
-    }
-
-    else {
-        std::cout << "Le batiment a maintenant une vie de " << batiment.getvie() << std::endl;
-    }
-
+    batiment.se_fait_attaquer(_niveau * FACTO_ATTAQUE_BAT);
 }
 
 int TroupeDeGuerre::se_fait_attaquer(int degats){ // Renvoie le nombre de vie qu'il lui reste (possible négatif -> surplus dégats)
@@ -55,13 +62,13 @@ int TroupeDeGuerre::se_fait_attaquer(int degats){ // Renvoie le nombre de vie qu
 Soldat::Soldat(int niveau){
     _type_troupe = "Soldat";
     _niveau = niveau;
-    _vie = _niveau/2*FACTO_VIE_SOLDAT;
+    _vie = _niveau * FACTO_VIE_SOLDAT;
     std::cout << "Les soldats ont une vie de " << _vie << std::endl ;
 }
 
 void Soldat::attaquer_troupe(TroupeDeGuerre &troupe){ // On attaque une troupe (dépend du niveau de la troupe)
     std::cout << "La troupe adverse avait une vie de " << troupe.getvie() << std::endl;
-    troupe.setvie(troupe.getvie() + -(_niveau / 2 * FACTO_ATTAQUE_TROUPE_SOLD));
+    troupe.setvie(troupe.getvie() + -(_niveau* FACTO_ATTAQUE_TROUPE_SOLD));
     
     if (troupe.getvie() <= 0 ){
         troupe.setvie(0);
@@ -84,13 +91,13 @@ void Soldat::defendre_batiment(Batiment batiment){ // La troupe défend un batim
 Magicien::Magicien(int niveau){
     _type_troupe = "Magicien";
     _niveau = niveau;
-    _vie = _niveau/2*FACTO_VIE_MAGICIEN;
+    _vie = _niveau * FACTO_VIE_MAGICIEN;
     std::cout << "Les magiciens ont une vie de " << _vie << std::endl;
 }
 
 void Magicien::attaquer_troupe(TroupeDeGuerre &troupe){ // On attaque une troupe (dépend du niveau de la troupe)
     std::cout << "La troupe adverse avait une vie de " << troupe.getvie() << std::endl;
-    troupe.setvie(troupe.getvie() -(_niveau / 2 * FACTO_ATTAQUE_TROUPE_MAG));
+    troupe.setvie(troupe.getvie() -(_niveau * FACTO_ATTAQUE_TROUPE_MAG));
     
     if (troupe.getvie() <= 0 ){
         troupe.setvie(0);
@@ -104,7 +111,7 @@ void Magicien::attaquer_troupe(TroupeDeGuerre &troupe){ // On attaque une troupe
 }
 
 void Magicien::soigner(TroupeDeGuerre &troupe){ // On soigne la troupe en parametre (dépend du niveau du magicien)
-    troupe.setvie(troupe.getvie()+ _niveau / 2 * FACTO_SOIN_TROUPE) ;
+    troupe.setvie(troupe.getvie()+ _niveau * FACTO_SOIN_TROUPE) ;
     if (troupe.gettroupe() == "Soldat") {
         if (troupe.getvie() > troupe.getniveau() * FACTO_VIE_SOLDAT) {
             troupe.setvie(troupe.getniveau()*FACTO_VIE_SOLDAT);
