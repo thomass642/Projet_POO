@@ -75,7 +75,7 @@ void Soldat::attaquer_troupe(TroupeDeGuerre &troupe){ // On attaque une troupe (
 }
 
 void Soldat::defendre_batiment(Batiment batiment){ // La troupe défend un batiment
-
+    batiment.se_fait_defendre(*this);
 }
 
 // ----------------------------------------------------------------
@@ -109,12 +109,12 @@ void Magicien::soigner(TroupeDeGuerre &troupe){ // On soigne la troupe en parame
         if (troupe.getvie() > troupe.getniveau() * FACTO_VIE_SOLDAT) {
             troupe.setvie(troupe.getniveau()*FACTO_VIE_SOLDAT);
         }
-    }
-
-    if (troupe.gettroupe() == "Magicien") {
+    } else if (troupe.gettroupe() == "Magicien") {
         if (troupe.getvie() > troupe.getniveau() * FACTO_VIE_MAGICIEN) {
             troupe.setvie(troupe.getniveau()*FACTO_VIE_MAGICIEN);
         }
+    } else{
+        std::cout << "Mauvais choix de type de troupe" << std::endl;
     }
     
     std::cout << "La troupe soignée a maintenant une vie de " << troupe.getvie() << std::endl;

@@ -20,13 +20,13 @@ class Batiment{
         std::vector<TroupeDeGuerre> _defenseurs;
     public:
         Troupe former_troupes(); // On forme une troupe à partir des ressources du joueur
-        void se_fait_reparer(int vie_recup){ _vie += vie_recup;} // Le batiment se fait réparer et récupère la quantité donnée
         void se_fait_attaquer(int degats); // Le batiment perd de la vie, a moins qu'il soit défendu. Dans ce cas c'est un défenseur qui prend les dégats
         void se_fait_defendre(Soldat troupe); // Le batiment se fait défendre par un défenseur
         void setvie(int vie){ _vie = vie;}
         int getvie(){ return _vie; }        
         int getniveau(){return _niveau;}
         void setniveau(int niveau){_niveau = niveau;}
+        std::string getbatiment(){return _type_batiment;}
 };
 
 class Base : public Batiment{
