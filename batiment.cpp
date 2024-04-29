@@ -1,4 +1,5 @@
 #include "batiment.hpp"
+#include "DefParam.h"
 
 // ----------------------------------------------------------------
 // BATIMENT
@@ -45,8 +46,8 @@ void Batiment::se_fait_defendre(Soldat troupe){ // Le batiment se fait défendre
 // BASE
 
 Base::Base(){ // Constructeur base
-    _vie = 500;
     _niveau = 1;
+    _vie = FACTO_VIE_BASE;
     _type_batiment = "Base";
 }
 
