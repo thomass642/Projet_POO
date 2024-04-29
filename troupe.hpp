@@ -12,14 +12,14 @@ class Troupe{
         Troupe(int niv);
 };
 
-class Travailleur{
+class Travailleur : public Troupe{
     public:
         Travailleur(int niveau) : Troupe(niveau){} // Constructeur de travailleur (on affecte le niveau)
         int chercher_ressources(); // Renvoie le nombre de ressources collectées (en fonction de son niveau)
         void reparer_batiment(int ressources); // Répare un batiment en fonction des ressources du joueur
 };
 
-class TroupeDeGuerre{
+class TroupeDeGuerre : public Troupe{
     protected:
         int _vie;
     public:
