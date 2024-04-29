@@ -46,6 +46,10 @@ void TroupeDeGuerre::attaquer_batiment(Batiment &batiment){ // On attaque un bat
 
 }
 
+int TroupeDeGuerre::se_fait_attaquer(int degats){ // Renvoie le nombre de vie qu'il lui reste (possible négatif -> surplus dégats)
+
+}
+
 // ----------------------------------------------------------------
 // SOLDAT
 
