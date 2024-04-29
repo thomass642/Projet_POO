@@ -30,6 +30,10 @@ void TroupeDeGuerre::attaquer_batiment(Batiment &batiment){ // On attaque un bat
 
 }
 
+int TroupeDeGuerre::se_fait_attaquer(int degats){ // Renvoie le nombre de vie qu'il lui reste (possible négatif -> surplus dégats)
+
+}
+
 // ----------------------------------------------------------------
 // SOLDAT
 
@@ -50,4 +54,22 @@ Magicien::Magicien(int niveau) : Troupe(niveau){
 
 void Magicien::soigner(Troupe &troupe){ // On soigne la troupe en parametre (dépend du niveau du magicien)
 
+}
+
+// --------------------------------------------------------------
+// OPÉRATEUR FLUX
+
+std :: ostream& operator<<(std::ostream&, const Travailleur& trav){ // Operator de flux Travailleur
+    os << "Travailleur de niveau " << _niveau << "!";
+    return os;
+}
+
+std :: ostream& operator<<(std::ostream&, const Soldat& sold){ // Operator de flux Soldat
+    os << "Soldat de niveau " << _niveau << "!\nVie : " << _vie << "  /  Degats : " << _niveau * truc << std::endl;
+    return os;
+}
+
+std :: ostream& operator<<(std::ostream&, const Magicien& mag){ // Operator de flux Magicien
+    os << "Soldat de niveau " << _niveau << "!\nVie : " << _vie << "  /  Degats : " << _niveau * truc << "  /  Soins : " << _niveau*truc<<std::endl;
+    return os;
 }

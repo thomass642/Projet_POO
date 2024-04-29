@@ -26,6 +26,7 @@ class TroupeDeGuerre : public Troupe{
         void attaquer_troupe(Troupe &troupe); // On attaque une troupe (dépend du niveau de la troupe)
         void attaquer_batiment(Batiment &batiment); // On attaque un batiment (dépend du niveau de la troupe)
         void se_fait_soigner(int qtt_soin){ _vie += qtt_soin;} // La troupe se fait soigner d'une quantité définie
+        int se_fait_attaquer(int degats); // Renvoie le nombre de vie qu'il lui reste (possible négatif -> surplus de dégats)
 };
 
 class Soldat : public TroupeDeGuerre{
@@ -38,5 +39,10 @@ class Magicien : public TroupeDeGuerre{
     public:
         void soigner(Troupe &troupe); // On soigne la troupe en parametre (dépend du niveau du magicien)
 };
+
+std :: ostream& operator<<(std::ostream&, const Travailleur& trav); // Operator de flux Travailleur
+std :: ostream& operator<<(std::ostream&, const Soldat& sold); // Operator de flux Soldat
+std :: ostream& operator<<(std::ostream&, const Magicien& mag); // Operator de flux Magicien
+
 
 #endif
