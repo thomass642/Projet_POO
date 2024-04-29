@@ -1,6 +1,5 @@
 #include "troupe.hpp"
-#define VIE_MAX_BAT 50
-#define VIE_MAX_TROUPE 50
+#include "DefParam.h"
 
 // ----------------------------------------------------------------
 // TROUPE
@@ -14,14 +13,14 @@ Troupe::Troupe(int niv){
 
 int Travailleur::chercher_ressources(){ // Renvoie le nombre de ressources collectées (en fonction de son niveau)
     int nb_ressources = 0;
-    nb_ressources = _niveau * 5 ;
+    nb_ressources = _niveau * FACTO_RESSOURCES ;
     std::cout << "Le nombre de ressources collectees est de " << nb_ressources << std::endl ;
     return nb_ressources;
 }
 
 void Travailleur::reparer_batiment(int ressources, Batiment& batiment){ // Répare un batiment en fonction des ressources du joueur
-    if (ressources >= _niveau * 5 && batiment.getvie() < VIE_MAX_BAT) {
-        batiment.setvie(batiment.getvie()+ _niveau * 2) ;
+    if (ressources >= _niveau * FACTO_RESSOURCES && batiment.getvie() < VIE_MAX_BAT) {
+        batiment.setvie(batiment.getvie()+ _niveau * FACTO_VIE_BAT) ;
     }
     else {
         std::cout << "Le batiment a atteint son niveau max ou le nombre de ressources n'est pas suffisant" << std::endl ;
@@ -33,7 +32,7 @@ void Travailleur::reparer_batiment(int ressources, Batiment& batiment){ // Répa
 
 void TroupeDeGuerre::attaquer_batiment(Batiment &batiment){ // On attaque un batiment (dépend du niveau de la troupe)
     std::cout << "Le batiment avait une vie de " << batiment.getvie() << std::endl;
-    batiment.setvie(batiment.getvie()+ -(_niveau / 2 * 20)) ;
+    batiment.setvie(batiment.getvie()+ -(_niveau / FACTO_VIE_BAT * FACTO_BAT_GUERRE)) ;
     
     if (batiment.getvie() <= 0 ){
         batiment.setvie(0) ;
@@ -56,13 +55,13 @@ int TroupeDeGuerre::se_fait_attaquer(int degats){ // Renvoie le nombre de vie qu
 Soldat::Soldat(int niveau){
     _type_troupe = "Soldat";
     _niveau = niveau;
-    _vie = _niveau/2*60;
+    _vie = _niveau/2*FACTO_VIE_SOLDAT;
     std::cout << "Les soldats ont une vie de " << _vie << std::endl ;
 }
 
 void Soldat::attaquer_troupe(TroupeDeGuerre &troupe){ // On attaque une troupe (dépend du niveau de la troupe)
     std::cout << "La troupe adverse avait une vie de " << troupe.getvie() << std::endl;
-    troupe.setvie(troupe.getvie() + -(_niveau / 2 * 20));
+    troupe.setvie(troupe.getvie() + -(_niveau / 2 * FACTO_ATTAQUE_TROUPE_SOLD));
     
     if (troupe.getvie() <= 0 ){
         troupe.setvie(0);
@@ -85,13 +84,13 @@ void Soldat::defendre_batiment(Batiment batiment){ // La troupe défend un batim
 Magicien::Magicien(int niveau){
     _type_troupe = "Magicien";
     _niveau = niveau;
-    _vie = _niveau/2*30;
+    _vie = _niveau/2*FACTO_VIE_MAGICIEN;
     std::cout << "Les magiciens ont une vie de " << _vie << std::endl;
 }
-// soins = niveau / 2 * 10
+
 void Magicien::attaquer_troupe(TroupeDeGuerre &troupe){ // On attaque une troupe (dépend du niveau de la troupe)
     std::cout << "La troupe adverse avait une vie de " << troupe.getvie() << std::endl;
-    troupe.setvie(troupe.getvie() -(_niveau / 2 * 25));
+    troupe.setvie(troupe.getvie() -(_niveau / 2 * FACTO_ATTAQUE_TROUPE_MAG));
     
     if (troupe.getvie() <= 0 ){
         troupe.setvie(0);
@@ -105,14 +104,19 @@ void Magicien::attaquer_troupe(TroupeDeGuerre &troupe){ // On attaque une troupe
 }
 
 void Magicien::soigner(TroupeDeGuerre &troupe){ // On soigne la troupe en parametre (dépend du niveau du magicien)
-    if (troupe.getvie() <= VIE_MAX_TROUPE - _niveau / 2 * 10) {
-        troupe.setvie(troupe.getvie()+ _niveau / 2 * 10) ;
+    troupe.setvie(troupe.getvie()+ _niveau / 2 * FACTO_SOIN_TROUPE) ;
+    if (troupe.gettroupe() == "Soldat") {
+        if (troupe.getvie() > troupe.getniveau() * FACTO_VIE_SOLDAT) {
+            troupe.setvie(troupe.getniveau()*FACTO_VIE_SOLDAT);
+        }
     }
 
-    else {
-        troupe.setvie(VIE_MAX_TROUPE) ;
+    if (troupe.gettroupe() == "Magicien") {
+        if (troupe.getvie() > troupe.getniveau() * FACTO_VIE_MAGICIEN) {
+            troupe.setvie(troupe.getniveau()*FACTO_VIE_MAGICIEN);
+        }
     }
-
+    
     std::cout << "La troupe soignée a maintenant une vie de " << troupe.getvie() << std::endl;
 }
 
