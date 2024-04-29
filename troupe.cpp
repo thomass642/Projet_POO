@@ -111,3 +111,21 @@ void Magicien::soigner(Troupe &troupe){ // On soigne la troupe en parametre (dé
 
     std::cout << "La troupe soignée a maintenant une vie de " << troupe.getvie() << std::endl;
 }
+
+// --------------------------------------------------------------
+// OPÉRATEUR FLUX
+
+std :: ostream& operator<<(std::ostream&, const Travailleur& trav){ // Operator de flux Travailleur
+    os << "Travailleur de niveau " << _niveau << "!";
+    return os;
+}
+
+std :: ostream& operator<<(std::ostream&, const Soldat& sold){ // Operator de flux Soldat
+    os << "Soldat de niveau " << _niveau << "!\nVie : " << _vie << "  /  Degats : " << _niveau * truc << std::endl;
+    return os;
+}
+
+std :: ostream& operator<<(std::ostream&, const Magicien& mag){ // Operator de flux Magicien
+    os << "Soldat de niveau " << _niveau << "!\nVie : " << _vie << "  /  Degats : " << _niveau * truc << "  /  Soins : " << _niveau*truc<<std::endl;
+    return os;
+}
