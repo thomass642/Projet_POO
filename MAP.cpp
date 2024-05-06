@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
     }
 
     // Chargement de l'image de fond
-    SDL_Surface* backgroundSurface = IMG_Load("background.jpg");
+    SDL_Surface* backgroundSurface = IMG_Load("img/background.jpg");
     if (backgroundSurface == nullptr) {
         SDL_Log("Erreur lors du chargement de l'image de fond : %s", IMG_GetError());
         SDL_DestroyRenderer(renderer);
@@ -47,7 +47,7 @@ int main(int argc, char* argv[]) {
 
 
     /// Insertion VILLAGE NIVEAU 1 
-    SDL_Surface* imageSurface = IMG_Load("village/village1.jpg");
+    SDL_Surface* imageSurface = IMG_Load("img/village/village1.jpg");
     if (imageSurface == nullptr) {
         SDL_Log("Erreur lors du chargement de l'image à insérer : %s", IMG_GetError());
         SDL_DestroyTexture(backgroundTexture);
@@ -87,7 +87,7 @@ int main(int argc, char* argv[]) {
 
 
     /// Insertion FORTERESSE NIVEAU 1
-    SDL_Surface* imageSurfacef = IMG_Load("forteresse/forteresse1.jpg");
+    SDL_Surface* imageSurfacef = IMG_Load("img/forteresse/forteresse1.jpg");
     if (imageSurfacef == nullptr) {
         SDL_Log("Erreur lors du chargement de l'image à insérer : %s", IMG_GetError());
         SDL_DestroyTexture(backgroundTexture);
@@ -122,7 +122,7 @@ int main(int argc, char* argv[]) {
 
 
     /// Insertion ECOLE DE MAGIE NIVEAU 1
-    SDL_Surface* imageSurfacem = IMG_Load("ecole de magie/1.jpg");
+    SDL_Surface* imageSurfacem = IMG_Load("img/ecole de magie/1.jpg");
     if (imageSurfacem == nullptr) {
         SDL_Log("Erreur lors du chargement de l'image à insérer : %s", IMG_GetError());
         SDL_DestroyTexture(backgroundTexture);
@@ -158,7 +158,7 @@ int main(int argc, char* argv[]) {
 
 
     /// Insertion TROUPE DE GUERRE NIVEAU 1
-    SDL_Surface* imageSurfaceg = IMG_Load("troupe de guerre/1.jpg");
+    SDL_Surface* imageSurfaceg = IMG_Load("img/troupe de guerre/1.jpg");
     if (imageSurfaceg == nullptr) {
         SDL_Log("Erreur lors du chargement de l'image à insérer : %s", IMG_GetError());
         SDL_DestroyTexture(backgroundTexture);
@@ -193,7 +193,7 @@ int main(int argc, char* argv[]) {
 
 
     /// Insertion MAGICIEN NIVEAU 1
-    SDL_Surface* imageSurfacema = IMG_Load("magicien/1.jpg");
+    SDL_Surface* imageSurfacema = IMG_Load("img/magicien/1.jpg");
     if (imageSurfacema == nullptr) {
         SDL_Log("Erreur lors du chargement de l'image à insérer : %s", IMG_GetError());
         SDL_DestroyTexture(backgroundTexture);
