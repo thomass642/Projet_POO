@@ -27,6 +27,7 @@ class Batiment{
         int getniveau(){return _niveau;}
         void setniveau(int niveau){_niveau = niveau;}
         std::string getbatiment(){return _type_batiment;}
+        void se_fait_reparer(int reparation); // reparation du batiment
 };
 
 class Base : public Batiment{

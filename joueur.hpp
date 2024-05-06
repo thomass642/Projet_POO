@@ -1,10 +1,10 @@
+#ifndef JOUEUR_HPP
+#define JOUEUR_HPP
+
 #include <vector>
 #include <string>
 #include "batiment.hpp"
 #include "troupe.hpp"
-
-#ifndef JOUEUR_HPP
-#define JOUEUR_HPP
 
 class Joueur{
     private:
@@ -15,12 +15,18 @@ class Joueur{
 
     public:
         Joueur(std::string nom);
-        void jouer(); // Le joueur joue
+        void jouer(Joueur& deuxieme_joueur); // Le joueur joue
         void former_troupes(int batiment_index); // L'index du batiment : 0 = base, 1 = forteresse, 2 = école magie
-        void mobiliser_troupes(); // Mobilise chaque troupe dans _troupes
-        void ameliorer_batiment(int index); // On améliore ou construit un batiment
+        void recuperer_ressources(int ressources){ _ressources += ressources;}
+        Batiment& get_batiment(int index){ return _village[index]; }
+        Troupe& get_troupe(int index){ return _troupes[index]; }
+        int get_size_troupes(){ return _troupes.size(); }
+        void show_troupes(); // Affiche toutes les troupes avec index
+        int get_action(int inf, int max); // Fait le choix 
 };
 
-class IA : public Joueur{}; // IA a definir
+class IA : public Joueur{
+    int get_action(int inf, int max); // Choisit une troupe au hasard
+};
 
 #endif
