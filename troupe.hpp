@@ -49,7 +49,7 @@ class Soldat : public TroupeDeGuerre{
     public:
         Soldat(int niveau);
         void attaquer_troupe(TroupeDeGuerre &troupe); // On attaque une troupe (dépend du niveau de la troupe)
-        void defendre_batiment(Batiment batiment); // La troupe défend un batiment
+        void defendre_batiment(Batiment &batiment); // La troupe défend un batiment
         void agir(Joueur& joueur, Joueur& deuxieme_joueur); // Méthode d'action. On copie le joueur en parametre 
 };
 
@@ -58,6 +58,7 @@ class Magicien : public TroupeDeGuerre{
         Magicien(int niveau);
         void attaquer_troupe(TroupeDeGuerre &troupe); // On attaque une troupe (dépend du niveau de la troupe)
         void soigner(TroupeDeGuerre &troupe); // On soigne la troupe en parametre (dépend du niveau du magicien)
+        void agir(Joueur& joueur, Joueur& deuxieme_joueur); // Méthode d'action. On copie le joueur en parametre 
 };
 
 std :: ostream& operator<<(std::ostream&, const Troupe& troupe){} // Operator de flux Travailleur

@@ -2,11 +2,6 @@
 #include "DefParam.h"
 
 // ----------------------------------------------------------------
-// BATIMENT
-
-// Troupe Batiment::former_troupes(){ // On forme une troupe à partir des ressources du joueur
-
-// }
 
 void Batiment::se_fait_attaquer(int degats){ // Le batiment perd de la vie, a moins qu'il soit défendu. Dans ce cas c'est un défenseur qui prend les dégats
     if (_defenseurs.size() == 0){

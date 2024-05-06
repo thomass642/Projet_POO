@@ -3,6 +3,7 @@
 // ----------------------------------------------------------------
 // JEU
 
-void Jeu::getPlayers(joueur1, joueur2){ // Définition des joueurs (ou IA)
-
+void Jeu::getPlayers(Joueur joueur1, Joueur joueur2){ // Définition des joueurs (ou IA)
+    _joueur1 = joueur1;
+    _joueur2 = joueur2;
 }

@@ -52,7 +52,7 @@ void Travailleur::ameliorer_batiment(Batiment& batiment){ // On ameliore un bati
 void Travailleur::agir(Joueur& joueur, Joueur& deuxieme_joueur){
     int action; // Commande du joueur
     std::cout << *this << std::endl << "Veuillez saisir une action :\n1 : Chercher des ressources\n2 : Reparer un batiment\n3 : Ameliorer un batiment\nAutre chose : Passer son tour\n";
-    action = joueur.get_action();
+    action = joueur.get_action(0,4);
     switch (action){
     case 1: // Chercher des ressources
         joueur.recuperer_ressources(chercher_ressources());
@@ -60,21 +60,31 @@ void Travailleur::agir(Joueur& joueur, Joueur& deuxieme_joueur){
     
     case 2: // Reparer un batiment
         std::cout << "Reparation d'un batiment:\nVeuillez saisir un batiment :\n1 : Base\n2 : Forteresse\n3 : Ecole De Magie\nAutre chose : Annuler\n";
-        action = joueur.get_action();
+        action = joueur.get_action(0,3);
+        
         switch (action){
         case 1: // Reparer Base
             std::cout << "Reparation de la Base" << std::endl;
-            reparer_batiment(_niveau * 10, joueur.get_batiment(0));
+            std::cout << "Veuillez saisir le nombre de ressources a utiliser:\n\t";
+            action = joueur.get_action(0,20);
+            reparer_batiment(action, joueur.get_batiment(0));
+            joueur.recuperer_ressources(-action); // On perd le nombre de ressources utilisées
             break;
         
         case 2: // Reparer Forteresse
             std::cout << "Reparation de la Forteresse" << std::endl;
-            reparer_batiment(_niveau * 10, joueur.get_batiment(1));
+            std::cout << "Veuillez saisir le nombre de ressources a utiliser:\n\t";
+            action = joueur.get_action(0,20);
+            reparer_batiment(action, joueur.get_batiment(1));
+            joueur.recuperer_ressources(-action); // On perd le nombre de ressources utilisées
             break;
 
         case 3: // Reparer Ecole de Magie
             std::cout << "Reparation de l'Ecole de Magie" << std::endl;
-            reparer_batiment(_niveau * 10, joueur.get_batiment(2));
+            std::cout << "Veuillez saisir le nombre de ressources a utiliser:\n\t";
+            action = joueur.get_action(0,20);
+            reparer_batiment(action, joueur.get_batiment(2));
+            joueur.recuperer_ressources(-action); // On perd le nombre de ressources utilisées
             break;
 
         default: // Annuler
@@ -86,7 +96,7 @@ void Travailleur::agir(Joueur& joueur, Joueur& deuxieme_joueur){
 
     case 3: // Ameliorer un batiment
         std::cout << "Amelioration d'un batiment:\nVeuillez saisir un batiment :\n1 : Base\n2 : Forteresse\n3 : Ecole De Magie\nAutre chose : Annuler\n";
-        action = joueur.get_action();
+        action = joueur.get_action(0,3);
         switch (action){
         case 1: // Ameliorer Base
             std::cout << "Amelioration de la Base" << std::endl;
@@ -151,38 +161,75 @@ void Soldat::attaquer_troupe(TroupeDeGuerre &troupe){ // On attaque une troupe (
 
 }
 
-void Soldat::defendre_batiment(Batiment batiment){ // La troupe défend un batiment
+void Soldat::defendre_batiment(Batiment& batiment){ // La troupe défend un batiment
     batiment.se_fait_defendre(*this);
 }
 
 
 void Soldat::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'action. On copie le joueur en parametre 
     int action; // Commande du joueur
-    std::cout << *this << std::endl << "Veuillez saisir une action :\n1 : Attaquer une troupe\n2 : Defendre un batiment\nAutre chose : Passer son tour\n";
-    action = joueur.get_action();
+    std::cout << *this << std::endl << "Veuillez saisir une action :\n1 : Attaquer une troupe\n2 : Attaquer un batiment\n3 : Defendre un batiment\nAutre : Passer son tour\n";
+    action = joueur.get_action(0,4);
     switch (action){
+    case 0:
+        break;
     case 1: // Attaquer une troupe
         std:: cout << "Veuillez choisir une troupe a attaquer:\n";
         deuxieme_joueur.show_troupes();
         std:: cout << "Veuillez choisir l'index de la troupe a cibler (ou 0 si vous voulez passer votre tour)";
-        action = joueur.get_action();
+        action = joueur.get_action(0, deuxieme_joueur.get_size_troupes());
 
         if (action != 0){ // Si le joueur ne souhaite pas passer son tour
             if (action <= deuxieme_joueur.get_size_troupes()){ // Si l'index est valide
                 if (deuxieme_joueur.get_troupe(action-1).gettroupe() != "Travailleur"){
-                    // attaquer_troupe(deuxieme_joueur.get_troupe(action-1));
-                    
+                    attaquer_troupe(dynamic_cast<TroupeDeGuerre&>(deuxieme_joueur.get_troupe(action-1)));
+                } else {
+                    std::cout << "On n'attaque pas un villageois !\n";
+                } 
             } else {
                 std::cout << "Mauvais choix d'index" << std::endl;
             }
         }
         
         break;
-    case 2:
-        
+    case 2: // Attaquer un batiment
+        std::cout << "Veuillez choisir un batiment :\n1 : Base\n2 : Forteresse\n3 : Ecole de Magie\nAutre Chose : Annuler\n"; 
+        action = joueur.get_action(0,4);
+        switch (action)
+        {
+        case 1: // Attaquer la base
+            attaquer_batiment(deuxieme_joueur.get_batiment(0)); 
+            break;
+        case 2:
+            attaquer_batiment(deuxieme_joueur.get_batiment(1));
+            break;
+
+        case 3:
+            attaquer_batiment(deuxieme_joueur.get_batiment(2));
+            break;
+
+        default:
+            agir(joueur, deuxieme_joueur);
+            break;
+        }
+        break;
+
+    case 3: // Defendre un batiment 
+        std::cout << "Veuillez choisir un batiment :\n1 : Base\n2 : Forteresse\n3 : Ecole de Magie\nAutre Chose : Annuler\n"; 
+        action = joueur.get_action(0,3);
+        if (action == 1){ // Defendre la Base 
+            defendre_batiment(joueur.get_batiment(0));
+        } else if (action == 1){ // Defendre la Forteresse 
+            defendre_batiment(joueur.get_batiment(1));
+        } else if (action == 1){ // Defendre l'ecole de magie 
+            defendre_batiment(joueur.get_batiment(2));
+        } else { // Annulation
+            agir(joueur, deuxieme_joueur);
+        }
         break;
 
     default:
+        agir(joueur, deuxieme_joueur);
         break;
     }
 }
@@ -229,7 +276,79 @@ void Magicien::soigner(TroupeDeGuerre &troupe){ // On soigne la troupe en parame
     std::cout << "La troupe soignée a maintenant une vie de " << troupe.getvie() << std::endl;
 }
 
+void Magicien::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'action. On copie le joueur en parametre 
+    int action; // Commande du joueur
+    std::cout << *this << std::endl << "Veuillez saisir une action :\n1 : Attaquer une troupe\n2 : Attaquer un batiment\n3 : Soigner une troupe\nAutre : Passer son tour\n";
+    action = joueur.get_action(0,3);
+    switch (action){
+    case 0:
+        break;
+    case 1: // Attaquer une troupe
+        std:: cout << "Veuillez choisir une troupe a attaquer:\n";
+        deuxieme_joueur.show_troupes();
+        std:: cout << "Veuillez choisir l'index de la troupe a cibler (ou 0 si vous voulez passer votre tour)";
+        action = joueur.get_action(0,deuxieme_joueur.get_size_troupes());
 
+        if (action != 0){ // Si le joueur ne souhaite pas passer son tour
+            if (action <= deuxieme_joueur.get_size_troupes()){ // Si l'index est valide
+                if (deuxieme_joueur.get_troupe(action-1).gettroupe() != "Travailleur"){
+                    attaquer_troupe(dynamic_cast<TroupeDeGuerre&>(deuxieme_joueur.get_troupe(action-1)));
+                } else {
+                    std::cout << "On n'attaque pas un villageois !\n";
+                } 
+            } else {
+                std::cout << "Mauvais choix d'index" << std::endl;
+            }
+        }
+        
+        break;
+    case 2: // Attaquer un batiment
+        std::cout << "Veuillez choisir un batiment :\n1 : Base\n2 : Forteresse\n3 : Ecole de Magie\nAutre Chose : Annuler\n"; 
+        action = joueur.get_action(0,3);
+        switch (action)
+        {
+        case 1: // Attaquer la base
+            attaquer_batiment(deuxieme_joueur.get_batiment(0)); 
+            break;
+        case 2:
+            attaquer_batiment(deuxieme_joueur.get_batiment(1));
+            break;
+
+        case 3:
+            attaquer_batiment(deuxieme_joueur.get_batiment(2));
+            break;
+
+        default:
+            agir(joueur, deuxieme_joueur);
+            break;
+        }
+        break;
+
+    case 3: // Soigner une troupe 
+        std:: cout << "Veuillez choisir une troupe a soigner:\n";
+        joueur.show_troupes();
+        std:: cout << "Veuillez choisir l'index de la troupe a cibler (ou 0 si vous voulez passer votre tour)";
+        action = joueur.get_action(0, joueur.get_size_troupes());
+
+        if (action != 0){ // Si le joueur ne souhaite pas passer son tour
+            if (action <= joueur.get_size_troupes()){ // Si l'index est valide
+                if (joueur.get_troupe(action-1).gettroupe() != "Travailleur"){
+                    soigner(dynamic_cast<TroupeDeGuerre&>(joueur.get_troupe(action-1)));
+                } else {
+                    std::cout << "On ne soigne pas un villageois !\n";
+                } 
+            } else {
+                std::cout << "Mauvais choix d'index" << std::endl;
+            }
+        }
+        
+        break;
+
+    default:
+        agir(joueur, deuxieme_joueur);
+        break;
+    }
+}
 
 // --------------------------------------------------------------
 // OPÉRATEUR FLUX
