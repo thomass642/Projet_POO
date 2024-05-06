@@ -45,6 +45,76 @@ void Travailleur::reparer_batiment(int ressources, Batiment& batiment){ // Répa
 
 }
 
+void Travailleur::ameliorer_batiment(Batiment& batiment){ // On ameliore un batiment
+    batiment.setniveau(batiment.getniveau() + 1);
+}
+
+void Travailleur::agir(Joueur& joueur, Joueur& deuxieme_joueur){
+    int action; // Commande du joueur
+    std::cout << *this << std::endl << "Veuillez saisir une action :\n1 : Chercher des ressources\n2 : Reparer un batiment\n3 : Ameliorer un batiment\nAutre chose : Passer son tour\n";
+    action = joueur.get_action();
+    switch (action){
+    case 1: // Chercher des ressources
+        joueur.recuperer_ressources(chercher_ressources());
+        break;
+    
+    case 2: // Reparer un batiment
+        std::cout << "Reparation d'un batiment:\nVeuillez saisir un batiment :\n1 : Base\n2 : Forteresse\n3 : Ecole De Magie\nAutre chose : Annuler\n";
+        action = joueur.get_action();
+        switch (action){
+        case 1: // Reparer Base
+            std::cout << "Reparation de la Base" << std::endl;
+            reparer_batiment(_niveau * 10, joueur.get_batiment(0));
+            break;
+        
+        case 2: // Reparer Forteresse
+            std::cout << "Reparation de la Forteresse" << std::endl;
+            reparer_batiment(_niveau * 10, joueur.get_batiment(1));
+            break;
+
+        case 3: // Reparer Ecole de Magie
+            std::cout << "Reparation de l'Ecole de Magie" << std::endl;
+            reparer_batiment(_niveau * 10, joueur.get_batiment(2));
+            break;
+
+        default: // Annuler
+            std::cout << "Annulation de la reparation" << std::endl;
+            this->agir(joueur, deuxieme_joueur);
+            break;
+        }
+        break;
+
+    case 3: // Ameliorer un batiment
+        std::cout << "Amelioration d'un batiment:\nVeuillez saisir un batiment :\n1 : Base\n2 : Forteresse\n3 : Ecole De Magie\nAutre chose : Annuler\n";
+        action = joueur.get_action();
+        switch (action){
+        case 1: // Ameliorer Base
+            std::cout << "Amelioration de la Base" << std::endl;
+            ameliorer_batiment(joueur.get_batiment(0));
+            break;
+        
+        case 2: // Ameliorer Forteresse
+            std::cout << "Amelioration de la Forteresse" << std::endl;
+            ameliorer_batiment(joueur.get_batiment(1));
+            break;
+
+        case 3: // Ameliorer Ecole de Magie
+            std::cout << "Amelioration de l'Ecole de Magie" << std::endl;
+            ameliorer_batiment(joueur.get_batiment(2));
+            break;
+
+        default: // Annuler
+            std::cout << "Annulation de l'amelioration" << std::endl;
+            this->agir(joueur, deuxieme_joueur);
+            break;
+        }
+        break;
+
+    default: // Passer son tour
+        break;
+    }
+}
+
 // ----------------------------------------------------------------
 // TROUPE DE GUERRE
 
@@ -83,6 +153,38 @@ void Soldat::attaquer_troupe(TroupeDeGuerre &troupe){ // On attaque une troupe (
 
 void Soldat::defendre_batiment(Batiment batiment){ // La troupe défend un batiment
     batiment.se_fait_defendre(*this);
+}
+
+
+void Soldat::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'action. On copie le joueur en parametre 
+    int action; // Commande du joueur
+    std::cout << *this << std::endl << "Veuillez saisir une action :\n1 : Attaquer une troupe\n2 : Defendre un batiment\nAutre chose : Passer son tour\n";
+    action = joueur.get_action();
+    switch (action){
+    case 1: // Attaquer une troupe
+        std:: cout << "Veuillez choisir une troupe a attaquer:\n";
+        deuxieme_joueur.show_troupes();
+        std:: cout << "Veuillez choisir l'index de la troupe a cibler (ou 0 si vous voulez passer votre tour)";
+        action = joueur.get_action();
+
+        if (action != 0){ // Si le joueur ne souhaite pas passer son tour
+            if (action <= deuxieme_joueur.get_size_troupes()){ // Si l'index est valide
+                if (deuxieme_joueur.get_troupe(action-1).gettroupe() != "Travailleur"){
+                    // attaquer_troupe(deuxieme_joueur.get_troupe(action-1));
+                    
+            } else {
+                std::cout << "Mauvais choix d'index" << std::endl;
+            }
+        }
+        
+        break;
+    case 2:
+        
+        break;
+
+    default:
+        break;
+    }
 }
 
 // ----------------------------------------------------------------

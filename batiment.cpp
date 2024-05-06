@@ -41,6 +41,10 @@ void Batiment::se_fait_defendre(Soldat troupe){ // Le batiment se fait défendre
     std::cout << "Le batiment se fait defendre par " << troupe << "!" << std::endl;
 }
 
+void Batiment::se_fait_reparer(int reparation){ // reparation du batiment
+    int vie_avant_rep = _vie;
+    _vie += reparation;
+}
 
 // ----------------------------------------------------------------
 // BASE
