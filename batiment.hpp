@@ -25,6 +25,7 @@ class Batiment{
         void setvie(int vie){ _vie = vie;}
         int getvie(){ return _vie; }        
         int getniveau(){return _niveau;}
+        std::vector<TroupeDeGuerre> getdefenseurs(){return _defenseurs;}
         void setniveau(int niveau){_niveau = niveau;}
         std::string getbatiment(){return _type_batiment;}
         void se_fait_reparer(int reparation); // reparation du batiment
@@ -47,5 +48,9 @@ class EcoleDeMagie : public Batiment{
         EcoleDeMagie();
         Magicien former_troupes(); // Renvoie un magicien 
 };
+
+
+std :: ostream& operator<<(std::ostream& os, Batiment& batiment); // Operator de flux Batiment
+
 
 #endif
