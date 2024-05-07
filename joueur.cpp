@@ -56,7 +56,9 @@ void Joueur::jouer(Joueur& deuxieme_joueur){ // Le joueur joue son tour
 void Joueur::former_troupes(int batiment_index){ // L'index du batiment : 0 = base, 1 = forteresse, 2 = école magie
     int cout = _village[batiment_index].getniveau() * 10;
     _ressources -= cout;
-    _troupes.push_back(_village[batiment_index].former_troupes());
+    Troupe copie = _village[batiment_index].former_troupes();
+    std::cout << "BIDUUUUUUUUUUUUULE" << copie << std::endl;
+    _troupes.push_back(copie);
     // std::cout << "Taille de la troupe : " << _troupes.size();
 }
 
@@ -100,7 +102,7 @@ std :: ostream& operator<<(std::ostream& os, Joueur& joueur){ // Operator de flu
     for (int i = 0; i < joueur.get_size_troupes(); i++){
         std::string text = (joueur.get_troupe(i)).get_infos();
         os << text;
-        std::cout << "GRAGRGRAGAGRAGRGAGAR" << text << "GRAGARAGARGAGAGARAA" << std::endl;        
+        // std::cout << "GRAGRGRAGAGRAGRGAGAR" << text << "GRAGARAGARGAGAGARAA" << std::endl;        
     }
     os << "--" << std::endl;
     os << "-------------------------" << std::endl;
