@@ -88,3 +88,15 @@ Magicien EcoleDeMagie::former_troupes(){ // Renvoie un magicien
     std:: cout << "L'Ecole de Magie de niveau " << _niveau << " a forme un magicien de niveau " << _niveau << " !" << std::endl; 
     return magicien;
 }
+
+// ----------------------------------------------------------------
+// Affichage
+
+std :: ostream& operator<<(std::ostream& os, Batiment& batiment){ // Operator de flux Batiment
+    os << batiment.getbatiment() << ": Niveau " << batiment.getniveau() << " Vie " << batiment.getvie() << std::endl << "Liste de defenseurs :";
+    for (TroupeDeGuerre defenseur : batiment.getdefenseurs()){
+        os << defenseur;
+    }
+    os << "--" << std::endl;
+    return os;
+}

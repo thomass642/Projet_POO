@@ -15,6 +15,7 @@ Joueur::Joueur(std::string nom){
 void Joueur::jouer(Joueur& deuxieme_joueur){ // Le joueur joue son tour
     // LE JOUEUR REGARDE S'IL VEUT FORMER DES TROUPES
     int action; // Commande  du joueur pour agir sur le jeu
+    std::cout << *this;
     do {
         std::cout << "Voulez-vous former une troupe ?\n0 : Non\n1 : Oui\n";
         action = get_action(0,1);
@@ -22,6 +23,7 @@ void Joueur::jouer(Joueur& deuxieme_joueur){ // Le joueur joue son tour
 
     if (action == 1){
         do { // Former des troupes
+            std::cout << *this;
             std::cout << "Veuillez selectionner la troupe a former:\n\t0 : Arreter la formation de Troupes\n\t1 : Travailleur\n\t2 : Soldat\n\t3 : Magicien\n";
             action = get_action(0,3);
 
@@ -55,6 +57,7 @@ void Joueur::former_troupes(int batiment_index){ // L'index du batiment : 0 = ba
     int cout = _village[batiment_index].getniveau() * 10;
     _ressources -= cout;
     _troupes.push_back(_village[batiment_index].former_troupes());
+    // std::cout << "Taille de la troupe : " << _troupes.size();
 }
 
 void Joueur::show_troupes(){ // Affiche toutes les troupes avec index
@@ -87,3 +90,19 @@ int IA::get_action(int inf, int max){ // Bornes inferieures et max
 // Affichage : 
 
 
+std :: ostream& operator<<(std::ostream& os, Joueur& joueur){ // Operator de flux Joueur
+    os << joueur.get_name() << " " << joueur.get_ressources() << " Ressources" <<std::endl;
+    for (int i = 0; i < 3; i++){
+        os << joueur.get_batiment(i);
+    }
+    os << "\nTroupes :";
+
+    for (int i = 0; i < joueur.get_size_troupes(); i++){
+        std::string text = (joueur.get_troupe(i)).get_infos();
+        os << text;
+        std::cout << "GRAGRGRAGAGRAGRGAGAR" << text << "GRAGARAGARGAGAGARAA" << std::endl;        
+    }
+    os << "--" << std::endl;
+    os << "-------------------------" << std::endl;
+    return os;
+}

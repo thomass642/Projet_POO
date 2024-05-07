@@ -11,6 +11,11 @@ Troupe::Troupe(int niv){
 // ----------------------------------------------------------------
 // TRAVAILLEUR
 
+std::string Travailleur::get_infos(){
+    return "!!!!!!!!!!!!!!!!!!!!!!!!!!\nTravailleur de niveau " + std::to_string(getniveau()) + "!\n!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
+}
+
+
 int Travailleur::chercher_ressources(){ // Renvoie le nombre de ressources collectées (en fonction de son niveau)
     int nb_ressources = 0;
     nb_ressources = _niveau * FACTO_RESSOURCES ;
@@ -146,6 +151,10 @@ Soldat::Soldat(int niveau){
     std::cout << "Les soldats ont une vie de " << _vie << std::endl ;
 }
 
+std::string Soldat::get_infos(){
+    return "PPPPPPPPPPPPPPPPPPPPPPPPPPPP\nSoldat de niveau " + std::to_string(getniveau()) + "!\nVie : " + std::to_string(getvie()) + "  /  Degats : " + std::to_string(getniveau() * 1) + "\nPPPPPPPPPPPPPPPPPPPPPPPPPPPP\n";
+}
+
 void Soldat::attaquer_troupe(TroupeDeGuerre &troupe){ // On attaque une troupe (dépend du niveau de la troupe)
     std::cout << "La troupe adverse avait une vie de " << troupe.getvie() << std::endl;
     troupe.setvie(troupe.getvie() + -(_niveau* FACTO_ATTAQUE_TROUPE_SOLD));
@@ -242,6 +251,10 @@ Magicien::Magicien(int niveau){
     _niveau = niveau;
     _vie = _niveau * FACTO_VIE_MAGICIEN;
     std::cout << "Les magiciens ont une vie de " << _vie << std::endl;
+}
+
+std::string Magicien::get_infos(){
+    return "*****************************\nMagicien de niveau " + std::to_string(getniveau()) + "!\nVie : " + std::to_string(getvie()) + "  /  Degats : " + std::to_string(getniveau() * 1) + "  /  Soins : " + std::to_string(getniveau() * 1) + "\n********************\n";
 }
 
 void Magicien::attaquer_troupe(TroupeDeGuerre &troupe){ // On attaque une troupe (dépend du niveau de la troupe)
@@ -353,7 +366,7 @@ void Magicien::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'acti
 // --------------------------------------------------------------
 // OPÉRATEUR FLUX
 
-std :: ostream& operator<<(std::ostream& os , const Troupe& troupe){return os;} // Operator de flux Troupe
+std :: ostream& operator<<(std::ostream& os , const Troupe& troupe){os << "MUAHAHAA" ; return os ;} // Operator de flux Troupe
 
 
 std :: ostream& operator<<(std::ostream& os, const Travailleur& trav){ // Operator de flux Travailleur
