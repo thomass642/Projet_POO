@@ -3,7 +3,7 @@
 
 // ----------------------------------------------------------------
 
-Troupe Batiment::former_troupes(){ return Troupe(0);} // On forme une troupe à partir des ressources du joueur
+Troupe* Batiment::former_troupes(){ Troupe* troupe = new Troupe(0); return troupe;} // On forme une troupe à partir des ressources du joueur
 
 
 void Batiment::se_fait_attaquer(int degats){ // Le batiment perd de la vie, a moins qu'il soit défendu. Dans ce cas c'est un défenseur qui prend les dégats
@@ -53,8 +53,8 @@ Base::Base(){ // Constructeur base
     _type_batiment = "Base";
 }
 
-Travailleur Base::former_troupes(){ // Renvoie un travailleur 
-    Travailleur travailleur(_niveau);
+Travailleur* Base::former_troupes(){ // Renvoie un travailleur 
+    Travailleur* travailleur = new Travailleur(_niveau);
     std:: cout << "La base de niveau " << _niveau << " a forme un travailleur de niveau " << _niveau << " !" << std::endl; 
     return travailleur;
 }
@@ -68,8 +68,8 @@ Forteresse::Forteresse(){ // Constructeur forteresse
     _type_batiment = "Forteresse";
 }
 
-Soldat Forteresse::former_troupes(){ // Renvoie un soldat
-    Soldat soldat(_niveau);
+Soldat* Forteresse::former_troupes(){ // Renvoie un soldat
+    Soldat* soldat = new Soldat(_niveau);
     std:: cout << "La forteresse de niveau " << _niveau << " a forme un soldat de niveau " << _niveau << " !" << std::endl; 
     return soldat;
 }
@@ -83,8 +83,8 @@ EcoleDeMagie::EcoleDeMagie(){ // Constructeur forteresse
     _type_batiment = "Ecole de Magie";
 }
 
-Magicien EcoleDeMagie::former_troupes(){ // Renvoie un magicien 
-    Magicien magicien(_niveau);
+Magicien* EcoleDeMagie::former_troupes(){ // Renvoie un magicien 
+    Magicien* magicien = new Magicien(_niveau);
     std:: cout << "L'Ecole de Magie de niveau " << _niveau << " a forme un magicien de niveau " << _niveau << " !" << std::endl; 
     return magicien;
 }

@@ -45,8 +45,8 @@ void Joueur::jouer(Joueur& deuxieme_joueur){ // Le joueur joue son tour
         } while(action != 0); // Tant que le joueur ne souhaite pas arreter la formation
     } 
 
-    for(Troupe troupe : _troupes){
-        troupe.agir(*this, deuxieme_joueur);
+    for(Troupe *troupe : _troupes){
+        troupe->agir(*this, deuxieme_joueur);
     }
 
     std::cout << "Fin du tour\n";
@@ -56,17 +56,15 @@ void Joueur::jouer(Joueur& deuxieme_joueur){ // Le joueur joue son tour
 void Joueur::former_troupes(int batiment_index){ // L'index du batiment : 0 = base, 1 = forteresse, 2 = école magie
     int cout = _village[batiment_index].getniveau() * 10;
     _ressources -= cout;
-    Troupe copie = _village[batiment_index].former_troupes();
-    std::cout << "BIDUUUUUUUUUUUUULE" << copie << std::endl;
-    _troupes.push_back(copie);
+    _troupes.push_back(_village[batiment_index].former_troupes());
     // std::cout << "Taille de la troupe : " << _troupes.size();
 }
 
 void Joueur::show_troupes(){ // Affiche toutes les troupes avec index
     std::cout << "/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\\nVoici la liste des troupes du joueur :\n";
     int index = 1;
-    for (Troupe troupe : _troupes){
-        std::cout << "Index :" << index << std::endl << troupe << std::endl;
+    for (Troupe* troupe : _troupes){
+        std::cout << "Index :" << index << std::endl << *troupe << std::endl;
         index+=1;
     }
     std::cout << "/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\\n";
