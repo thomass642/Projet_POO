@@ -1,11 +1,19 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 #include "MAPfonction.h"
 
 int main(int argc, char* argv[]) {
     // Initialisation de SDL
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         SDL_Log("Erreur lors de l'initialisation de SDL : %s", SDL_GetError());
+        return 1;
+    }
+
+    // Initialisation de SDL_ttf
+    if (TTF_Init() != 0) {
+        SDL_Log("Erreur lors de l'initialisation de SDL_ttf : %s", TTF_GetError());
+        SDL_Quit();
         return 1;
     }
 
@@ -45,6 +53,52 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    // Chargez une police TTF
+    TTF_Font* font = TTF_OpenFont("arial.ttf", 24); // Utilisez le chemin approprié vers votre fichier de police
+
+    if (font == nullptr) {
+        SDL_Log("Erreur lors du chargement de la police : %s", TTF_GetError());
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        TTF_Quit();
+        SDL_Quit();
+        return 1;
+    }
+
+    // Créez une surface noire pour le rendu du texte
+    SDL_Surface* textSurface = TTF_RenderText_Solid(font, "Welcome dans la partie !", {255, 255, 255}); // Couleur blanche
+    if (textSurface == nullptr) {
+        SDL_Log("Erreur lors de la création de la surface de texte : %s", TTF_GetError());
+        TTF_CloseFont(font);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        TTF_Quit();
+        SDL_Quit();
+        return 1;
+    }
+
+    // Créez une texture à partir de la surface de texte
+    SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+    if (textTexture == nullptr) {
+        SDL_Log("Erreur lors de la création de la texture de texte : %s", SDL_GetError());
+        SDL_FreeSurface(textSurface);
+        TTF_CloseFont(font);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        TTF_Quit();
+        SDL_Quit();
+        return 1;
+    }
+
+    // Positionnez le texte au centre de la fenêtre "MAP"
+    SDL_Rect textRect;
+    SDL_QueryTexture(textTexture, nullptr, nullptr, &textRect.w, &textRect.h);
+    textRect.x = (1280 - textRect.w) / 2;
+    textRect.y = (900 - textRect.h) / 2;
+
+
+
+    //------------------------------------------------------------------------------------------------------------
 
 
     /// Insertion VILLAGE NIVEAU 1 
@@ -156,8 +210,6 @@ int main(int argc, char* argv[]) {
 
 
 
-
-
     /// Insertion TROUPE DE GUERRE NIVEAU 1
     SDL_Surface* imageSurfaceg = IMG_Load("img/troupe de guerre/1.jpg");
     if (imageSurfaceg == nullptr) {
@@ -227,6 +279,10 @@ int main(int argc, char* argv[]) {
 
 
 
+    //---------------------------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------------------
+
+
     Element highlightedElement;
 
     // Boucle principale
@@ -267,6 +323,9 @@ int main(int argc, char* argv[]) {
 
         // Dessiner l'image de fond
         SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
+
+        // Afficher le texte
+        SDL_RenderCopy(renderer, textTexture, nullptr, &textRect);
 
 
         // Dessiner les 2 villages niveau 1
