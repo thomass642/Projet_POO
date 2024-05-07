@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include "MAPfonction.h"
 
 int main(int argc, char* argv[]) {
     // Initialisation de SDL
@@ -80,8 +81,8 @@ int main(int argc, char* argv[]) {
     int y = 320;
 
     // Redimensionner l'image à insérer (par exemple, à la moitié de sa taille)
-    int newImageWidth = imageWidth/3;
-    int newImageHeight = imageHeight/3;
+    int widthV = imageWidth/3;
+    int heightV = imageHeight/3;
 
 
 
@@ -226,7 +227,7 @@ int main(int argc, char* argv[]) {
 
 
 
-
+    Element highlightedElement;
 
     // Boucle principale
     bool running = true;
@@ -235,6 +236,29 @@ int main(int argc, char* argv[]) {
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 running = false;
+            }else if (event.type == SDL_MOUSEBUTTONDOWN) {
+                // Si un clic de souris est détecté, obtenir les coordonnées du clic
+                int clickX = event.button.x;
+                int clickY = event.button.y;
+
+
+                // Vérifier si les coordonnées du clic sont à l'intérieur de l'image
+                if (isClickInsideImage(clickX, clickY, x, y, widthV, heightV)) {
+                    SDL_Log("Village !");
+                    highlightedElement = VILLAGE;
+                } else if (isClickInsideImage(clickX, clickY, xf, yf, widthF, heightF)){
+                    SDL_Log("Forteresse !");
+                    highlightedElement = FORTERESSE;
+                } else if (isClickInsideImage(clickX, clickY, xm, ym, widthM, heightM)){
+                    SDL_Log("Ecole de magie !");
+                    highlightedElement = ECOLE_DE_MAGIE;
+                } else if (isClickInsideImage(clickX, clickY, xg, yg, widthG, heightG)){
+                    SDL_Log("Troupe de guerre !");
+                    highlightedElement = TROUPE_DE_GUERRE;
+                } else if (isClickInsideImage(clickX, clickY, xma, yma, widthMA, heightMA)){
+                    SDL_Log("Magicien !");
+                    highlightedElement = MAGICIEN;
+                }
             }
         }
 
@@ -246,15 +270,23 @@ int main(int argc, char* argv[]) {
 
 
         // Dessiner les 2 villages niveau 1
-        SDL_Rect dstRect = {x, y, newImageWidth, newImageHeight};
+        SDL_Rect dstRect = {x, y, widthV, heightV};
+        if (highlightedElement == VILLAGE){
+            SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
+            drawCircle(renderer, x + y / 2 - 25, y + heightV / 2, widthV / 2 - 5); // Cercle autour de l'image
+        }
         SDL_RenderCopy(renderer, imageTexture, NULL, &dstRect);
 
-        SDL_Rect dstRect2 = {1000, y, newImageWidth, newImageHeight};
+        SDL_Rect dstRect2 = {1000, y, widthV, heightV};
         SDL_RenderCopy(renderer, imageTexture, NULL, &dstRect2);
 
 
         // Dessiner les 2 forteresses niveau 1
         SDL_Rect dstRectf = {xf, yf, widthF, heightF};
+        if (highlightedElement == FORTERESSE){
+            SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
+            drawCircle(renderer, xf + yf / 2 + 50, yf + heightF / 2, widthF / 2 ); // Cercle autour de l'image
+        }
         SDL_RenderCopy(renderer, imageTexturef, NULL, &dstRectf);
 
         SDL_Rect dstRectf2 = {1030, yf, widthF, heightF};
@@ -263,6 +295,10 @@ int main(int argc, char* argv[]) {
 
         // Dessiner les 2 ecoles de magie niveau 1
         SDL_Rect dstRectm = {xm, ym, widthM, heightM};
+        if (highlightedElement == ECOLE_DE_MAGIE){
+            SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
+            drawCircle(renderer, xf + yf / 2 + 40, ym + heightM / 2 + 5, widthF / 2 ); // Cercle autour de l'image
+        }
         SDL_RenderCopy(renderer, imageTexturem, NULL, &dstRectm);
 
         SDL_Rect dstRectm2 = {1050, ym, widthM, heightM};
@@ -271,6 +307,10 @@ int main(int argc, char* argv[]) {
 
         // Dessiner les 2 troupes de guerre niveau 1
         SDL_Rect dstRectg = {xg, yg, widthG, heightG};
+        if (highlightedElement == TROUPE_DE_GUERRE){
+            SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
+            drawCircle(renderer, xg + yg / 2 - 35, yg + heightG / 2 + 5, widthG / 2 ); // Cercle autour de l'image
+        }
         SDL_RenderCopy(renderer, imageTextureg, NULL, &dstRectg);
 
         SDL_Rect dstRectg2 = {850, yg, widthG, heightG};
@@ -279,6 +319,10 @@ int main(int argc, char* argv[]) {
 
         // Dessiner les 2 magiciens niveau 1
         SDL_Rect dstRectma = {xma, yma, widthMA, heightMA};
+        if (highlightedElement == MAGICIEN){
+            SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
+            drawCircle(renderer, (xma + yma) / 2 , yma + heightMA / 2 + 5, widthG / 2 ); // Cercle autour de l'image
+        }
         SDL_RenderCopy(renderer, imageTexturema, NULL, &dstRectma);
 
         SDL_Rect dstRectma2 = {880, yma, widthMA, heightMA};
@@ -288,6 +332,8 @@ int main(int argc, char* argv[]) {
         // Afficher ce qui a été dessiné
         SDL_RenderPresent(renderer);
     }
+
+
 
     // Libération des ressources et fermeture de SDL
     SDL_DestroyTexture(imageTexture);
