@@ -61,10 +61,10 @@ class Magicien : public TroupeDeGuerre{
         void agir(Joueur& joueur, Joueur& deuxieme_joueur); // Méthode d'action. On copie le joueur en parametre 
 };
 
-std :: ostream& operator<<(std::ostream&, const Troupe& troupe){} // Operator de flux Travailleur
-std :: ostream& operator<<(std::ostream&, const Travailleur& trav); // Operator de flux Travailleur
-std :: ostream& operator<<(std::ostream&, const Soldat& sold); // Operator de flux Soldat
-std :: ostream& operator<<(std::ostream&, const Magicien& mag); // Operator de flux Magicien
+std :: ostream& operator<<(std::ostream& os, const Troupe& troupe); // Operator de flux Troupe
+std :: ostream& operator<<(std::ostream& os, const Travailleur& trav); // Operator de flux Travailleur
+std :: ostream& operator<<(std::ostream& os, const Soldat& sold); // Operator de flux Soldat
+std :: ostream& operator<<(std::ostream& os, const Magicien& mag); // Operator de flux Magicien
 
 
 #endif

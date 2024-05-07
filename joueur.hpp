@@ -6,6 +6,9 @@
 #include "batiment.hpp"
 #include "troupe.hpp"
 
+class Batiment;
+class Troupe;
+
 class Joueur{
     private:
         std::vector<Batiment> _village;

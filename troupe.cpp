@@ -353,6 +353,9 @@ void Magicien::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'acti
 // --------------------------------------------------------------
 // OPÉRATEUR FLUX
 
+std :: ostream& operator<<(std::ostream& os , const Troupe& troupe){return os;} // Operator de flux Troupe
+
+
 std :: ostream& operator<<(std::ostream& os, const Travailleur& trav){ // Operator de flux Travailleur
     os << "!!!!!!!!!!!!!!!!!!!!!!!!!!\nTravailleur de niveau " << trav.getniveau() << "!" << std::endl<< "!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
     return os;
