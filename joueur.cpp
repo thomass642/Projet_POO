@@ -1,14 +1,15 @@
 #include "joueur.hpp"
 
+
 // ----------------------------------------------------------------
 // JOUEUR
 
 Joueur::Joueur(std::string nom){
     _nom_joueur = nom;
     _ressources = 10;
-    _village.push_back(Base()); // On rajoute la base
-    _village.push_back(Forteresse()); // On rajoute la forteresse
-    _village.push_back(EcoleDeMagie()); // On rajoute une école de magie
+    _base = new Base;
+    _forteresse = new Forteresse;
+    _ecole_magie = new EcoleDeMagie;
     srand(time(NULL));
 }
 
@@ -19,7 +20,7 @@ void Joueur::jouer(Joueur& deuxieme_joueur){ // Le joueur joue son tour
     do {
         std::cout << "Voulez-vous former une troupe ?\n0 : Non\n1 : Oui\n";
         action = get_action(0,1);
-    } while(not (action == 0 or action == 1));
+    } while (not (action == 0 or action == 1));
 
     if (action == 1){
         do { // Former des troupes
@@ -50,13 +51,29 @@ void Joueur::jouer(Joueur& deuxieme_joueur){ // Le joueur joue son tour
     }
 
     std::cout << "Fin du tour\n";
+    std::cout << *this;
 
 }
 
 void Joueur::former_troupes(int batiment_index){ // L'index du batiment : 0 = base, 1 = forteresse, 2 = école magie
-    int cout = _village[batiment_index].getniveau() * 10;
+    int cout;
+
+    if (batiment_index == 0){
+
+        cout = _base->getniveau() * 10;
+
+        _troupes.push_back(_base->former_troupes());
+
+    } else if (batiment_index == 1){
+        cout = _forteresse->getniveau() * 10;
+        _troupes.push_back(_forteresse->former_troupes());
+
+    } else if (batiment_index == 2){
+        cout = _ecole_magie->getniveau() * 10;
+        _troupes.push_back(_ecole_magie->former_troupes());
+
+    }
     _ressources -= cout;
-    _troupes.push_back(_village[batiment_index].former_troupes());
     // std::cout << "Taille de la troupe : " << _troupes.size();
 }
 
@@ -75,6 +92,22 @@ int Joueur::get_action(int inf, int max){ // le joueur choisit un nombre
     std::cin >> action;
     return action;
 }
+
+Batiment* Joueur::get_batiment(int index){
+    switch (index)
+    {
+    case 0:
+        return _base;
+        break;
+    case 1:
+        return _forteresse;
+    case 2:
+        return _ecole_magie;
+    default:
+        return _base;
+    }
+}
+
 
 // ----------------------------------------------------------------
 // IA 
@@ -95,7 +128,7 @@ std :: ostream& operator<<(std::ostream& os, Joueur& joueur){ // Operator de flu
     for (int i = 0; i < 3; i++){
         os << joueur.get_batiment(i);
     }
-    os << "\nTroupes :";
+    os << "\nTroupes :" << std::endl;
 
     for (int i = 0; i < joueur.get_size_troupes(); i++){
         std::string text = (joueur.get_troupe(i)).get_infos();

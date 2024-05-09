@@ -23,24 +23,24 @@ int Travailleur::chercher_ressources(){ // Renvoie le nombre de ressources colle
     return nb_ressources;
 }
 
-void Travailleur::reparer_batiment(int ressources, Batiment& batiment){ // Répare un batiment en fonction des ressources du joueur
-    batiment.setvie(batiment.getvie() + ressources * FACTO_REPAR);
+void Travailleur::reparer_batiment(int ressources, Batiment* batiment){ // Répare un batiment en fonction des ressources du joueur
+    batiment->setvie(batiment->getvie() + ressources * FACTO_REPAR);
 
-    if (batiment.getbatiment() == "Base") {
-        if (batiment.getvie() > batiment.getniveau() * FACTO_VIE_BASE) {
-            batiment.setvie(batiment.getniveau() * FACTO_VIE_BASE);
+    if (batiment->getbatiment() == "Base") {
+        if (batiment->getvie() > batiment->getniveau() * FACTO_VIE_BASE) {
+            batiment->setvie(batiment->getniveau() * FACTO_VIE_BASE);
         }
     }
 
-    else if (batiment.getbatiment() == "Forteresse") {
-        if (batiment.getvie() > batiment.getniveau() * FACTO_VIE_FORTERESSE) {
-            batiment.setvie(batiment.getvie()+ _niveau * FACTO_VIE_FORTERESSE);
+    else if (batiment->getbatiment() == "Forteresse") {
+        if (batiment->getvie() > batiment->getniveau() * FACTO_VIE_FORTERESSE) {
+            batiment->setvie(batiment->getvie()+ _niveau * FACTO_VIE_FORTERESSE);
         }
     }
 
-    else if (batiment.getbatiment() == "Ecole de magie") {
-        if (batiment.getvie() > batiment.getniveau() * FACTO_VIE_ECOLE_MAGIE) {
-            batiment.setvie(batiment.getvie()+ _niveau * FACTO_VIE_ECOLE_MAGIE);
+    else if (batiment->getbatiment() == "Ecole de magie") {
+        if (batiment->getvie() > batiment->getniveau() * FACTO_VIE_ECOLE_MAGIE) {
+            batiment->setvie(batiment->getvie()+ _niveau * FACTO_VIE_ECOLE_MAGIE);
         }
     }
 
@@ -50,8 +50,8 @@ void Travailleur::reparer_batiment(int ressources, Batiment& batiment){ // Répa
 
 }
 
-void Travailleur::ameliorer_batiment(Batiment& batiment){ // On ameliore un batiment
-    batiment.setniveau(batiment.getniveau() + 1);
+void Travailleur::ameliorer_batiment(Batiment* batiment){ // On ameliore un batiment
+    batiment->setniveau(batiment->getniveau() + 1);
 }
 
 void Travailleur::agir(Joueur& joueur, Joueur& deuxieme_joueur){
@@ -133,8 +133,8 @@ void Travailleur::agir(Joueur& joueur, Joueur& deuxieme_joueur){
 // ----------------------------------------------------------------
 // TROUPE DE GUERRE
 
-void TroupeDeGuerre::attaquer_batiment(Batiment &batiment){ // On attaque un batiment (dépend du niveau de la troupe)
-    batiment.se_fait_attaquer(_niveau * FACTO_ATTAQUE_BAT);
+void TroupeDeGuerre::attaquer_batiment(Batiment *batiment){ // On attaque un batiment (dépend du niveau de la troupe)
+    batiment->se_fait_attaquer(_niveau * FACTO_ATTAQUE_BAT);
 }
 
 int TroupeDeGuerre::se_fait_attaquer(int degats){ // Renvoie le nombre de vie qu'il lui reste (possible négatif -> surplus dégats)
@@ -170,8 +170,8 @@ void Soldat::attaquer_troupe(TroupeDeGuerre &troupe){ // On attaque une troupe (
 
 }
 
-void Soldat::defendre_batiment(Batiment& batiment){ // La troupe défend un batiment
-    batiment.se_fait_defendre(*this);
+void Soldat::defendre_batiment(Batiment* batiment){ // La troupe défend un batiment
+    batiment->se_fait_defendre(*this);
 }
 
 
