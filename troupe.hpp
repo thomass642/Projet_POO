@@ -26,10 +26,10 @@ class Troupe{
 class Travailleur : public Troupe{
     public:
         Travailleur(int niveau) : Troupe(niveau){_type_troupe = "Travailleur";} // Constructeur de travailleur (on affecte le niveau)
-        std::string get_infos();
+        std::string get_infos() override ;
         int chercher_ressources(); // Renvoie le nombre de ressources collectées (en fonction de son niveau)
-        void reparer_batiment(int ressources, Batiment& batiment); // Répare un batiment en fonction des ressources du joueur
-        void ameliorer_batiment(Batiment& batiment); // On ameliore un batiment
+        void reparer_batiment(int ressources, Batiment* batiment); // Répare un batiment en fonction des ressources du joueur
+        void ameliorer_batiment(Batiment* batiment); // On ameliore un batiment
         void agir(Joueur& joueur, Joueur& deuxieme_joueur); // Méthode d'action. On copie le joueur en parametre 
 };
 
@@ -38,7 +38,7 @@ class TroupeDeGuerre : public Troupe{
         int _vie;
     public:
         TroupeDeGuerre(){}
-        void attaquer_batiment(Batiment &batiment); // On attaque un batiment (dépend du niveau de la troupe)
+        void attaquer_batiment(Batiment *batiment); // On attaque un batiment (dépend du niveau de la troupe)
         void se_fait_soigner(int qtt_soin){ _vie += qtt_soin;} // La troupe se fait soigner d'une quantité définie
         int se_fait_attaquer(int degats); // Renvoie le nombre de vie qu'il lui reste (possible négatif -> surplus de dégats)
         int getvie(){return _vie;}
@@ -51,7 +51,7 @@ class Soldat : public TroupeDeGuerre{
         Soldat(int niveau);
         std::string get_infos();
         void attaquer_troupe(TroupeDeGuerre &troupe); // On attaque une troupe (dépend du niveau de la troupe)
-        void defendre_batiment(Batiment &batiment); // La troupe défend un batiment
+        void defendre_batiment(Batiment *batiment); // La troupe défend un batiment
         void agir(Joueur& joueur, Joueur& deuxieme_joueur); // Méthode d'action. On copie le joueur en parametre 
 };
 
