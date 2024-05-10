@@ -228,9 +228,9 @@ void Soldat::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'action
         action = joueur.get_action(0,3);
         if (action == 1){ // Defendre la Base 
             defendre_batiment(joueur.get_batiment(0));
-        } else if (action == 1){ // Defendre la Forteresse 
+        } else if (action == 2){ // Defendre la Forteresse 
             defendre_batiment(joueur.get_batiment(1));
-        } else if (action == 1){ // Defendre l'ecole de magie 
+        } else if (action == 3){ // Defendre l'ecole de magie 
             defendre_batiment(joueur.get_batiment(2));
         } else { // Annulation
             agir(joueur, deuxieme_joueur);

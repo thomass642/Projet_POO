@@ -101,15 +101,16 @@ int Joueur::get_action(int inf, int max){ // le joueur choisit un nombre
 }
 
 Batiment* Joueur::get_batiment(int index){
-    switch (index)
-    {
+    switch (index) {
     case 0:
         return _base;
         break;
     case 1:
         return _forteresse;
+        break;
     case 2:
         return _ecole_magie;
+        break;
     default:
         return _base;
     }
