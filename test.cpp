@@ -9,6 +9,10 @@ int main(){
     Joueur j2("Manpreet");
 
     j1.jouer(j2);
+    j1.jouer(j2);
+
+    // std::cout << j1 << std::endl << "Autre joueur : \n" << j2;
+
 
     // std::vector<Batiment*> _village;
 

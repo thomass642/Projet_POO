@@ -11,7 +11,7 @@ void Batiment::se_fait_attaquer(int degats){ // Le batiment perd de la vie, a mo
         _vie -= degats;
         std::cout << "La " << _type_batiment << " n'a pas de defenseur et a subi " << degats << ". Il lui reste " << _vie << " points de vie..." << std::endl;
     } else {
-        int vie_apres_degats = _defenseurs[0].se_fait_attaquer(degats); // Défenseur mort si degats <= 0
+        int vie_apres_degats = _defenseurs[0]->se_fait_attaquer(degats); // Défenseur mort si degats <= 0
         std::cout << "Le defenseur a subi " << degats << " degats.. Il lui reste donc " << vie_apres_degats << "points de vie..." << std::endl; 
         while (vie_apres_degats <=0){ // Tant que les degats infliges excedent les degats du defenseur courant
             _defenseurs.erase(_defenseurs.begin()); // On supprime le defenseur courant (car mort)
@@ -21,7 +21,7 @@ void Batiment::se_fait_attaquer(int degats){ // Le batiment perd de la vie, a mo
                 vie_apres_degats = 0;
             } else {
                 std::cout << "Le deuxieme defenseur a subi " << -vie_apres_degats << " degats..";
-                vie_apres_degats = _defenseurs[0].se_fait_attaquer(-vie_apres_degats);
+                vie_apres_degats = _defenseurs[0]->se_fait_attaquer(-vie_apres_degats);
                 std::cout <<" Il lui reste donc " << vie_apres_degats << "points de vie..." << std::endl; 
             }
         }
@@ -34,9 +34,9 @@ void Batiment::se_fait_attaquer(int degats){ // Le batiment perd de la vie, a mo
     }
 }
 
-void Batiment::se_fait_defendre(Soldat troupe){ // Le batiment se fait défendre par un défenseur
+void Batiment::se_fait_defendre(Soldat* troupe){ // Le batiment se fait défendre par un défenseur
     _defenseurs.push_back(troupe);
-    std::cout << "Le batiment se fait defendre par " << troupe << "!" << std::endl;
+    std::cout << "Le batiment se fait defendre par " << *troupe << "!" << std::endl;
 }
 
 void Batiment::se_fait_reparer(int reparation){ // reparation du batiment
@@ -94,8 +94,8 @@ Magicien* EcoleDeMagie::former_troupes(){ // Renvoie un magicien
 
 std :: ostream& operator<<(std::ostream& os, Batiment& batiment){ // Operator de flux Batiment
     os << batiment.getbatiment() << ": Niveau " << batiment.getniveau() << " Vie " << batiment.getvie() << std::endl << "Liste de defenseurs :";
-    for (TroupeDeGuerre defenseur : batiment.getdefenseurs()){
-        os << defenseur;
+    for (TroupeDeGuerre* defenseur : batiment.getdefenseurs()){
+        os << *defenseur;
     }
     os << "--" << std::endl;
     return os;

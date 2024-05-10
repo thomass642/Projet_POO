@@ -18,14 +18,14 @@ void Joueur::jouer(Joueur& deuxieme_joueur){ // Le joueur joue son tour
     int action; // Commande  du joueur pour agir sur le jeu
     std::cout << *this;
     do {
-        std::cout << "Voulez-vous former une troupe ?\n0 : Non\n1 : Oui\n";
+        std::cout << "Voulez-vous former une troupe ?\n\t0 : Non\n\t1 : Oui\n";
         action = get_action(0,1);
     } while (not (action == 0 or action == 1));
 
     if (action == 1){
         do { // Former des troupes
             std::cout << *this;
-            std::cout << "Veuillez selectionner la troupe a former:\n\t0 : Arreter la formation de Troupes\n\t1 : Travailleur\n\t2 : Soldat\n\t3 : Magicien\n";
+            std::cout << "Vous avez " << _ressources << " ressources\nVeuillez selectionner la troupe a former:\n\t0 : Arreter la formation de Troupes\n\t1 : Travailleur\n\t2 : Soldat\n\t3 : Magicien\n";
             action = get_action(0,3);
 
             switch(action){
@@ -33,10 +33,18 @@ void Joueur::jouer(Joueur& deuxieme_joueur){ // Le joueur joue son tour
                 former_troupes(0);
                 break;
             case 2: // Soldat
-                former_troupes(1);
+                if (_forteresse->getniveau() != 0){
+                    former_troupes(1);
+                } else {
+                    std::cout << "Veuillez tout d'abord construire la forteresse pour former un soldat...\n";
+                }
                 break;
             case 3: // Magicien
-                former_troupes(2);
+                if (_ecole_magie->getniveau() != 0){
+                    former_troupes(2);
+                } else {
+                    std::cout << "Veuillez tout d'abord construire l'ecole de magie pour former un magicien...\n";
+                }
                 break;
             
             default:
@@ -45,7 +53,6 @@ void Joueur::jouer(Joueur& deuxieme_joueur){ // Le joueur joue son tour
             }
         } while(action != 0); // Tant que le joueur ne souhaite pas arreter la formation
     } 
-
     for(Troupe *troupe : _troupes){
         troupe->agir(*this, deuxieme_joueur);
     }
@@ -126,14 +133,13 @@ int IA::get_action(int inf, int max){ // Bornes inferieures et max
 std :: ostream& operator<<(std::ostream& os, Joueur& joueur){ // Operator de flux Joueur
     os << joueur.get_name() << " " << joueur.get_ressources() << " Ressources" <<std::endl;
     for (int i = 0; i < 3; i++){
-        os << joueur.get_batiment(i);
+        os << *joueur.get_batiment(i);
     }
     os << "\nTroupes :" << std::endl;
 
     for (int i = 0; i < joueur.get_size_troupes(); i++){
         std::string text = (joueur.get_troupe(i)).get_infos();
         os << text;
-        // std::cout << "GRAGRGRAGAGRAGRGAGAR" << text << "GRAGARAGARGAGAGARAA" << std::endl;        
     }
     os << "--" << std::endl;
     os << "-------------------------" << std::endl;

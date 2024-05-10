@@ -12,7 +12,7 @@ Troupe::Troupe(int niv){
 // TRAVAILLEUR
 
 std::string Travailleur::get_infos(){
-    return "!!!!!!!!!!!!!!!!!!!!!!!!!!\nTravailleur de niveau " + std::to_string(getniveau()) + "!\n!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
+    return "\n!!!!!!!!!!!!!!!!!!!!!!!!!!\nTravailleur de niveau " + std::to_string(getniveau()) + "!\n!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
 }
 
 
@@ -45,7 +45,7 @@ void Travailleur::reparer_batiment(int ressources, Batiment* batiment){ // Répa
     }
 
     else {
-        std::cout << "Mauvaise type de batiment" << std::endl;
+        std::cout << "Mauvais type de batiment" << std::endl;
     }
 
 }
@@ -56,7 +56,7 @@ void Travailleur::ameliorer_batiment(Batiment* batiment){ // On ameliore un bati
 
 void Travailleur::agir(Joueur& joueur, Joueur& deuxieme_joueur){
     int action; // Commande du joueur
-    std::cout << *this << std::endl << "Veuillez saisir une action :\n1 : Chercher des ressources\n2 : Reparer un batiment\n3 : Ameliorer un batiment\nAutre chose : Passer son tour\n";
+    std::cout << *this << std::endl << "Veuillez saisir une action :\n\t1 : Chercher des ressources\n\t2 : Reparer un batiment\n\t3 : Ameliorer / Construire un batiment\n\tAutre chose : Passer son tour\n";
     action = joueur.get_action(0,4);
     switch (action){
     case 1: // Chercher des ressources
@@ -64,7 +64,7 @@ void Travailleur::agir(Joueur& joueur, Joueur& deuxieme_joueur){
         break;
     
     case 2: // Reparer un batiment
-        std::cout << "Reparation d'un batiment:\nVeuillez saisir un batiment :\n1 : Base\n2 : Forteresse\n3 : Ecole De Magie\nAutre chose : Annuler\n";
+        std::cout << "Reparation d'un batiment:\nVeuillez saisir un batiment :\n\t1 : Base\n\t2 : Forteresse\n\t3 : Ecole De Magie\n\tAutre chose : Annuler\n";
         action = joueur.get_action(0,3);
         
         switch (action){
@@ -100,7 +100,7 @@ void Travailleur::agir(Joueur& joueur, Joueur& deuxieme_joueur){
         break;
 
     case 3: // Ameliorer un batiment
-        std::cout << "Amelioration d'un batiment:\nVeuillez saisir un batiment :\n1 : Base\n2 : Forteresse\n3 : Ecole De Magie\nAutre chose : Annuler\n";
+        std::cout << "Amelioration / Construction d'un batiment:\nVeuillez saisir un batiment :\n\t1 : Base\n\t2 : Forteresse\n\t3 : Ecole De Magie\n\tAutre chose : Annuler\n";
         action = joueur.get_action(0,3);
         switch (action){
         case 1: // Ameliorer Base
@@ -152,7 +152,7 @@ Soldat::Soldat(int niveau){
 }
 
 std::string Soldat::get_infos(){
-    return "PPPPPPPPPPPPPPPPPPPPPPPPPPPP\nSoldat de niveau " + std::to_string(getniveau()) + "!\nVie : " + std::to_string(getvie()) + "  /  Degats : " + std::to_string(getniveau() * 1) + "\nPPPPPPPPPPPPPPPPPPPPPPPPPPPP\n";
+    return "\nPPPPPPPPPPPPPPPPPPPPPPPPPPPP\nSoldat de niveau " + std::to_string(getniveau()) + "!\nVie : " + std::to_string(getvie()) + "  /  Degats : " + std::to_string(getniveau() * 1) + "\nPPPPPPPPPPPPPPPPPPPPPPPPPPPP\n";
 }
 
 void Soldat::attaquer_troupe(TroupeDeGuerre &troupe){ // On attaque une troupe (dépend du niveau de la troupe)
@@ -171,13 +171,13 @@ void Soldat::attaquer_troupe(TroupeDeGuerre &troupe){ // On attaque une troupe (
 }
 
 void Soldat::defendre_batiment(Batiment* batiment){ // La troupe défend un batiment
-    batiment->se_fait_defendre(*this);
+    batiment->se_fait_defendre(this);
 }
 
 
 void Soldat::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'action. On copie le joueur en parametre 
     int action; // Commande du joueur
-    std::cout << *this << std::endl << "Veuillez saisir une action :\n1 : Attaquer une troupe\n2 : Attaquer un batiment\n3 : Defendre un batiment\nAutre : Passer son tour\n";
+    std::cout << *this << std::endl << "Veuillez saisir une action :\n\t1 : Attaquer une troupe\n\t2 : Attaquer un batiment\n\t3 : Defendre un batiment\n\tAutre : Passer son tour\n";
     action = joueur.get_action(0,4);
     switch (action){
     case 0:
@@ -202,7 +202,7 @@ void Soldat::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'action
         
         break;
     case 2: // Attaquer un batiment
-        std::cout << "Veuillez choisir un batiment :\n1 : Base\n2 : Forteresse\n3 : Ecole de Magie\nAutre Chose : Annuler\n"; 
+        std::cout << "Veuillez choisir un batiment a attaquer:\n\t1 : Base\n\t2 : Forteresse\n\t3 : Ecole de Magie\n\tAutre Chose : Annuler\n"; 
         action = joueur.get_action(0,4);
         switch (action)
         {
@@ -224,7 +224,7 @@ void Soldat::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'action
         break;
 
     case 3: // Defendre un batiment 
-        std::cout << "Veuillez choisir un batiment :\n1 : Base\n2 : Forteresse\n3 : Ecole de Magie\nAutre Chose : Annuler\n"; 
+        std::cout << "Veuillez choisir un batiment a defendre:\n\t1 : Base\n\t2 : Forteresse\n\t3 : Ecole de Magie\n\tAutre Chose : Annuler\n"; 
         action = joueur.get_action(0,3);
         if (action == 1){ // Defendre la Base 
             defendre_batiment(joueur.get_batiment(0));
@@ -254,7 +254,7 @@ Magicien::Magicien(int niveau){
 }
 
 std::string Magicien::get_infos(){
-    return "*****************************\nMagicien de niveau " + std::to_string(getniveau()) + "!\nVie : " + std::to_string(getvie()) + "  /  Degats : " + std::to_string(getniveau() * 1) + "  /  Soins : " + std::to_string(getniveau() * 1) + "\n********************\n";
+    return "\n*****************************\nMagicien de niveau " + std::to_string(getniveau()) + "!\nVie : " + std::to_string(getvie()) + "  /  Degats : " + std::to_string(getniveau() * 1) + "  /  Soins : " + std::to_string(getniveau() * 1) + "\n********************\n";
 }
 
 void Magicien::attaquer_troupe(TroupeDeGuerre &troupe){ // On attaque une troupe (dépend du niveau de la troupe)
@@ -291,7 +291,7 @@ void Magicien::soigner(TroupeDeGuerre &troupe){ // On soigne la troupe en parame
 
 void Magicien::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'action. On copie le joueur en parametre 
     int action; // Commande du joueur
-    std::cout << *this << std::endl << "Veuillez saisir une action :\n1 : Attaquer une troupe\n2 : Attaquer un batiment\n3 : Soigner une troupe\nAutre : Passer son tour\n";
+    std::cout << *this << std::endl << "Veuillez saisir une action :\n\t1 : Attaquer une troupe\n\t2 : Attaquer un batiment\n\t3 : Soigner une troupe\n\tAutre : Passer son tour\n";
     action = joueur.get_action(0,3);
     switch (action){
     case 0:
