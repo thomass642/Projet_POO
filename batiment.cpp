@@ -93,9 +93,9 @@ Magicien* EcoleDeMagie::former_troupes(){ // Renvoie un magicien
 // Affichage
 
 std :: ostream& operator<<(std::ostream& os, Batiment& batiment){ // Operator de flux Batiment
-    os << batiment.getbatiment() << ": Niveau " << batiment.getniveau() << " Vie " << batiment.getvie() << std::endl << "Liste de defenseurs :";
+    os << batiment.getbatiment() << ": Niveau " << batiment.getniveau() << " Vie " << batiment.getvie() << std::endl << "Liste de defenseurs :\n";
     for (TroupeDeGuerre* defenseur : batiment.getdefenseurs()){
-        os << *defenseur;
+        os <<  *dynamic_cast<Soldat*>(defenseur);
     }
     os << "--" << std::endl;
     return os;
