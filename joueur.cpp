@@ -88,7 +88,7 @@ void Joueur::show_troupes(){ // Affiche toutes les troupes avec index
     std::cout << "/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\\nVoici la liste des troupes du joueur :\n";
     int index = 1;
     for (Troupe* troupe : _troupes){
-        std::cout << "Index :" << index << std::endl << *troupe << std::endl;
+        std::cout << "Index :" << index << std::endl << troupe->get_infos() << std::endl;
         index+=1;
     }
     std::cout << "/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\\n";
