@@ -38,7 +38,9 @@ class Joueur{
 };
 
 class IA : public Joueur{
-    int get_action(int inf, int max); // Choisit une troupe au hasard
+    public:
+        IA() : Joueur("IA") {}
+        int get_action(int inf, int max); // Choisit une troupe au hasard
 };
 
 std :: ostream& operator<<(std::ostream& os, Joueur& joueur); // Operator de flux Joueur

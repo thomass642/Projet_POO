@@ -86,6 +86,9 @@ void Joueur::jouer(Joueur& deuxieme_joueur){ // Le joueur joue son tour
     } 
     for(Troupe *troupe : _troupes){
         troupe->agir(*this, deuxieme_joueur);
+        if (not deuxieme_joueur.est_vivant()){
+            break;
+        }
     }
 
     for (int i = 0; i < _troupes.size(); i++){
