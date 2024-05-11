@@ -14,7 +14,7 @@ int main(){
         j1.jouer(j2);
         std::cout << "\n\n\n\n TOUR DU JOUEUR 2\n\n"; 
         j2.jouer(j1);
-    } while (true);
+    } while (j1.est_vivant() and j2.est_vivant());
 
     // std::cout << j1 << std::endl << "Autre joueur : \n" << j2;
 

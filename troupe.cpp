@@ -204,19 +204,35 @@ void Soldat::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'action
         
         break;
     case 2: // Attaquer un batiment
-        std::cout << "Veuillez choisir un batiment a attaquer:\n\t1 : Base\n\t2 : Forteresse\n\t3 : Ecole de Magie\n\tAutre Chose : Annuler\n"; 
+        std::cout << "Veuillez choisir un batiment a attaquer:\n\t0 : Passer son tour\n\t1 : Base\n\t2 : Forteresse\n\t3 : Ecole de Magie\n\tAutre Chose : Annuler\n"; 
         action = joueur.get_action(0,4);
-        switch (action)
-        {
+        switch (action){
+        case 0: // Passer tour
+            break;
         case 1: // Attaquer la base
-            attaquer_batiment(deuxieme_joueur.get_batiment(0)); 
+            if (deuxieme_joueur.get_batiment(0)->getvie() <= 0){
+                std::cout << "La base est deja detruite...\n";
+                agir(joueur, deuxieme_joueur);
+            } else {
+                attaquer_batiment(deuxieme_joueur.get_batiment(0)); 
+            }
             break;
         case 2:
-            attaquer_batiment(deuxieme_joueur.get_batiment(1));
+            if (deuxieme_joueur.get_batiment(1)->getvie() <= 0){
+                std::cout << "La forteresse est deja detruite...\n";
+                agir(joueur, deuxieme_joueur);
+            } else {
+                attaquer_batiment(deuxieme_joueur.get_batiment(1)); 
+            }
             break;
 
         case 3:
-            attaquer_batiment(deuxieme_joueur.get_batiment(2));
+            if (deuxieme_joueur.get_batiment(2)->getvie() <= 0){
+                std::cout << "L ecole de magie est deja detruite...\n";
+                agir(joueur, deuxieme_joueur);
+            } else {
+                attaquer_batiment(deuxieme_joueur.get_batiment(2));
+            }
             break;
 
         default:
@@ -319,19 +335,35 @@ void Magicien::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'acti
         
         break;
     case 2: // Attaquer un batiment
-        std::cout << "Veuillez choisir un batiment :\n\t1 : Base\n\t2 : Forteresse\n\t3 : Ecole de Magie\n\tAutre Chose : Annuler\n"; 
-        action = joueur.get_action(0,3);
-        switch (action)
-        {
+        std::cout << "Veuillez choisir un batiment a attaquer:\n\t0 : Passer son tour\n\t1 : Base\n\t2 : Forteresse\n\t3 : Ecole de Magie\n\tAutre Chose : Annuler\n"; 
+        action = joueur.get_action(0,4);
+        switch (action){
+        case 0: // Passer tour
+            break;
         case 1: // Attaquer la base
-            attaquer_batiment(deuxieme_joueur.get_batiment(0)); 
+            if (deuxieme_joueur.get_batiment(0)->getvie() <= 0){
+                std::cout << "La base est deja detruite...\n";
+                agir(joueur, deuxieme_joueur);
+            } else {
+                attaquer_batiment(deuxieme_joueur.get_batiment(0)); 
+            }
             break;
         case 2:
-            attaquer_batiment(deuxieme_joueur.get_batiment(1));
+            if (deuxieme_joueur.get_batiment(1)->getvie() <= 0){
+                std::cout << "La forteresse est deja detruite...\n";
+                agir(joueur, deuxieme_joueur);
+            } else {
+                attaquer_batiment(deuxieme_joueur.get_batiment(1)); 
+            }
             break;
 
         case 3:
-            attaquer_batiment(deuxieme_joueur.get_batiment(2));
+            if (deuxieme_joueur.get_batiment(2)->getvie() <= 0){
+                std::cout << "L ecole de magie est deja detruite...\n";
+                agir(joueur, deuxieme_joueur);
+            } else {
+                attaquer_batiment(deuxieme_joueur.get_batiment(2));
+            }
             break;
 
         default:

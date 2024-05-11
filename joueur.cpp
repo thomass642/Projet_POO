@@ -141,6 +141,14 @@ Batiment* Joueur::get_batiment(int index){
     }
 }
 
+bool Joueur::est_vivant(){ // Regarde si le joueur peut continuer a jouer
+    if (_base->getvie() > 0 or _forteresse->getvie() > 0 or _ecole_magie->getvie() > 0){
+        return true;
+    } else {
+        std::cout << _nom_joueur << " ne peut plus se battre et a donc perdu...\n"; 
+        return false;
+    }
+}
 
 // ----------------------------------------------------------------
 // IA 
