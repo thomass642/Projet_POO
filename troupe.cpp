@@ -235,6 +235,7 @@ void Soldat::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'action
         } else { // Annulation
             agir(joueur, deuxieme_joueur);
         }
+        _type_troupe = "Defend";
         break;
 
     default:

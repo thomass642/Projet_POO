@@ -72,6 +72,16 @@ void Joueur::jouer(Joueur& deuxieme_joueur){ // Le joueur joue son tour
         troupe->agir(*this, deuxieme_joueur);
     }
 
+    for (int i = 0; i < _troupes.size(); i++){
+        if (_troupes[i]->gettroupe() == "Defend"){
+            elems_to_remove.push_back(i);
+        }
+    }
+
+    for (auto it = elems_to_remove.rbegin(); it != elems_to_remove.rend(); ++it) {
+        _troupes.erase(_troupes.begin() + *it);
+    }
+
     std::cout << "Fin du tour\n";
     std::cout << *this;
 
