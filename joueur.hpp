@@ -34,6 +34,7 @@ class Joueur{
         int get_action(int inf, int max); // Fait le choix 
         int get_ressources(){ return _ressources;}
         bool est_vivant(); // Regarde si le joueur peut continuer a jouer
+        int cout_amelioration(int index);
 };
 
 class IA : public Joueur{

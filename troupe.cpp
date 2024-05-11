@@ -101,22 +101,40 @@ void Travailleur::agir(Joueur& joueur, Joueur& deuxieme_joueur){
         break;
 
     case 3: // Ameliorer un batiment
-        std::cout << "Amelioration / Construction d'un batiment:\nVeuillez saisir un batiment :\n\t1 : Base\n\t2 : Forteresse\n\t3 : Ecole De Magie\n\tAutre chose : Annuler\n";
+        std::cout << "Amelioration / Construction d'un batiment (" << joueur.get_ressources() << "):\nVeuillez saisir un batiment :\n\t1 : Base (" << joueur.cout_amelioration(0) << ")\n\t2 : Forteresse (" << joueur.cout_amelioration(1) << ")\n\t3 : Ecole De Magie (" << joueur.cout_amelioration(2) << ")\n\tAutre chose : Annuler\n";
         action = joueur.get_action(0,3);
         switch (action){
         case 1: // Ameliorer Base
-            std::cout << "Amelioration de la Base" << std::endl;
-            ameliorer_batiment(joueur.get_batiment(0));
+            if (joueur.get_ressources() >= joueur.cout_amelioration(0)){
+                std::cout << "Amelioration de la Base" << std::endl;
+                joueur.recuperer_ressources(-joueur.cout_amelioration(0));
+                ameliorer_batiment(joueur.get_batiment(0));
+            } else {
+                std::cout << "Cout trop eleve pour l'amelioration de la Base\n";
+                this->agir(joueur, deuxieme_joueur);
+            }
             break;
         
         case 2: // Ameliorer Forteresse
-            std::cout << "Amelioration de la Forteresse" << std::endl;
-            ameliorer_batiment(joueur.get_batiment(1));
+            if (joueur.get_ressources() >= joueur.cout_amelioration(1)){
+                std::cout << "Amelioration de la Forteresse" << std::endl;
+                joueur.recuperer_ressources(-joueur.cout_amelioration(1));
+                ameliorer_batiment(joueur.get_batiment(1));
+            } else {
+                std::cout << "Cout trop eleve pour l'amelioration de la Forteresse\n";
+                this->agir(joueur, deuxieme_joueur);
+            }
             break;
 
         case 3: // Ameliorer Ecole de Magie
-            std::cout << "Amelioration de l'Ecole de Magie" << std::endl;
-            ameliorer_batiment(joueur.get_batiment(2));
+            if (joueur.get_ressources() >= joueur.cout_amelioration(2)){
+                std::cout << "Amelioration de l'Ecole de Magie" << std::endl;
+                joueur.recuperer_ressources(-joueur.cout_amelioration(2));
+                ameliorer_batiment(joueur.get_batiment(2));
+            } else {
+                std::cout << "Cout trop eleve pour l'amelioration de l ecole de magie\n";
+                this->agir(joueur, deuxieme_joueur);
+            }
             break;
 
         default: // Annuler
@@ -154,7 +172,7 @@ Soldat::Soldat(int niveau){
 }
 
 std::string Soldat::get_infos(){
-    return "\nPPPPPPPPPPPPPPPPPPPPPPPPPPPP\nSoldat de niveau " + std::to_string(getniveau()) + "!\nVie : " + std::to_string(getvie()) + "  /  Degats : " + std::to_string(getniveau() * 1) + "\nPPPPPPPPPPPPPPPPPPPPPPPPPPPP\n";
+    return "\nPPPPPPPPPPPPPPPPPPPPPPPPPPPP\nSoldat de niveau " + std::to_string(getniveau()) + "!\nVie : " + std::to_string(getvie()) + "/" + std::to_string(getniveau()*FACTO_VIE_SOLDAT) + " //  Degats : " + std::to_string(getniveau() * FACTO_ATTAQUE_TROUPE_SOLD) + "\nPPPPPPPPPPPPPPPPPPPPPPPPPPPP\n";
 }
 
 void Soldat::attaquer_troupe(TroupeDeGuerre &troupe){ // On attaque une troupe (dépend du niveau de la troupe)
@@ -273,7 +291,7 @@ Magicien::Magicien(int niveau){
 }
 
 std::string Magicien::get_infos(){
-    return "\n*****************************\nMagicien de niveau " + std::to_string(getniveau()) + "!\nVie : " + std::to_string(getvie()) + "  /  Degats : " + std::to_string(getniveau() * 1) + "  /  Soins : " + std::to_string(getniveau() * 1) + "\n********************\n";
+    return "\n*****************************\nMagicien de niveau " + std::to_string(getniveau()) + "!\nVie : " + std::to_string(getvie()) + "/" + std::to_string(getniveau()*FACTO_VIE_MAGICIEN) + "  //  Degats : " + std::to_string(getniveau() * FACTO_ATTAQUE_TROUPE_MAG) + "  //  Soins : " + std::to_string(getniveau() * FACTO_SOIN_TROUPE) + "\n********************\n";
 }
 
 void Magicien::attaquer_troupe(TroupeDeGuerre &troupe){ // On attaque une troupe (dépend du niveau de la troupe)
@@ -401,7 +419,7 @@ void Magicien::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'acti
 // --------------------------------------------------------------
 // OPÉRATEUR FLUX
 
-std :: ostream& operator<<(std::ostream& os , const Troupe& troupe){os << "MUAHAHAA" ; return os ;} // Operator de flux Troupe
+std :: ostream& operator<<(std::ostream& os , const Troupe& troupe){os << "VIRTUAL" ; return os ;} // Operator de flux Troupe
 
 
 std :: ostream& operator<<(std::ostream& os, const Travailleur& trav){ // Operator de flux Travailleur
@@ -410,11 +428,11 @@ std :: ostream& operator<<(std::ostream& os, const Travailleur& trav){ // Operat
 }
 
 std :: ostream& operator<<(std::ostream& os, const Soldat& sold){ // Operator de flux Soldat
-    os << "PPPPPPPPPPPPPPPPPPPPPPPPPPPP\nSoldat de niveau " << sold.getniveau() << "!\nVie : " << sold.getvie() << "  /  Degats : " << sold.getniveau() * 1 << std::endl << "PPPPPPPPPPPPPPPPPPPPPPPPPPPP\n";
+    os << "PPPPPPPPPPPPPPPPPPPPPPPPPPPP\nSoldat de niveau " << sold.getniveau() << "!\nVie : " << sold.getvie() << "/" << sold.getniveau()*FACTO_VIE_SOLDAT << "  //  Degats : " << sold.getniveau() * FACTO_ATTAQUE_TROUPE_SOLD << std::endl << "PPPPPPPPPPPPPPPPPPPPPPPPPPPP\n";
     return os;
 }
 
 std :: ostream& operator<<(std::ostream& os, const Magicien& mag){ // Operator de flux Magicien
-    os << "*****************************\nMagicien de niveau " << mag.getniveau() << "!\nVie : " << mag.getvie() << "  /  Degats : " << mag.getniveau() * 1 << "  /  Soins : " << mag.getniveau() * 1<<std::endl << "********************\n";
+    os << "*****************************\nMagicien de niveau " << mag.getniveau() << "!\nVie : " << mag.getvie() << "/" << mag.getniveau()*FACTO_VIE_MAGICIEN << "  //  Degats : " << mag.getniveau() * FACTO_ATTAQUE_TROUPE_MAG << "  /  Soins : " << mag.getniveau() * FACTO_SOIN_TROUPE <<std::endl << "********************\n";
     return os;
 }

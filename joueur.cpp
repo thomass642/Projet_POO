@@ -40,23 +40,39 @@ void Joueur::jouer(Joueur& deuxieme_joueur){ // Le joueur joue son tour
     if (action == 1){
         do { // Former des troupes
             std::cout << *this;
-            std::cout << "Vous avez " << _ressources << " ressources\nVeuillez selectionner la troupe a former:\n\t0 : Arreter la formation de Troupes\n\t1 : Travailleur\n\t2 : Soldat\n\t3 : Magicien\n";
+            std::cout << "Vous avez " << _ressources << " ressources\nVeuillez selectionner la troupe a former:\n\t0 : Arreter la formation de Troupes\n\t1 : Travailleur (" << _base->cout_formation() << ")\n\t2 : Soldat (" << _forteresse->cout_formation() << ")\n\t3 : Magicien (" << _ecole_magie->cout_formation() <<  ")\n";
             action = get_action(0,3);
 
             switch(action){
             case 1: // Villageois
-                former_troupes(0);
+                if (_base->getniveau() != 0){
+                    if (_base->cout_formation() <= _ressources){
+                        former_troupes(0);
+                    } else {
+                        std::cout << "Cout formation trop eleve...\n";
+                    }
+                } else {
+                    std::cout << "Votre base est detruite...\n";
+                }
                 break;
             case 2: // Soldat
                 if (_forteresse->getniveau() != 0){
-                    former_troupes(1);
+                    if (_forteresse->cout_formation() <= _ressources){
+                        former_troupes(1);
+                     } else {
+                        std::cout << "Cout formation trop eleve...\n";
+                    }
                 } else {
                     std::cout << "Veuillez tout d'abord construire la forteresse pour former un soldat...\n";
                 }
                 break;
             case 3: // Magicien
                 if (_ecole_magie->getniveau() != 0){
-                    former_troupes(2);
+                    if (_ecole_magie->cout_formation() <= _ressources){
+                        former_troupes(2);
+                    } else {
+                        std::cout << "Cout formation trop eleve...\n";
+                    }
                 } else {
                     std::cout << "Veuillez tout d'abord construire l'ecole de magie pour former un magicien...\n";
                 }
@@ -92,21 +108,17 @@ void Joueur::former_troupes(int batiment_index){ // L'index du batiment : 0 = ba
 
     if (batiment_index == 0){
 
-        cout = _base->getniveau() * 10;
-
+        cout = _base->cout_formation();
         _troupes.push_back(_base->former_troupes());
-
     } else if (batiment_index == 1){
-        cout = _forteresse->getniveau() * 10;
+        cout = _forteresse->cout_formation();
         _troupes.push_back(_forteresse->former_troupes());
 
     } else if (batiment_index == 2){
-        cout = _ecole_magie->getniveau() * 10;
+        cout = _ecole_magie->cout_formation();
         _troupes.push_back(_ecole_magie->former_troupes());
-
     }
     _ressources -= cout;
-    // std::cout << "Taille de la troupe : " << _troupes.size();
 }
 
 void Joueur::show_troupes(){ // Affiche toutes les troupes avec index
@@ -147,6 +159,23 @@ bool Joueur::est_vivant(){ // Regarde si le joueur peut continuer a jouer
     } else {
         std::cout << _nom_joueur << " ne peut plus se battre et a donc perdu...\n"; 
         return false;
+    }
+}
+
+int Joueur::cout_amelioration(int index){
+    switch (index){
+    case 0:
+        return _base->cout_amelioration();
+        break;
+    case 1:
+        return _forteresse->cout_amelioration();
+        break;
+    case 2:
+        return _ecole_magie->cout_amelioration();
+        break;
+    default:
+        return 10000;
+        break;
     }
 }
 

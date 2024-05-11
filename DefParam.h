@@ -1,9 +1,13 @@
+#ifndef DEF_PARAM 
+#define DEF_PARAM
+// Definition de nos parametres
+
 #define FACTO_VIE_BASE 300
 #define FACTO_VIE_FORTERESSE 200
 #define FACTO_VIE_ECOLE_MAGIE 100
-#define NIVEAU_MAX_BAT 20
+#define NIVEAU_MAX_BAT 5
 
-#define NIVEAU_MAX_TROUPE 20
+#define NIVEAU_MAX_TROUPE 5
 
 #define FACTO_RESSOURCES 5
 #define FACTO_ATTAQUE_BAT 20
@@ -17,3 +21,14 @@
 #define FACTO_SOIN_TROUPE 10
 
 #define FACTO_REPAR 1/4
+
+#define FACTO_COUT_BASE 2
+#define FACTO_COUT_FORT 3
+#define FACTO_COUT_ECOLE 4
+
+#define FACTO_AMELIO_BASE 30
+#define FACTO_AMELIO_FORT 10
+#define FACTO_AMELIO_ECOLE 10
+
+
+#endif

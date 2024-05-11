@@ -4,6 +4,7 @@
 #include <string>
 #include "batiment.hpp"
 #include "joueur.hpp"
+#include "DefParam.h"
 
 class Batiment;
 class Joueur;

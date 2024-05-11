@@ -5,6 +5,7 @@
 #include <vector>
 #include <iostream>
 #include "troupe.hpp"
+#include "DefParam.h"
 
 class Troupe;
 class Travailleur;
@@ -29,24 +30,32 @@ class Batiment{
         void setniveau(int niveau){_niveau = niveau;}
         std::string getbatiment(){return _type_batiment;}
         void se_fait_reparer(int reparation); // reparation du batiment
+        int cout_formation(){ return 0;}
+        int cout_amelioration(){ return 0;}
 };
 
 class Base : public Batiment{
     public:
         Base();
         Travailleur* former_troupes(); // Renvoie un travailleur 
+        int cout_formation(){ return _niveau * FACTO_COUT_BASE;}
+        int cout_amelioration();
 };
 
 class Forteresse : public Batiment{
     public:
         Forteresse();
         Soldat* former_troupes(); // Renvoie un soldat
+        int cout_formation(){ return _niveau * FACTO_COUT_FORT;}
+        int cout_amelioration();
 };
 
 class EcoleDeMagie : public Batiment{
     public:
         EcoleDeMagie();
         Magicien* former_troupes(); // Renvoie un magicien 
+        int cout_formation(){ return _niveau * FACTO_COUT_ECOLE;}
+        int cout_amelioration();
 };
 
 

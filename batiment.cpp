@@ -60,6 +60,15 @@ Travailleur* Base::former_troupes(){ // Renvoie un travailleur
     return travailleur;
 }
 
+int Base::cout_amelioration(){
+    if (_niveau == 0 or _niveau == 5){
+        return 10000;
+    } else {
+        return _niveau * FACTO_AMELIO_BASE;
+    }
+}
+
+
 // ----------------------------------------------------------------
 // FORTERESSE
 
@@ -75,6 +84,14 @@ Soldat* Forteresse::former_troupes(){ // Renvoie un soldat
     return soldat;
 }
 
+int Forteresse::cout_amelioration(){
+    if (_niveau == 5){
+        return 10000;
+    } else {
+        return (_niveau+1) * FACTO_AMELIO_FORT;
+    }
+}
+
 // ----------------------------------------------------------------
 // ECOLE DE MAGIE
 
@@ -88,6 +105,14 @@ Magicien* EcoleDeMagie::former_troupes(){ // Renvoie un magicien
     Magicien* magicien = new Magicien(_niveau);
     std:: cout << "L'Ecole de Magie de niveau " << _niveau << " a forme un magicien de niveau " << _niveau << " !" << std::endl; 
     return magicien;
+}
+
+int EcoleDeMagie::cout_amelioration(){
+    if (_niveau == 5){
+        return 10000;
+    } else {
+        return (_niveau+1) * FACTO_AMELIO_ECOLE;
+    }
 }
 
 // ----------------------------------------------------------------
