@@ -16,6 +16,21 @@ Joueur::Joueur(std::string nom){
 void Joueur::jouer(Joueur& deuxieme_joueur){ // Le joueur joue son tour
     // LE JOUEUR REGARDE S'IL VEUT FORMER DES TROUPES
     int action; // Commande  du joueur pour agir sur le jeu
+    std::vector<int> elems_to_remove;
+
+    for (int i = 0; i < _troupes.size(); i++){
+        if (_troupes[i]->gettroupe() != "Travailleur"){
+            if (dynamic_cast<TroupeDeGuerre*>(_troupes[i])->getvie() <= 0){
+                elems_to_remove.push_back(i);
+            }
+        }
+    }
+
+    for (auto it = elems_to_remove.rbegin(); it != elems_to_remove.rend(); ++it) {
+        delete _troupes[*it];
+        _troupes.erase(_troupes.begin() + *it);
+    }
+
     std::cout << *this;
     do {
         std::cout << "Voulez-vous former une troupe ?\n\t0 : Non\n\t1 : Oui\n";
