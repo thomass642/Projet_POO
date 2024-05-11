@@ -18,7 +18,7 @@ void Batiment::se_fait_attaquer(int degats){ // Le batiment perd de la vie, a mo
             if (_defenseurs.size() == 0){ // S'il n'y a plus de defenseur le batiment est attaque
                 std::cout << "Le dernier defenseur est mort et le batiment encaisse " << -vie_apres_degats << ".Il lui reste " << _vie << " points de vie..." << std::endl;
                 _vie -= -vie_apres_degats;
-                vie_apres_degats = 0;
+                break;
             } else {
                 std::cout << "Le deuxieme defenseur a subi " << -vie_apres_degats << " degats..";
                 vie_apres_degats = _defenseurs[0]->se_fait_attaquer(-vie_apres_degats);
@@ -26,6 +26,7 @@ void Batiment::se_fait_attaquer(int degats){ // Le batiment perd de la vie, a mo
             }
         }
     }
+
     if (_vie > 0){
         std::cout << "La " << _type_batiment << " a tenu bon face a l'attaque. Il lui reste " << _vie << " points de vie." << std::endl;  
     } else{

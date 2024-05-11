@@ -52,6 +52,7 @@ void Travailleur::reparer_batiment(int ressources, Batiment* batiment){ // Répa
 
 void Travailleur::ameliorer_batiment(Batiment* batiment){ // On ameliore un batiment
     batiment->setniveau(batiment->getniveau() + 1);
+    batiment->setvie(batiment->getvie() + 200);
 }
 
 void Travailleur::agir(Joueur& joueur, Joueur& deuxieme_joueur){
@@ -318,7 +319,7 @@ void Magicien::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'acti
         
         break;
     case 2: // Attaquer un batiment
-        std::cout << "Veuillez choisir un batiment :\n1 : Base\n2 : Forteresse\n3 : Ecole de Magie\nAutre Chose : Annuler\n"; 
+        std::cout << "Veuillez choisir un batiment :\n\t1 : Base\n\t2 : Forteresse\n\t3 : Ecole de Magie\n\tAutre Chose : Annuler\n"; 
         action = joueur.get_action(0,3);
         switch (action)
         {
