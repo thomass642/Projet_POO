@@ -285,6 +285,26 @@ int main(int argc, char* argv[]) {
 
     Element highlightedElement = NONE;
 
+    int nb_travailleur1 = 2;
+    int nb_travailleur2 = 2;
+    int nb_troupe_geurre1 = 0;
+    int nb_troupe_geurre2 = 0;
+    int nb_magicien1 = 0;
+    int nb_magicien2 = 0;
+
+    int level_village1 = 1;
+    int level_village2 = 1;
+    int level_forteresse1 = 1;
+    int level_forteresse2 = 1;
+    int level_ecole_magie1 = 1;
+    int level_ecole_magie2 = 1;
+    int level_troupe_guerre1 = 1;
+    int level_troupe_guerre2 = 1;
+    int level_magicien1 = 1;
+    int level_magicien2 = 1;
+
+
+
     // Boucle principale
     bool running = true;
     SDL_Event event;
@@ -377,9 +397,15 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, x + y / 2 - 25, y + heightV / 2, widthV / 2 - 5); // Cercle autour de l'image
         }
+        drawHealthBar(renderer, x, y, 200, heightV, 0.75); // Exemple: barre de vie à 75%
+        number(renderer, x, y, nb_travailleur1); // Afficher le nombre de travaileurs
+        level(renderer, x, y+35, level_village1);
         SDL_RenderCopy(renderer, imageTexture, NULL, &dstRect);
 
         SDL_Rect dstRect2 = {1000, y, widthV, heightV};
+        drawHealthBar(renderer, 1000, y, 200, heightV, 0.75); // Exemple: barre de vie à 75%
+        number(renderer, 1000, y, nb_travailleur2); // Afficher le nombre de travaileurs
+        level(renderer, 1000, y+35, level_village2);
         SDL_RenderCopy(renderer, imageTexture, NULL, &dstRect2);
 
 
@@ -389,9 +415,13 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, xf + yf / 2 + 50, yf + heightF / 2, widthF / 2 ); // Cercle autour de l'image
         }
+        drawHealthBar(renderer, xf, yf, 200, heightV, 0.75); // Exemple: barre de vie à 75%
+        level(renderer, xf, yf, level_forteresse1);
         SDL_RenderCopy(renderer, imageTexturef, NULL, &dstRectf);
 
         SDL_Rect dstRectf2 = {1030, yf, widthF, heightF};
+        drawHealthBar(renderer, 1030, yf, 200, heightV, 0.75); // Exemple: barre de vie à 75%
+        level(renderer, 1030, yf, level_forteresse2);
         SDL_RenderCopy(renderer, imageTexturef, NULL, &dstRectf2);
 
 
@@ -401,9 +431,13 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, xf + yf / 2 + 40, ym + heightM / 2 + 5, widthF / 2 ); // Cercle autour de l'image
         }
+        drawHealthBar(renderer, xm, ym, 200, heightV, 0.75); // Exemple: barre de vie à 75%
+        level(renderer, xm, ym, level_ecole_magie1);
         SDL_RenderCopy(renderer, imageTexturem, NULL, &dstRectm);
 
         SDL_Rect dstRectm2 = {1050, ym, widthM, heightM};
+        drawHealthBar(renderer, 1050, ym, 200, heightV, 0.75); // Exemple: barre de vie à 75%
+        level(renderer, 1050, ym, level_ecole_magie2);
         SDL_RenderCopy(renderer, imageTexturem, NULL, &dstRectm2);
 
 
@@ -413,21 +447,33 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, xg + yg / 2 - 35, yg + heightG / 2 + 5, widthG / 2 ); // Cercle autour de l'image
         }
+        drawHealthBar(renderer, xg, yg, 200, heightV, 0.75); // Exemple: barre de vie à 75%
+        number(renderer, xg + 130, yg - 25, nb_troupe_geurre1); // Afficher le nombre de troupe de guerre
+        level(renderer, xg +130, yg+10, level_troupe_guerre1);
         SDL_RenderCopy(renderer, imageTextureg, NULL, &dstRectg);
 
-        SDL_Rect dstRectg2 = {850, yg, widthG, heightG};
+        SDL_Rect dstRectg2 = {810, yg, widthG, heightG};
+        drawHealthBar(renderer, 810, yg, 200, heightV, 0.75); // Exemple: barre de vie à 75%
+        number(renderer, 810 + 130, yg -25, nb_troupe_geurre2); // Afficher le nombre de troupe de guerre
+        level(renderer, 810 +130, yg+10, level_troupe_guerre2);
         SDL_RenderCopy(renderer, imageTextureg, NULL, &dstRectg2);
 
 
         // Dessiner les 2 magiciens niveau 1
-        SDL_Rect dstRectma = {xma, yma, widthMA, heightMA};
+        SDL_Rect dstRectma = {xma , yma, widthMA, heightMA};
         if (highlightedElement == MAGICIEN){
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, (xma + yma) / 2 , yma + heightMA / 2 + 5, widthG / 2 ); // Cercle autour de l'image
         }
+        drawHealthBar(renderer, xma, yma, 200, heightV, 0.75); // Exemple: barre de vie à 75%
+        number(renderer, xma + 120, yma -25, nb_magicien2); // Afficher le nombre de magicien
+        level(renderer, xma +120, yma+10, level_magicien1);
         SDL_RenderCopy(renderer, imageTexturema, NULL, &dstRectma);
 
-        SDL_Rect dstRectma2 = {880, yma, widthMA, heightMA};
+        SDL_Rect dstRectma2 = {820, yma, widthMA, heightMA};
+        drawHealthBar(renderer, 820, yma, 200, heightV, 0.75); // Exemple: barre de vie à 75%
+        number(renderer, 820 + 120, yma -25, nb_magicien2); // Afficher le nombre de magicien
+        level(renderer, 820+120, yma+10, level_magicien2);
         SDL_RenderCopy(renderer, imageTexturema, NULL, &dstRectma2);
 
 

@@ -94,3 +94,22 @@ magicien : vie : niveau / 2 * 40, dégats = niveau / 2 * 25, soins = niveau / 2 
 
 Interface Graphique (chaque troupe surlignée quand son tour et clic pour choisir action)
 
+
+
+THREAD
+boucle affichage (var glob) + transmer actions joueurs
+
+THREADboucle jeu = affecte var glob + recup action (clic)
+
+var glob : 
+pour chaque joueurs
+nombre
+ressources
+texteinfo
+base = vie, niveau, nb_travailleurs, nb_defensseurs, vie_premier_defensseur
+forteresse = vie, niveau,nb_defensseurs, vie_premier_defensseur
+base = vie, niveau,  nb_defensseurs, vie_premier_defensseur
+nb_soldats
+listsoldats
+nb_magiciens
+listmagiciens

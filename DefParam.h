@@ -31,4 +31,37 @@
 #define FACTO_AMELIO_ECOLE 10
 
 
+struct data{
+    data_joueur j1;
+    data_joueur j2;
+};
+
+struct data_joueur{
+    std::string nomj;
+    int ressources = 10;
+    std::string texteinfo = "debut !";
+    int nb_travailleurs = 0;
+    data_batiment base;
+    data_batiment forteresse; 
+    data_batiment ecole_magie;
+    std::vector<data_troupes_de_guerre> listesoldats;
+    std::vector<data_troupes_de_guerre> listemagiciens;
+};
+
+struct data_batiment{
+    int vie ;
+    int niveau; 
+    int nb_defenseurs;
+    int vie_premier_defenseur;
+};
+
+struct data_troupes_de_guerre{
+    int vie;
+    int niveau;
+    int degats;
+    int soins;
+};
+
+
+
 #endif
