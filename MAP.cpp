@@ -2,7 +2,10 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include "MAPfonction.h"
-#include "DefParam.h"
+
+#include "testmap.h"
+
+
 
 int main(int argc, char* argv[]) {
     // Initialisation de SDL
@@ -295,7 +298,7 @@ int main(int argc, char* argv[]) {
     int level_village1 = 1;
     int level_village2 = 1;
     int level_forteresse1 = 1;
-    int level_forteresse2 = 1;
+    int level_forteresse2 ;
     int level_ecole_magie1 = 1;
     int level_ecole_magie2 = 1;
     int level_troupe_guerre1 = 1;
@@ -367,11 +370,11 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, x + y / 2 - 25, y + heightV / 2, widthV / 2 - 5); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, x, y, 200, heightV, 0.75); // Exemple: barre de vie à 75%
-        number(renderer, x, y, nb_travailleur1); // Afficher le nombre de travaileurs
-        level(renderer, x, y+35, level_village1);
-        shield(renderer, x+145, y-28, 3);
-        drawHealthBar(renderer, x+185, y, 100, heightV, 1);
+        drawHealthBar(renderer, x, y, 200, heightV, jou1.base.vie); // Exemple: barre de vie à 75%
+        number(renderer, x, y, jou1.nb_travailleurs); // Afficher le nombre de travaileurs
+        level(renderer, x, y+35, jou1.base.niveau);
+        shield(renderer, x+145, y-28, jou1.base.nb_defenseurs);
+        drawHealthBar(renderer, x+185, y, 100, heightV, jou1.base.vie_premier_defenseur);
         SDL_RenderCopy(renderer, imageTexture, NULL, &dstRect);
 
         SDL_Rect dstRect2 = {1000, y, widthV, heightV};
@@ -379,11 +382,11 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, 1000 + y / 2 - 25, y + heightV / 2, widthV / 2 - 5); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, 1000, y, 200, heightV, 0.75); // Exemple: barre de vie à 75%
-        number(renderer, 1000, y, nb_travailleur2); // Afficher le nombre de travaileurs
-        level(renderer, 1000, y+35, level_village2);
-        shield(renderer, 1000+145, y-28, 3);
-        drawHealthBar(renderer, 1000+185, y, 100, heightV, 1);
+        drawHealthBar(renderer, 1000, y, 200, heightV, jou2.base.vie); // Exemple: barre de vie à 75%
+        number(renderer, 1000, y, jou2.nb_travailleurs); // Afficher le nombre de travaileurs
+        level(renderer, 1000, y+35, jou2.base.niveau);
+        shield(renderer, 1000+145, y-28, jou2.base.nb_defenseurs);
+        drawHealthBar(renderer, 1000+185, y, 100, heightV, jou2.base.vie_premier_defenseur);
         SDL_RenderCopy(renderer, imageTexture, NULL, &dstRect2);
 
 
