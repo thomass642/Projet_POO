@@ -52,6 +52,40 @@ void drawCircle(SDL_Renderer* renderer, int centerX, int centerY, int radius) {
     }
 }
 
+void highlightText(SDL_Renderer* renderer, TTF_Font* font, const char* text, SDL_Color textColor, SDL_Color highlightColor, int x, int y) {
+    // Créer une surface de texte normale
+    SDL_Surface* textSurface = TTF_RenderText_Blended(font, text, textColor);
+    if (textSurface == nullptr) {
+        SDL_Log("Erreur lors de la création de la surface de texte : %s", TTF_GetError());
+        return;
+    }
+
+    // Créer une texture à partir de la surface de texte normale
+    SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+    if (textTexture == nullptr) {
+        SDL_Log("Erreur lors de la création de la texture de texte : %s", SDL_GetError());
+        SDL_FreeSurface(textSurface);
+        return;
+    }
+
+    // Obtenir les dimensions de la texture de texte
+    int textWidth, textHeight;
+    SDL_QueryTexture(textTexture, nullptr, nullptr, &textWidth, &textHeight);
+
+    // Dessiner le texte normalement
+    SDL_Rect textRect = {x, y, textWidth, textHeight};
+    SDL_RenderCopy(renderer, textTexture, nullptr, &textRect);
+
+    // Dessiner un rectangle autour du texte pour le surligner
+    SDL_SetRenderDrawColor(renderer, highlightColor.r, highlightColor.g, highlightColor.b, highlightColor.a);
+    SDL_RenderDrawRect(renderer, &textRect);
+
+    // Libérer la texture et la surface de texte
+    SDL_DestroyTexture(textTexture);
+    SDL_FreeSurface(textSurface);
+}
+
+
 void afficherTexte(SDL_Renderer* renderer, TTF_Font* font, const char* texte, int x, int y, SDL_Color couleur) {
     // Créer une surface de texte
     SDL_Surface* surfaceTexte = TTF_RenderText_Solid(font, texte, couleur);

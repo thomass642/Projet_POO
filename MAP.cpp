@@ -303,7 +303,10 @@ int main(int argc, char* argv[]) {
     int level_magicien1 = 1;
     int level_magicien2 = 1;
 
+    int clickX = -1;
+    int clickY = -1;
 
+    int choix = -1; 
 
     // Boucle principale
     bool running = true;
@@ -314,33 +317,30 @@ int main(int argc, char* argv[]) {
                 running = false;
             }else if (event.type == SDL_MOUSEBUTTONDOWN) {
                 // Si un clic de souris est détecté, obtenir les coordonnées du clic
-                int clickX = event.button.x;
-                int clickY = event.button.y;
+                clickX = event.button.x;
+                clickY = event.button.y;
 
 
-                // Vérifier si les coordonnées du clic sont à l'intérieur de l'image
+                // JOUEUR 1
                 if (isClickInsideImage(clickX, clickY, x, y, widthV, heightV)) {
-                    SDL_Log("Village !");
+                    SDL_Log("Village 1!");
                     highlightedElement = VILLAGE;
                 } else if (isClickInsideImage(clickX, clickY, xf, yf, widthF, heightF)){
-                    SDL_Log("Forteresse !");
+                    SDL_Log("Forteresse 1!");
                     highlightedElement = FORTERESSE;
                 } else if (isClickInsideImage(clickX, clickY, xm, ym, widthM, heightM)){
-                    SDL_Log("Ecole de magie !");
+                    SDL_Log("Ecole de magie 1!");
                     highlightedElement = ECOLE_DE_MAGIE;
                 } else if (isClickInsideImage(clickX, clickY, xg, yg, widthG, heightG)){
-                    SDL_Log("Troupe de guerre !");
-                    highlightedElement = TROUPE_DE_GUERRE;
-                    
+                    SDL_Log("Troupe de guerre 1!");
+                    highlightedElement = TROUPE_DE_GUERRE;                    
                 } else if (isClickInsideImage(clickX, clickY, xma, yma, widthMA, heightMA)){
-                    SDL_Log("Magicien !");
+                    SDL_Log("Magicien 1!");
                     highlightedElement = MAGICIEN;
                 }
 
 
-
                 
-
             }
         }
 
@@ -354,47 +354,11 @@ int main(int argc, char* argv[]) {
         //SDL_RenderCopy(renderer, textTexture, nullptr, &textRect);
 
 
-        // Afficher les choix en fonction de l'élément mis en surbrillance
-        /*switch (highlightedElement) {
-            case VILLAGE:
-                // Afficher les choix pour le village
-                SDL_Log("Choix pour le village :");
-                SDL_Log("1. Améliorer la défense");
-                SDL_Log("2. Recruter des habitants");
-                SDL_Log("3. Construire une ferme");
-                break;
-            case FORTERESSE:
-                // Afficher les choix pour la forteresse
-                SDL_Log("Choix pour la forteresse :");
-                SDL_Log("1. Améliorer les remparts");
-                SDL_Log("2. Former des soldats");
-                SDL_Log("3. Construire une tour de guet");
-                break;
-            case ECOLE_DE_MAGIE:
-                // Afficher les choix pour l'école de magie
-                SDL_Log("Choix pour l'école de magie :");
-                SDL_Log("1. Rechercher de nouveaux sorts");
-                SDL_Log("2. Recruter des apprentis");
-                SDL_Log("3. Améliorer les installations");
-                break;
-            case TROUPE_DE_GUERRE:
-                // Afficher les choix pour la troupe de guerre
-                SDL_Log("Choix pour la troupe de guerre :");
-                SDL_Log("1. Entraîner les soldats");
-                SDL_Log("2. Recruter des mercenaires");
-                SDL_Log("3. Améliorer l'équipement");
-                break;
-            case MAGICIEN:
-                // Afficher les choix pour le magicien
-                SDL_Log("Choix pour le magicien :");
-                SDL_Log("1. Étudier de nouveaux sorts");
-                SDL_Log("2. Entraîner ses pouvoirs");
-                SDL_Log("3. Chercher des artefacts magiques");
-                break;
-            default:
-                // Aucun élément mis en surbrillance, aucun choix à afficher
-                break;
-        }*/
+
+
+
+
+        /// AFFICHER LES BAT ET PERSO -----------------------------------------------------------------------------
 
 
         // Dessiner les 2 villages niveau 1
@@ -411,6 +375,10 @@ int main(int argc, char* argv[]) {
         SDL_RenderCopy(renderer, imageTexture, NULL, &dstRect);
 
         SDL_Rect dstRect2 = {1000, y, widthV, heightV};
+        if (highlightedElement == VILLAGE){
+            SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
+            drawCircle(renderer, 1000 + y / 2 - 25, y + heightV / 2, widthV / 2 - 5); // Cercle autour de l'image
+        }
         drawHealthBar(renderer, 1000, y, 200, heightV, 0.75); // Exemple: barre de vie à 75%
         number(renderer, 1000, y, nb_travailleur2); // Afficher le nombre de travaileurs
         level(renderer, 1000, y+35, level_village2);
@@ -432,6 +400,10 @@ int main(int argc, char* argv[]) {
         SDL_RenderCopy(renderer, imageTexturef, NULL, &dstRectf);
 
         SDL_Rect dstRectf2 = {1030, yf, widthF, heightF};
+        if (highlightedElement == FORTERESSE){
+            SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
+            drawCircle(renderer, 1030 + yf / 2 + 50, yf + heightF / 2, widthF / 2 ); // Cercle autour de l'image
+        }
         drawHealthBar(renderer, 1030, yf, 200, heightV, 0.75); // Exemple: barre de vie à 75%
         level(renderer, 1030, yf, level_forteresse2);
         shield(renderer, 1030+145, yf-28, 3);
@@ -452,6 +424,10 @@ int main(int argc, char* argv[]) {
         SDL_RenderCopy(renderer, imageTexturem, NULL, &dstRectm);
 
         SDL_Rect dstRectm2 = {1050, ym, widthM, heightM};
+        if (highlightedElement == ECOLE_DE_MAGIE){
+            SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
+            drawCircle(renderer, 1050 + yf / 2 + 40, ym + heightM / 2 + 5, widthF / 2 ); // Cercle autour de l'image
+        }
         drawHealthBar(renderer, 1050-30, ym, 200, heightV, 0.75); // Exemple: barre de vie à 75%
         level(renderer, 1050-30, ym, level_ecole_magie2);
         shield(renderer, 1050+115, ym-28, 3);
@@ -471,6 +447,10 @@ int main(int argc, char* argv[]) {
         SDL_RenderCopy(renderer, imageTextureg, NULL, &dstRectg);
 
         SDL_Rect dstRectg2 = {810, yg, widthG, heightG};
+        if (highlightedElement == TROUPE_DE_GUERRE){
+            SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
+            drawCircle(renderer, 810 + yg / 2 - 35, yg + heightG / 2 + 5, widthG / 2 ); // Cercle autour de l'image
+        }
         drawHealthBar(renderer, 810, yg, 200, heightV, 0.75); // Exemple: barre de vie à 75%
         number(renderer, 810 + 130, yg -25, nb_troupe_geurre2); // Afficher le nombre de troupe de guerre
         level(renderer, 810 +130, yg+10, level_troupe_guerre2);
@@ -489,10 +469,81 @@ int main(int argc, char* argv[]) {
         SDL_RenderCopy(renderer, imageTexturema, NULL, &dstRectma);
 
         SDL_Rect dstRectma2 = {820, yma, widthMA, heightMA};
+        if (highlightedElement == MAGICIEN){
+            drawCircle(renderer, 660 + yma / 2 , yma + heightMA / 2 + 5, widthG / 2 ); // Cercle autour de l'image
+        }
         drawHealthBar(renderer, 820, yma, 200, heightV, 0.75); // Exemple: barre de vie à 75%
         number(renderer, 820 + 120, yma -25, nb_magicien2); // Afficher le nombre de magicien
         level(renderer, 820+120, yma+10, level_magicien2);
         SDL_RenderCopy(renderer, imageTexturema, NULL, &dstRectma2);
+
+
+
+        /// CHOIX DU SOLDAT -----------------------------------------------------------------------------------------------------
+
+        
+
+        if (highlightedElement == TROUPE_DE_GUERRE){
+            afficherTexte(renderer, font, "Attaquer", textRect.x, textRect.y, {255,255,255,0});
+            afficherTexte(renderer, font, "Defendre", textRect.x + 150, textRect.y, {255,255,255,0});
+            if (isClickInsideImage(clickX, clickY, textRect.x, textRect.y, 100, 20)){
+                highlightText(renderer,font,"Attaquer",{0,0,0,0},{100,0,100,0},textRect.x,textRect.y);
+                choix = 1;
+            } else if (isClickInsideImage(clickX, clickY, textRect.x+150, textRect.y, 100, 20)){
+                highlightText(renderer,font,"Defendre",{0,0,0,0},{100,0,100,0},textRect.x+150,textRect.y);
+                choix = 0;
+            }
+        } else { choix = -1;}
+
+        // SI IL ATTAQUE
+
+        if (choix == 1){
+            // baisser nb ressources
+            afficherTexte(renderer, font, "Qui voulez vous attaquer ?", textRect.x,textRect.y+50,{255,255,255,0});
+            if (isClickInsideImage(clickX, clickY, 1000, y, widthV, heightV)) {
+                SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+                drawCircle(renderer, 1000 + y / 2 - 25, y + heightV / 2, widthV / 2 - 5);
+                // -- vie village
+            } else if (isClickInsideImage(clickX, clickY, 1030, yf, widthF, heightF)){
+                SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+                drawCircle(renderer, 1030 + yf / 2 + 50, yf + heightF / 2, widthF / 2 );
+                // -- vie forteresse sinon defensseurs
+            } else if (isClickInsideImage(clickX, clickY, 1050, ym, widthM, heightM)){
+                SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+                drawCircle(renderer, 1050 + yf / 2 + 40, ym + heightM / 2 + 5, widthF / 2 );
+                // -- vie ecole sinon defensseurs
+            } else if (isClickInsideImage(clickX, clickY, 810, yg, widthG, heightG)){
+                SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+                drawCircle(renderer, 810 + yg / 2 - 35, yg + heightG / 2 + 5, widthG / 2 );
+                // -- vie soldats
+            } else if (isClickInsideImage(clickX, clickY, 820, yma, widthMA, heightMA)){
+                SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+                drawCircle(renderer, 660 + yma / 2 , yma + heightMA / 2 + 5, widthG / 2 );
+                // -- vie magiciens
+            }
+        }
+
+       
+        // DEFENDRE 
+
+        if (choix == 0){
+            // baisser nb ressources
+            afficherTexte(renderer, font, "Qui voulez vous defendre ?", textRect.x,textRect.y+50,{255,255,255,0});
+            if (isClickInsideImage(clickX, clickY, x, y, widthV, heightV)) {
+                SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+                drawCircle(renderer, x + y / 2 - 25, y + heightV / 2, widthV / 2 - 5);
+                
+            } else if (isClickInsideImage(clickX, clickY, xf, yf, widthF, heightF)){
+                SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+                drawCircle(renderer, xf + yf / 2 + 50, yf + heightF / 2, widthF / 2 );
+                
+            } else if (isClickInsideImage(clickX, clickY, xm, ym, widthM, heightM)){
+                SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+                drawCircle(renderer, xm + yf / 2 + 40, ym + heightM / 2 + 5, widthF / 2 );
+                
+            } 
+        }
+
 
 
         // Afficher ce qui a été dessiné
