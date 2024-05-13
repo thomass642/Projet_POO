@@ -1,6 +1,8 @@
 #ifndef DEF_PARAM 
 #define DEF_PARAM
 // Definition de nos parametres
+#include <string>
+#include <vector>
 
 #define FACTO_VIE_BASE 300
 #define FACTO_VIE_FORTERESSE 200
@@ -31,22 +33,6 @@
 #define FACTO_AMELIO_ECOLE 10
 
 
-struct data{
-    data_joueur j1;
-    data_joueur j2;
-};
-
-struct data_joueur{
-    std::string nomj;
-    int ressources = 10;
-    std::string texteinfo = "debut !";
-    int nb_travailleurs = 0;
-    data_batiment base;
-    data_batiment forteresse; 
-    data_batiment ecole_magie;
-    std::vector<data_troupes_de_guerre> listesoldats;
-    std::vector<data_troupes_de_guerre> listemagiciens;
-};
 
 struct data_batiment{
     int vie ;
@@ -62,6 +48,24 @@ struct data_troupes_de_guerre{
     int soins;
 };
 
+struct data_joueur{
+    std::string nomj;
+    int ressources = 10;
+    int nb_travailleurs = 0;
+    data_batiment base;
+    data_batiment forteresse; 
+    data_batiment ecole_magie;
+    std::vector<data_troupes_de_guerre> listesoldats;
+    std::vector<data_troupes_de_guerre> listemagiciens;
+};
 
+
+struct data{
+    data_joueur j1;
+    data_joueur j2;
+    std::string texteinfo = "debut !";
+    int tour_joueur = 1;
+
+};
 
 #endif

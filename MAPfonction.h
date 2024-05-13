@@ -223,3 +223,93 @@ void level(SDL_Renderer* renderer, int x, int y, int level) {
     SDL_DestroyTexture(textTexture);
     TTF_CloseFont(font);
 }
+
+
+void shield(SDL_Renderer* renderer, int x, int y, int defensseur) {
+    // Charger l'image 
+    SDL_Surface* defensseurSurface = IMG_Load("img/shield.png");
+    if (defensseurSurface == nullptr) {
+        SDL_Log("Erreur lors du chargement de l'image : %s", IMG_GetError());
+        return;
+    }
+
+    SDL_Texture* defensseurTexture = SDL_CreateTextureFromSurface(renderer, defensseurSurface);
+    SDL_FreeSurface(defensseurSurface);
+    if (defensseurTexture == nullptr) {
+        SDL_Log("Erreur lors de la création de la texture de l'image : %s", SDL_GetError());
+        return;
+    }
+
+    // Dessiner le niveau à côté de l'image 
+    std::string defensseurText = std::to_string(defensseur);
+    TTF_Font* font = TTF_OpenFont("arial.ttf", 16); // Charger une police de taille 16 
+    if (font == nullptr) {
+        SDL_Log("Erreur lors du chargement de la police : %s", TTF_GetError());
+        return;
+    }
+
+    SDL_Color textColor = {255, 255, 255}; // Couleur du texte 
+    SDL_Surface* textSurface = TTF_RenderText_Solid(font, defensseurText.c_str(), textColor);
+    if (textSurface == nullptr) {
+        SDL_Log("Erreur lors de la création de la surface de texte : %s", TTF_GetError());
+        TTF_CloseFont(font);
+        return;
+    }
+
+    SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+    if (textTexture == nullptr) {
+        SDL_Log("Erreur lors de la création de la texture de texte : %s", SDL_GetError());
+        SDL_FreeSurface(textSurface);
+        TTF_CloseFont(font);
+        return;
+    }
+
+    // Positionner le texte à côté de l'image
+    SDL_Rect textRect;
+    SDL_QueryTexture(textTexture, nullptr, nullptr, &textRect.w, &textRect.h);
+    textRect.x = x + 30; 
+    textRect.y = y;
+
+    // Dessiner l'image 
+    SDL_Rect defensseurRect = {x, y, 30, 30}; 
+    SDL_RenderCopy(renderer, defensseurTexture, nullptr, &defensseurRect);
+
+    // Dessiner le texte du niveau
+    SDL_RenderCopy(renderer, textTexture, nullptr, &textRect);
+
+    // Libérer 
+    SDL_DestroyTexture(defensseurTexture);
+    SDL_DestroyTexture(textTexture);
+    TTF_CloseFont(font);
+}
+
+enum class SelectedImage {
+    VILLAGE,
+    FORTERESSE,
+    ECOLE_DE_MAGIE,
+    TROUPE_DE_GUERRE,
+    MAGICIEN
+};
+
+SelectedImage selectedImage = SelectedImage::VILLAGE; // Image initialement sélectionnée
+
+// Fonction pour changer la sélection en fonction de la flèche cliquée
+void changeSelection(bool goRight) {
+    switch (selectedImage) {
+        case SelectedImage::VILLAGE:
+            selectedImage = (goRight) ? SelectedImage::FORTERESSE : SelectedImage::MAGICIEN;
+            break;
+        case SelectedImage::FORTERESSE:
+            selectedImage = (goRight) ? SelectedImage::ECOLE_DE_MAGIE : SelectedImage::VILLAGE;
+            break;
+        case SelectedImage::ECOLE_DE_MAGIE:
+            selectedImage = (goRight) ? SelectedImage::TROUPE_DE_GUERRE : SelectedImage::FORTERESSE;
+            break;
+        case SelectedImage::TROUPE_DE_GUERRE:
+            selectedImage = (goRight) ? SelectedImage::MAGICIEN : SelectedImage::ECOLE_DE_MAGIE;
+            break;
+        case SelectedImage::MAGICIEN:
+            selectedImage = (goRight) ? SelectedImage::VILLAGE : SelectedImage::TROUPE_DE_GUERRE;
+            break;
+    }
+}
