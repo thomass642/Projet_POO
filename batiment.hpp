@@ -6,6 +6,7 @@
 #include <iostream>
 #include "troupe.hpp"
 #include "DefParam.h"
+#include "data.h"
 
 class Troupe;
 class Travailleur;

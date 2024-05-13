@@ -15,15 +15,36 @@ Jeu::Jeu(std::string joueur1, std::string joueur2){ // Définition des joueurs (
 }
 
 void Jeu::run(){
+    // JEU
+    // Lancement thread
+    joueur_courant = 1;
+    DONNEES.j1.nomj = _joueur1->get_name();
+    DONNEES.j2.nomj = _joueur2->get_name();
+    DONNEES.j1.base.niveau = 1;
+    DONNEES.j2.base.niveau = 1;
+    DONNEES.j1.base.vie = FACTO_VIE_BASE;
+    DONNEES.j2.base.vie = FACTO_VIE_BASE;
+
     std::cout << "\n\nDEBUT DE LA PARTIE\n\n";
+
     while(_joueur1->est_vivant() and _joueur2->est_vivant()){
         std::cout << "\n\n\n\n TOUR DE " << _joueur1->get_name() << "\n\n\n"; 
+        // MISE A JOUR AFFICHAGE ICI
+        joueur_courant = 1;
+        DONNEES.tour_joueur = 1;
         _joueur1->jouer(*_joueur2);
         if (not _joueur2->est_vivant())
             break;
+        // MISE A JOUR AFFICHAGE ICI
         std::cout << "\n\n\n\n TOUR DE " << _joueur2->get_name() << "\n\n\n"; 
+        joueur_courant = 2;
+        DONNEES.tour_joueur = 2;
         _joueur2->jouer(*_joueur1);
     }
+
+
+
+    // Affichage gagnant
     std::string gagnant;
     if (_joueur1->est_vivant()){
         gagnant = _joueur1->get_name();
@@ -31,4 +52,6 @@ void Jeu::run(){
         gagnant = _joueur2->get_name();
     }
     std::cout << "\n\nFIN DE LA PARTIE\n\nGagnant : " << gagnant << std::endl;
+    // MISE A JOUR AFFICHAGE ICI
+
 }

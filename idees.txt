@@ -94,3 +94,65 @@ magicien : vie : niveau / 2 * 40, dégats = niveau / 2 * 25, soins = niveau / 2 
 
 Interface Graphique (chaque troupe surlignée quand son tour et clic pour choisir action)
 
+
+
+
+
+
+
+
+
+
+
+
+
+THREAD
+BOUCLE AFFICHAGE (VARIABLES GLOBALES) + TRANSMET ACTIONS JOUEURS
+
+
+
+THREAD
+BOUCLE JEU -> AFFECTE VARIABLES GLOBALES + RECUPERE ACTIONS
+
+
+variables globale : 
+struct data{
+
+data_joueur j1 
+data_joueur j2
+
+
+};
+
+struct data_joueur{
+std::string nomj
+int ressources
+std::string texteinfo
+    int nb_travailleurs
+    data_batiment base  
+    data_batiment forteresse 
+    data_batiment ecole_magie
+    int nb_soldats
+    data_troupes_de_guerre listesoldats
+    int nb_magiciens
+    data_troupes_de_guerre listemagiciens
+};
+
+struct data_batiment{
+    int vie 
+    int niveau  
+    int nb_defenseurs
+    int vie_premier_defenseur
+};
+
+struct data_troupes_de_guerre{
+    int vie
+    int niveau
+    int degats
+    int soins
+};
+
+
+
+
+
