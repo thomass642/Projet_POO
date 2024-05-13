@@ -283,7 +283,7 @@ int main(int argc, char* argv[]) {
     //---------------------------------------------------------------------------------------------------------
 
 
-    Element highlightedElement;
+    Element highlightedElement = NONE;
 
     // Boucle principale
     bool running = true;
@@ -326,6 +326,49 @@ int main(int argc, char* argv[]) {
 
         // Afficher le texte
         SDL_RenderCopy(renderer, textTexture, nullptr, &textRect);
+
+
+        // Afficher les choix en fonction de l'élément mis en surbrillance
+        switch (highlightedElement) {
+            case VILLAGE:
+                // Afficher les choix pour le village
+                SDL_Log("Choix pour le village :");
+                SDL_Log("1. Améliorer la défense");
+                SDL_Log("2. Recruter des habitants");
+                SDL_Log("3. Construire une ferme");
+                break;
+            case FORTERESSE:
+                // Afficher les choix pour la forteresse
+                SDL_Log("Choix pour la forteresse :");
+                SDL_Log("1. Améliorer les remparts");
+                SDL_Log("2. Former des soldats");
+                SDL_Log("3. Construire une tour de guet");
+                break;
+            case ECOLE_DE_MAGIE:
+                // Afficher les choix pour l'école de magie
+                SDL_Log("Choix pour l'école de magie :");
+                SDL_Log("1. Rechercher de nouveaux sorts");
+                SDL_Log("2. Recruter des apprentis");
+                SDL_Log("3. Améliorer les installations");
+                break;
+            case TROUPE_DE_GUERRE:
+                // Afficher les choix pour la troupe de guerre
+                SDL_Log("Choix pour la troupe de guerre :");
+                SDL_Log("1. Entraîner les soldats");
+                SDL_Log("2. Recruter des mercenaires");
+                SDL_Log("3. Améliorer l'équipement");
+                break;
+            case MAGICIEN:
+                // Afficher les choix pour le magicien
+                SDL_Log("Choix pour le magicien :");
+                SDL_Log("1. Étudier de nouveaux sorts");
+                SDL_Log("2. Entraîner ses pouvoirs");
+                SDL_Log("3. Chercher des artefacts magiques");
+                break;
+            default:
+                // Aucun élément mis en surbrillance, aucun choix à afficher
+                break;
+        }
 
 
         // Dessiner les 2 villages niveau 1
@@ -390,6 +433,9 @@ int main(int argc, char* argv[]) {
 
         // Afficher ce qui a été dessiné
         SDL_RenderPresent(renderer);
+
+        SDL_Delay(100);
+        highlightedElement = NONE;
     }
 
 
