@@ -1,8 +1,9 @@
 #ifndef DEF_PARAM 
 #define DEF_PARAM
 // Definition de nos parametres
-#include <string>
+
 #include <vector>
+#include <string>
 
 #define FACTO_VIE_BASE 300
 #define FACTO_VIE_FORTERESSE 200
@@ -33,39 +34,36 @@
 #define FACTO_AMELIO_ECOLE 10
 
 
-
 struct data_batiment{
-    float vie ;
-    int niveau; 
-    int nb_defenseurs;
-    float vie_premier_defenseur;
+    int vie = 0;
+    int niveau = 0;  
+    int nb_defenseurs = 0;
+    int vie_premier_defenseur = 0;
 };
 
 struct data_troupes_de_guerre{
-    float vie;
-    int niveau;
-    int degats;
-    int soins;
+    int vie = 0;
+    int niveau = 0;
+    int degats = 0;
+    int soins = 0;
 };
 
 struct data_joueur{
-    std::string nomj;
-    int ressources = 10;
-    int nb_travailleurs = 0;
-    data_batiment base;
-    data_batiment forteresse; 
-    data_batiment ecole_magie;
-    std::vector<data_troupes_de_guerre> listesoldats;
-    std::vector<data_troupes_de_guerre> listemagiciens;
+    std::string nomj; 
+    int ressources = 10; // ok
+    int nb_travailleurs = 0; // ok
+    data_batiment base; 
+    data_batiment forteresse;  // ok
+    data_batiment ecole_magie; // ok
+    std::vector<data_troupes_de_guerre> listesoldats; // ok
+    std::vector<data_troupes_de_guerre> listemagiciens; // ok
 };
-
 
 struct data{
     data_joueur j1;
     data_joueur j2;
-    std::string texteinfo = "debut !";
+    std::string texteinfo = "debut de la partie";
     int tour_joueur = 1;
-
 };
 
 #endif

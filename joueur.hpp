@@ -5,6 +5,7 @@
 #include <string>
 #include "batiment.hpp"
 #include "troupe.hpp"
+#include "data.h"
 
 class Batiment;
 class Base;
@@ -26,7 +27,7 @@ class Joueur{
         std::string get_name() { return _nom_joueur;}
         void jouer(Joueur& deuxieme_joueur); // Le joueur joue
         void former_troupes(int batiment_index); // L'index du batiment : 0 = base, 1 = forteresse, 2 = école magie
-        void recuperer_ressources(int ressources){ _ressources += ressources;}
+        void recuperer_ressources(int ressources);
         Batiment* get_batiment(int index);
         Troupe& get_troupe(int index){ return *(_troupes[index]); }
         int get_size_troupes(){ return _troupes.size(); }

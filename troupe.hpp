@@ -5,6 +5,7 @@
 #include "batiment.hpp"
 #include "joueur.hpp"
 #include "DefParam.h"
+#include "data.h"
 
 class Batiment;
 class Joueur;
