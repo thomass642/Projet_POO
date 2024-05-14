@@ -99,13 +99,6 @@ Interface Graphique (chaque troupe surlignée quand son tour et clic pour choisi
 
 
 
-
-
-
-
-
-
-
 THREAD
 BOUCLE AFFICHAGE (VARIABLES GLOBALES) + TRANSMET ACTIONS JOUEURS
 
@@ -151,8 +144,3 @@ struct data_troupes_de_guerre{
     int degats
     int soins
 };
-
-
-
-
-

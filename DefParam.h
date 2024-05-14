@@ -1,6 +1,7 @@
 #ifndef DEF_PARAM 
 #define DEF_PARAM
 // Definition de nos parametres
+
 #include <vector>
 #include <string>
 
@@ -64,6 +65,5 @@ struct data{
     std::string texteinfo = "debut de la partie";
     int tour_joueur = 1;
 };
-
 
 #endif
