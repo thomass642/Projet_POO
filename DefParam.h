@@ -35,14 +35,14 @@
 
 
 struct data_batiment{
-    int vie = 0;
+    float vie = 0;
     int niveau = 0;  
     int nb_defenseurs = 0;
-    int vie_premier_defenseur = 0;
+    float vie_premier_defenseur = 0;
 };
 
 struct data_troupes_de_guerre{
-    int vie = 0;
+    float vie = 0;
     int niveau = 0;
     int degats = 0;
     int soins = 0;
