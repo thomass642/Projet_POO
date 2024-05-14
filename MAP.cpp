@@ -306,6 +306,8 @@ int main(int argc, char* argv[]) {
     int level_magicien1 = 1;
     int level_magicien2 = 1;
 
+    extern int bidule;
+
     int clickX = -1;
     int clickY = -1;
 
@@ -370,11 +372,11 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, x + y / 2 - 25, y + heightV / 2, widthV / 2 - 5); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, x, y, 200, heightV, jou1.base.vie); // Exemple: barre de vie à 75%
-        number(renderer, x, y, jou1.nb_travailleurs); // Afficher le nombre de travaileurs
-        level(renderer, x, y+35, jou1.base.niveau);
-        shield(renderer, x+145, y-28, jou1.base.nb_defenseurs);
-        drawHealthBar(renderer, x+185, y, 100, heightV, jou1.base.vie_premier_defenseur);
+        drawHealthBar(renderer, x, y, 200, heightV, jeu.j1.base.vie); // Exemple: barre de vie à 75%
+        number(renderer, x, y, jeu.j1.nb_travailleurs); // Afficher le nombre de travaileurs
+        level(renderer, x, y+35, jeu.j1.base.niveau);
+        shield(renderer, x+145, y-28, jeu.j1.base.nb_defenseurs);
+        drawHealthBar(renderer, x+185, y, 100, heightV, jeu.j1.base.vie_premier_defenseur);
         SDL_RenderCopy(renderer, imageTexture, NULL, &dstRect);
 
         SDL_Rect dstRect2 = {1000, y, widthV, heightV};
@@ -382,11 +384,11 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, 1000 + y / 2 - 25, y + heightV / 2, widthV / 2 - 5); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, 1000, y, 200, heightV, jou2.base.vie); // Exemple: barre de vie à 75%
-        number(renderer, 1000, y, jou2.nb_travailleurs); // Afficher le nombre de travaileurs
-        level(renderer, 1000, y+35, jou2.base.niveau);
-        shield(renderer, 1000+145, y-28, jou2.base.nb_defenseurs);
-        drawHealthBar(renderer, 1000+185, y, 100, heightV, jou2.base.vie_premier_defenseur);
+        drawHealthBar(renderer, 1000, y, 200, heightV, jeu.j2.base.vie); // Exemple: barre de vie à 75%
+        number(renderer, 1000, y, jeu.j2.nb_travailleurs); // Afficher le nombre de travaileurs
+        level(renderer, 1000, y+35, jeu.j2.base.niveau);
+        shield(renderer, 1000+145, y-28, jeu.j2.base.nb_defenseurs);
+        drawHealthBar(renderer, 1000+185, y, 100, heightV, jeu.j2.base.vie_premier_defenseur);
         SDL_RenderCopy(renderer, imageTexture, NULL, &dstRect2);
 
 
@@ -396,10 +398,10 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, xf + yf / 2 + 50, yf + heightF / 2, widthF / 2 ); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, xf, yf, 200, heightV, 0.75); // Exemple: barre de vie à 75%
-        level(renderer, xf, yf, level_forteresse1);
-        shield(renderer, xf+145, yf-28, 3);
-        drawHealthBar(renderer, xf+185, yf, 100, heightV, 1);
+        drawHealthBar(renderer, xf, yf, 200, heightV, jeu.j1.forteresse.vie); // Exemple: barre de vie à 75%
+        level(renderer, xf, yf, jeu.j1.forteresse.niveau);
+        shield(renderer, xf+145, yf-28, jeu.j1.forteresse.nb_defenseurs);
+        drawHealthBar(renderer, xf+185, yf, 100, heightV, jeu.j1.forteresse.vie_premier_defenseur);
         SDL_RenderCopy(renderer, imageTexturef, NULL, &dstRectf);
 
         SDL_Rect dstRectf2 = {1030, yf, widthF, heightF};
@@ -407,10 +409,10 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, 1030 + yf / 2 + 50, yf + heightF / 2, widthF / 2 ); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, 1030, yf, 200, heightV, 0.75); // Exemple: barre de vie à 75%
-        level(renderer, 1030, yf, level_forteresse2);
-        shield(renderer, 1030+145, yf-28, 3);
-        drawHealthBar(renderer, 1030+185, yf, 100, heightV, 1);
+        drawHealthBar(renderer, 1030, yf, 200, heightV, jeu.j2.forteresse.vie); // Exemple: barre de vie à 75%
+        level(renderer, 1030, yf, jeu.j2.forteresse.niveau);
+        shield(renderer, 1030+145, yf-28, jeu.j2.forteresse.nb_defenseurs);
+        drawHealthBar(renderer, 1030+185, yf, 100, heightV, jeu.j2.forteresse.vie_premier_defenseur);
         SDL_RenderCopy(renderer, imageTexturef, NULL, &dstRectf2);
 
 
@@ -420,10 +422,10 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, xf + yf / 2 + 40, ym + heightM / 2 + 5, widthF / 2 ); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, xm-30, ym, 200, heightV, 0.75); // Exemple: barre de vie à 75%
-        level(renderer, xm-30, ym, level_ecole_magie1);
-        shield(renderer, xm+115, ym-28, 3);
-        drawHealthBar(renderer, xm+155, ym, 100, heightV, 1);
+        drawHealthBar(renderer, xm-30, ym, 200, heightV, jeu.j1.ecole_magie.vie); // Exemple: barre de vie à 75%
+        level(renderer, xm-30, ym, jeu.j1.ecole_magie.niveau);
+        shield(renderer, xm+115, ym-28, jeu.j1.ecole_magie.nb_defenseurs);
+        drawHealthBar(renderer, xm+155, ym, 100, heightV, jeu.j1.ecole_magie.vie_premier_defenseur);
         SDL_RenderCopy(renderer, imageTexturem, NULL, &dstRectm);
 
         SDL_Rect dstRectm2 = {1050, ym, widthM, heightM};
@@ -431,10 +433,10 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, 1050 + yf / 2 + 40, ym + heightM / 2 + 5, widthF / 2 ); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, 1050-30, ym, 200, heightV, 0.75); // Exemple: barre de vie à 75%
-        level(renderer, 1050-30, ym, level_ecole_magie2);
-        shield(renderer, 1050+115, ym-28, 3);
-        drawHealthBar(renderer, 1050+155, ym, 100, heightV, 1);
+        drawHealthBar(renderer, 1050-30, ym, 200, heightV, jeu.j2.ecole_magie.vie); // Exemple: barre de vie à 75%
+        level(renderer, 1050-30, ym, jeu.j2.ecole_magie.niveau);
+        shield(renderer, 1050+115, ym-28, jeu.j2.ecole_magie.nb_defenseurs);
+        drawHealthBar(renderer, 1050+155, ym, 100, heightV, jeu.j2.ecole_magie.vie_premier_defenseur);
         SDL_RenderCopy(renderer, imageTexturem, NULL, &dstRectm2);
 
 
@@ -444,9 +446,9 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, xg + yg / 2 - 35, yg + heightG / 2 + 5, widthG / 2 ); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, xg, yg, 200, heightV, 0.75); // Exemple: barre de vie à 75%
-        number(renderer, xg + 130, yg - 25, nb_troupe_geurre1); // Afficher le nombre de troupe de guerre
-        level(renderer, xg +130, yg+10, level_troupe_guerre1);
+        drawHealthBar(renderer, xg, yg, 200, heightV, jeu.j1.listesoldats[jeu.j1.listesoldats.size()-1].vie); // Exemple: barre de vie à 75%
+        number(renderer, xg + 130, yg - 25, jeu.j1.listesoldats.size()); // Afficher le nombre de troupe de guerre
+        level(renderer, xg +130, yg+10, jeu.j1.listesoldats[jeu.j1.listesoldats.size()-1].niveau);
         SDL_RenderCopy(renderer, imageTextureg, NULL, &dstRectg);
 
         SDL_Rect dstRectg2 = {810, yg, widthG, heightG};
@@ -454,9 +456,9 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, 810 + yg / 2 - 35, yg + heightG / 2 + 5, widthG / 2 ); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, 810, yg, 200, heightV, 0.75); // Exemple: barre de vie à 75%
-        number(renderer, 810 + 130, yg -25, nb_troupe_geurre2); // Afficher le nombre de troupe de guerre
-        level(renderer, 810 +130, yg+10, level_troupe_guerre2);
+        drawHealthBar(renderer, 810, yg, 200, heightV, jeu.j2.listesoldats[jeu.j2.listesoldats.size()-1].vie); // Exemple: barre de vie à 75%
+        number(renderer, 810 + 130, yg -25, jeu.j2.listesoldats.size()); // Afficher le nombre de troupe de guerre
+        level(renderer, 810 +130, yg+10, jeu.j2.listesoldats[jeu.j2.listesoldats.size()-1].niveau);
         SDL_RenderCopy(renderer, imageTextureg, NULL, &dstRectg2);
 
 
@@ -466,18 +468,18 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, (xma + yma) / 2 , yma + heightMA / 2 + 5, widthG / 2 ); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, xma, yma, 200, heightV, 0.75); // Exemple: barre de vie à 75%
-        number(renderer, xma + 120, yma -25, nb_magicien2); // Afficher le nombre de magicien
-        level(renderer, xma +120, yma+10, level_magicien1);
+        drawHealthBar(renderer, xma, yma, 200, heightV, jeu.j1.listemagiciens[jeu.j1.listemagiciens.size()-1].vie); // Exemple: barre de vie à 75%
+        number(renderer, xma + 120, yma -25, jeu.j1.listemagiciens.size()); // Afficher le nombre de magicien
+        level(renderer, xma +120, yma+10, jeu.j1.listemagiciens[jeu.j1.listemagiciens.size()-1].niveau);
         SDL_RenderCopy(renderer, imageTexturema, NULL, &dstRectma);
 
         SDL_Rect dstRectma2 = {820, yma, widthMA, heightMA};
         if (highlightedElement == MAGICIEN){
             drawCircle(renderer, 660 + yma / 2 , yma + heightMA / 2 + 5, widthG / 2 ); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, 820, yma, 200, heightV, 0.75); // Exemple: barre de vie à 75%
-        number(renderer, 820 + 120, yma -25, nb_magicien2); // Afficher le nombre de magicien
-        level(renderer, 820+120, yma+10, level_magicien2);
+        drawHealthBar(renderer, 820, yma, 200, heightV, jeu.j2.listemagiciens[jeu.j2.listemagiciens.size()-1].vie); // Exemple: barre de vie à 75%
+        number(renderer, 820 + 120, yma -25, jeu.j2.listemagiciens.size()); // Afficher le nombre de magicien
+        level(renderer, 820+120, yma+10, jeu.j2.listemagiciens[jeu.j2.listemagiciens.size()-1].niveau);
         SDL_RenderCopy(renderer, imageTexturema, NULL, &dstRectma2);
 
 
