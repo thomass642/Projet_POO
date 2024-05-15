@@ -4,6 +4,13 @@
 #include "DefParam.h"
 
 
+enum Tour{
+    TRAVAILLEURS,
+    SOLDATS,
+    MAGICIENS,
+    NONE
+};
+
 data_batiment village1 = {0.8,1,0,0};
 data_batiment forteresse1 = {0.5,1,2,0.5};
 data_batiment magie1 = {0.6,2,1,0.75};
@@ -25,5 +32,7 @@ data_troupes_de_guerre mag22 = {0.5,2,3,5};
 data_joueur jou2 = {"Thomas",15,6,village2,forteresse2,magie2,{sol2},{mag2,mag22}};
 
 data jeu = {jou1,jou2,"debut",1};
+
+Tour tourjeu = SOLDATS;
 
 #endif

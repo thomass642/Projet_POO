@@ -302,7 +302,7 @@ void shield(SDL_Renderer* renderer, int x, int y, int defensseur) {
     TTF_CloseFont(font);
 }
 
-SelectedImage selectedImage = SelectedImage::VILLAGE; // Image initialement sélectionnée
+/*SelectedImage selectedImage = SelectedImage::VILLAGE; // Image initialement sélectionnée
 
 // Fonction pour changer la sélection en fonction de la flèche cliquée
 void changeSelection(bool goRight) {
@@ -323,5 +323,5 @@ void changeSelection(bool goRight) {
             selectedImage = (goRight) ? SelectedImage::VILLAGE : SelectedImage::TROUPE_DE_GUERRE;
             break;
     }
-}
+}*/
 

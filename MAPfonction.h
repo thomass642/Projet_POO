@@ -5,22 +5,22 @@
 #include <SDL2/SDL_ttf.h>
 #include <string>
 
-enum Element {
-    ACTION,
-    VILLAGE,
-    FORTERESSE,
-    ECOLE_DE_MAGIE,
-    TROUPE_DE_GUERRE,
-    MAGICIEN,
-    NONE
+enum Element1 {
+    VILLAGE1,
+    FORTERESSE1,
+    ECOLE_DE_MAGIE1,
+    TROUPE_DE_GUERRE1,
+    MAGICIEN1,
+    NONE1
 };
 
-enum class SelectedImage {
-    VILLAGE,
-    FORTERESSE,
-    ECOLE_DE_MAGIE,
-    TROUPE_DE_GUERRE,
-    MAGICIEN
+enum Element2 {
+    VILLAGE2,
+    FORTERESSE2,
+    ECOLE_DE_MAGIE2,
+    TROUPE_DE_GUERRE2,
+    MAGICIEN2,
+    NONE2
 };
 
 // Fonction pour vérifier si les coordonnées du clic sont à l'intérieur d'une image
