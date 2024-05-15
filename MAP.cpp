@@ -496,6 +496,7 @@ int main(int argc, char* argv[]) {
 
         SDL_Rect dstRectma2 = {820, yma, widthMA, heightMA};
         if (highlightedElement2 == MAGICIEN2){
+            SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, 660 + yma / 2 , yma + heightMA / 2 + 5, widthG / 2 ); // Cercle autour de l'image
         }
         drawHealthBar(renderer, 820, yma, 200, heightV, jeu.j2.listemagiciens[jeu.j2.listemagiciens.size()-1].vie); 
@@ -526,7 +527,7 @@ int main(int argc, char* argv[]) {
                 highlightText(renderer,font,"Defendre",{0,0,0,0},{100,0,100,0},textRect.x+150,textRect.y);
                 choix = 0;
             }
-        } else { choix = -1;}
+        } 
 
 
 
@@ -539,8 +540,9 @@ int main(int argc, char* argv[]) {
             afficherTexte(renderer, font, "Qui voulez vous attaquer ?", textRect.x,textRect.y+50,{255,255,255,0});
 
             if (highlightedElement2 == VILLAGE2) { //click une le village adverse
-                jeu.j2.base.vie --;
+                jeu.j2.base.vie = jeu.j2.base.vie - 0.5;  //////////////////////////////////////////////BIZARRE//////////////////////////////////////////////////
                 // -- vie base sinon defensseurs
+                afficherTexte(renderer, font, "Vous attaquez la base adverse!", textRect.x, textRect.y + 100, {255,255,0,0});
                 choix = -1;
             } else if (highlightedElement2 == FORTERESSE2){ //click sur la forteresse adverse
                 
@@ -565,7 +567,7 @@ int main(int argc, char* argv[]) {
        
         // SI IL DEFEND 
 
-        if (choix == 0 && tourjeu == SOLDATS){
+        else if (choix == 0 && tourjeu == SOLDATS){
 
             afficherTexte(renderer, font, "Qui voulez vous defendre ?", textRect.x,textRect.y+50,{255,255,255,0});
 
@@ -584,7 +586,11 @@ int main(int argc, char* argv[]) {
             } 
         }
 
-
+        else {
+            highlightedElement1 = NONE1;
+            highlightedElement2 = NONE2;
+            choix = -1;
+        }
 
 
 
