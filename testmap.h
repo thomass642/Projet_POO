@@ -1,6 +1,10 @@
 #ifndef TEST_MAP
 #define TEST_MAP
 
+#include <iostream>
+#include <thread>
+#include <chrono>
+
 #include "DefParam.h"
 
 
@@ -31,7 +35,16 @@ data_troupes_de_guerre mag22 = {0.5,2,3,5};
 
 data_joueur jou2 = {"Thomas",15,6,village2,forteresse2,magie2,{sol2},{mag2,mag22}};
 
-data jeu = {jou1,jou2,"debut",1};
+void pauseAndChangeVillage2(data* donnees) {
+    
+
+    // Change les valeurs de village2
+    donnees->j2.base.vie = 0.5;
+    
+    std::cout << "Les valeurs de village2 ont été changées." << std::endl;
+}
+
+data DONNEES = {jou1,jou2,"debut",1};
 
 Tour tourjeu = SOLDATS;
 
