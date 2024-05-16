@@ -353,8 +353,7 @@ int main(int argc, char* argv[]) {
                 else if (isClickInsideImage(clickX, clickY, 1000, y, widthV, heightV)){
                     SDL_Log("Village 2!");
                     highlightedElement2 = VILLAGE2;
-                    pauseAndChangeVillage2(&DONNEES);
-                    std::cout << DONNEES.j2.base.vie << std::endl;
+                    changeVillage2(&DONNEES);
                 } else if (isClickInsideImage(clickX, clickY, 1030, yf, widthF, heightF)){
                     SDL_Log("Forteresse 2!");
                     highlightedElement2 = FORTERESSE2;
@@ -364,6 +363,7 @@ int main(int argc, char* argv[]) {
                 } else if (isClickInsideImage(clickX, clickY, 810, yg, widthG, heightG)){
                     SDL_Log("Troupe de guerre 2!");
                     highlightedElement2 = TROUPE_DE_GUERRE2;
+                    changesold2(&DONNEES);
                 } else if (isClickInsideImage(clickX, clickY, 820, yma, widthMA, heightMA)){
                     SDL_Log("Magicien 2!");
                     highlightedElement2 = MAGICIEN2;
@@ -469,9 +469,9 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, xg + yg / 2 - 35, yg + heightG / 2 + 5, widthG / 2 ); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, xg, yg, 200, heightV, DONNEES.j1.listesoldats[DONNEES.j1.listesoldats.size()-1].vie); 
+        drawHealthBar(renderer, xg, yg, 200, heightV, DONNEES.j1.select_vie_sold); 
         number(renderer, xg + 130, yg - 25, DONNEES.j1.listesoldats.size()); // Afficher le nombre de troupe de guerre
-        level(renderer, xg +130, yg+10, DONNEES.j1.listesoldats[DONNEES.j1.listesoldats.size()-1].niveau);
+        level(renderer, xg +130, yg+10, DONNEES.j1.select_niveau_sold);
         SDL_RenderCopy(renderer, imageTextureg, NULL, &dstRectg);
 
         SDL_Rect dstRectg2 = {810, yg, widthG, heightG};
@@ -479,9 +479,9 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, 810 + yg / 2 - 35, yg + heightG / 2 + 5, widthG / 2 ); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, 810, yg, 200, heightV, DONNEES.j2.listesoldats[DONNEES.j2.listesoldats.size()-1].vie); 
+        drawHealthBar(renderer, 810, yg, 200, heightV, DONNEES.j2.select_vie_sold); 
         number(renderer, 810 + 130, yg -25, DONNEES.j2.listesoldats.size()); // Afficher le nombre de troupe de guerre
-        level(renderer, 810 +130, yg+10, DONNEES.j2.listesoldats[DONNEES.j2.listesoldats.size()-1].niveau);
+        level(renderer, 810 +130, yg+10, DONNEES.j2.select_niveau_sold);
         SDL_RenderCopy(renderer, imageTextureg, NULL, &dstRectg2);
 
 
@@ -491,9 +491,9 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, (xma + yma) / 2 , yma + heightMA / 2 + 5, widthG / 2 ); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, xma, yma, 200, heightV, DONNEES.j1.listemagiciens[DONNEES.j1.listemagiciens.size()-1].vie); 
+        drawHealthBar(renderer, xma, yma, 200, heightV, DONNEES.j1.select_vie_mag); 
         number(renderer, xma + 120, yma -25, DONNEES.j1.listemagiciens.size()); // Afficher le nombre de magicien
-        level(renderer, xma +120, yma+10, DONNEES.j1.listemagiciens[DONNEES.j1.listemagiciens.size()-1].niveau);
+        level(renderer, xma +120, yma+10, DONNEES.j1.select_niveau_mag);
         SDL_RenderCopy(renderer, imageTexturema, NULL, &dstRectma);
 
         SDL_Rect dstRectma2 = {820, yma, widthMA, heightMA};
@@ -501,14 +501,15 @@ int main(int argc, char* argv[]) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, 660 + yma / 2 , yma + heightMA / 2 + 5, widthG / 2 ); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, 820, yma, 200, heightV, DONNEES.j2.listemagiciens[DONNEES.j2.listemagiciens.size()-1].vie); 
+        drawHealthBar(renderer, 820, yma, 200, heightV, DONNEES.j2.select_vie_mag); 
         number(renderer, 820 + 120, yma -25, DONNEES.j2.listemagiciens.size()); // Afficher le nombre de magicien
-        level(renderer, 820+120, yma+10, DONNEES.j2.listemagiciens[DONNEES.j2.listemagiciens.size()-1].niveau);
+        level(renderer, 820+120, yma+10, DONNEES.j2.select_niveau_mag);
         SDL_RenderCopy(renderer, imageTexturema, NULL, &dstRectma2);
 
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if ( DONNEES.tour_joueur == 1 ) { afficherTexte(renderer, font, DONNEES.j1.nomj.c_str(), 600, 100, {200,0,200,0});}
+
+        if ( DONNEES.tour_joueur == 1 ) { afficherTexte(renderer, font, DONNEES.j1.nomj.c_str(), 600, 150, {200,0,200,0});}
         else {afficherTexte(renderer, font, DONNEES.j2.nomj.c_str(), 600, 100, {255,0,0,0});}
         
         const char* info = DONNEES.texteinfo.c_str(); // convertir string en const char*

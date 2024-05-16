@@ -3,7 +3,7 @@
 
 int main(){
 
-    Jeu jeu("Thomas", "Manpreet");  
+    Jeu jeu("stefou", "Manpreet");  
     jeu.run();
 
     return 0;

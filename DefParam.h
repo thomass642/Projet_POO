@@ -57,6 +57,13 @@ struct data_joueur{
     data_batiment ecole_magie; // ok
     std::vector<data_troupes_de_guerre> listesoldats; // ok
     std::vector<data_troupes_de_guerre> listemagiciens; // ok
+    float select_vie_sold = 0;
+    int select_niveau_sold;
+    int select_degats_sold;
+    float select_vie_mag;
+    int select_niveau_mag;
+    int select_degats_mag;
+    int select_soins;
 };
 
 struct data{
