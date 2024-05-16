@@ -41,6 +41,8 @@ data DONNEES = {jou1,jou2,"debut",1};
 
 Tour tourjeu = SOLDATS;
 
+int choix = 1; // ATTAQUER
+
 
 // permet de tester si les valeurs change à partir de la boucle de l'interface graph
 void changeVillage2(data* donnees) {

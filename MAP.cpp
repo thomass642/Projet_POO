@@ -373,7 +373,6 @@ int main(int argc, char* argv[]) {
     int clickY ;
     clickY = -1;
 
-    int choix = -1; 
 
     // Boucle principale
     bool running = true;
@@ -576,8 +575,7 @@ int main(int argc, char* argv[]) {
         
         afficherTexte(renderer, font, info,550,200, {255,255,255,0});
 
-        
-        insertImages(renderer, 810, yg, widthG, heightG, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -591,13 +589,13 @@ int main(int argc, char* argv[]) {
             if (tourjeu == SOLDATS){
                 afficherTexte(renderer, font, "Attaquer", textRect.x, textRect.y, {255,255,255,0});
                 afficherTexte(renderer, font, "Defendre", textRect.x + 150, textRect.y, {255,255,255,0});
-                if (isClickInsideImage(clickX, clickY, textRect.x, textRect.y, 100, 20)){
+                /*if (isClickInsideImage(clickX, clickY, textRect.x, textRect.y, 100, 20)){
                     highlightText(renderer,font,"Attaquer",{0,0,0,0},{100,0,100,0},textRect.x,textRect.y);
-                    choix = 1;
+                    
                 } else if (isClickInsideImage(clickX, clickY, textRect.x+150, textRect.y, 100, 20)){
                     highlightText(renderer,font,"Defendre",{0,0,0,0},{100,0,100,0},textRect.x+150,textRect.y);
-                    choix = 0;
-                }
+                    
+                }*/
             } 
 
 
@@ -617,23 +615,24 @@ int main(int argc, char* argv[]) {
                 } else if (highlightedElement2 == FORTERESSE2){ //click sur la forteresse adverse
                     
                     // -- vie forteresse sinon defensseurs
-                    choix = -1;
                 } else if (highlightedElement2 == ECOLE_DE_MAGIE2){  //click sur ecole magie adverse
                     
                     // -- vie ecole sinon defensseurs
-                    choix = -1;
                 } else if (highlightedElement2 == TROUPE_DE_GUERRE2){  //click sur soldat adverse
-                
+
                     // -- vie soldats
                     if (DONNEES.j2.listesoldats.size() > 1){
-                        insertImages(renderer, 810, yg, widthG, heightG, imageTexturefl, widthFL, heightFL, imageTexturefl, widthFL, heightFL);
-                        std::this_thread::sleep_for(std::chrono::seconds(5));
+                        insertImages(renderer, 810, yg, widthG, heightG, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+                        if (isClickInsideImage(clickX, clickY, 810-widthFLg, yg + (heightG - heightFLg) / 2, widthFLg, heightFLg)){
+                            std::cout << "soldat avant" << std::endl;
+                        } else if (isClickInsideImage(clickX, clickY, 810+widthG, yg + (heightG - heightFL) / 2, widthFL, heightFL)){
+                            std::cout << "soldat apres" << std::endl;
+                        }
                     }
 
                 } else if (highlightedElement2 == MAGICIEN2){ //click sur magicien adverse
                     
                     // -- vie magiciens
-                    choix = -1;
                 }
             
             }
@@ -648,22 +647,20 @@ int main(int argc, char* argv[]) {
                 if (highlightedElement1 == VILLAGE1) { // click sur sa base
                     
                     // ++ nb defensseurs
-                    choix = -1;
+                   
                 } else if (highlightedElement1 == FORTERESSE1){ // click sur sa forteresse
                     
                     // ++ nb defensseurs
-                    choix = -1;
+                    
                 } else if (highlightedElement1 == ECOLE_DE_MAGIE1){ // click sur son ecole magie
                     
                     // ++ nb defensseurs
-                    choix = -1;
+                    
                 } 
             }
 
             else {
-                highlightedElement1 = NONE1;
-                highlightedElement2 = NONE2;
-                choix = -1;
+                
             }
 
 
@@ -686,7 +683,7 @@ int main(int argc, char* argv[]) {
                     highlightText(renderer,font,"Soigner",{0,0,0,0},{100,0,100,0},textRect.x+200,textRect.y);
                     choix = 2;
                 }
-            } else { choix = -1;}
+            } 
 
 
             // SI IL ATTAQUE
