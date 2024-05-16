@@ -282,6 +282,66 @@ int main(int argc, char* argv[]) {
 
 
 
+
+    /// Insertion FLECHE POUR SELECTIONNER DROITE
+    SDL_Surface* imageSurfacefl = IMG_Load("img/arrow.png");
+    if (imageSurfacefl == nullptr) {
+        SDL_Log("Erreur lors du chargement de l'image à insérer : %s", IMG_GetError());
+        SDL_DestroyTexture(backgroundTexture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        return 1;
+    }
+    SDL_Texture* imageTexturefl = SDL_CreateTextureFromSurface(renderer, imageSurfacefl);
+    SDL_FreeSurface(imageSurfacefl);
+    if (imageTexturefl == nullptr) {
+        SDL_Log("Erreur lors de la création de la texture de l'image à insérer : %s", SDL_GetError());
+        SDL_DestroyTexture(backgroundTexture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        return 1;
+    }
+
+    // Récupérer les dimensions de l'image à insérer
+    SDL_QueryTexture(imageTexturefl, NULL, NULL, &imageWidth, &imageHeight);
+
+    // Redimensionner l'image à insérer (par exemple, à la moitié de sa taille)
+    int widthFL = imageWidth/8;
+    int heightFL = imageHeight/8;
+
+
+    /// Insertion FLECHE POUR SELECTIONNER GAUCHE
+    SDL_Surface* imageSurfaceflg = IMG_Load("img/arrowleft.png");
+    if (imageSurfaceflg == nullptr) {
+        SDL_Log("Erreur lors du chargement de l'image à insérer : %s", IMG_GetError());
+        SDL_DestroyTexture(backgroundTexture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        return 1;
+    }
+    SDL_Texture* imageTextureflg = SDL_CreateTextureFromSurface(renderer, imageSurfaceflg);
+    SDL_FreeSurface(imageSurfaceflg);
+    if (imageTextureflg == nullptr) {
+        SDL_Log("Erreur lors de la création de la texture de l'image à insérer : %s", SDL_GetError());
+        SDL_DestroyTexture(backgroundTexture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        return 1;
+    }
+
+    // Récupérer les dimensions de l'image à insérer
+    SDL_QueryTexture(imageTextureflg, NULL, NULL, &imageWidth, &imageHeight);
+
+    // Redimensionner l'image à insérer (par exemple, à la moitié de sa taille)
+    int widthFLg = imageWidth/8;
+    int heightFLg = imageHeight/8;
+
+    
+
     //---------------------------------------------------------------------------------------------------------
     //---------------------------------------------------------------------------------------------------------
 
@@ -516,6 +576,8 @@ int main(int argc, char* argv[]) {
         
         afficherTexte(renderer, font, info,550,200, {255,255,255,0});
 
+        
+        insertImages(renderer, 810, yg, widthG, heightG, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -549,10 +611,9 @@ int main(int argc, char* argv[]) {
                 afficherTexte(renderer, font, "Qui voulez vous attaquer ?", textRect.x,textRect.y+50,{255,255,255,0});
 
                 if (highlightedElement2 == VILLAGE2) { //click une le village adverse
-                    DONNEES.j2.base.vie = DONNEES.j2.base.vie - 0.5;  //////////////////////////////////////////////BIZARRE//////////////////////////////////////////////////
                     // -- vie base sinon defensseurs
-                    afficherTexte(renderer, font, "Vous attaquez la base adverse!", textRect.x, textRect.y + 100, {255,255,0,0});
-                    choix = -1;
+
+                    
                 } else if (highlightedElement2 == FORTERESSE2){ //click sur la forteresse adverse
                     
                     // -- vie forteresse sinon defensseurs
@@ -564,7 +625,11 @@ int main(int argc, char* argv[]) {
                 } else if (highlightedElement2 == TROUPE_DE_GUERRE2){  //click sur soldat adverse
                 
                     // -- vie soldats
-                    choix = -1;
+                    if (DONNEES.j2.listesoldats.size() > 1){
+                        insertImages(renderer, 810, yg, widthG, heightG, imageTexturefl, widthFL, heightFL, imageTexturefl, widthFL, heightFL);
+                        std::this_thread::sleep_for(std::chrono::seconds(5));
+                    }
+
                 } else if (highlightedElement2 == MAGICIEN2){ //click sur magicien adverse
                     
                     // -- vie magiciens

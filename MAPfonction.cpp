@@ -302,6 +302,27 @@ void shield(SDL_Renderer* renderer, int x, int y, int defensseur) {
     TTF_CloseFont(font);
 }
 
+
+// Fonction pour insérer des images à droite et à gauche d'une image centrale
+void insertImages(SDL_Renderer* renderer, int centralX, int centralY, int centralWidth, int centralHeight, SDL_Texture* leftImage, int leftWidth, int leftHeight, SDL_Texture* rightImage, int rightWidth, int rightHeight) {
+    
+    // Calcul des positions des images
+    int leftX = centralX - leftWidth;
+    int leftY = centralY + (centralHeight - leftHeight) / 2;
+
+    int rightX = centralX + centralWidth;
+    int rightY = centralY + (centralHeight - rightHeight) / 2;
+
+    // Rendu des images
+    SDL_Rect leftRect = { leftX, leftY, leftWidth, leftHeight };
+    SDL_Rect rightRect = { rightX, rightY, rightWidth, rightHeight };
+
+    SDL_RenderCopy(renderer, leftImage, NULL, &leftRect);
+    SDL_RenderCopy(renderer, rightImage, NULL, &rightRect);
+}
+
+
+
 /*SelectedImage selectedImage = SelectedImage::VILLAGE; // Image initialement sélectionnée
 
 // Fonction pour changer la sélection en fonction de la flèche cliquée

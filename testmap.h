@@ -30,10 +30,12 @@ data_batiment forteresse2 = {0.7,3,2,0.5};
 data_batiment magie2 = {0.5,2,0,0.75};
 
 data_troupes_de_guerre sol2 = {1,1,5,0};
+data_troupes_de_guerre sol22 = {0.5,3,5,0};
+data_troupes_de_guerre sol222 = {0,1,1,0};
 data_troupes_de_guerre mag2 = {1,3,15,0};
 data_troupes_de_guerre mag22 = {0.5,2,3,5};
 
-data_joueur jou2 = {"Thomas",15,6,village2,forteresse2,magie2,{sol2},{mag2,mag22},0.3,0,0,0,0,0,0};
+data_joueur jou2 = {"Thomas",15,6,village2,forteresse2,magie2,{sol2,sol22,sol222},{mag2,mag22},0.3,0,0,0,0,0,0};
 
 data DONNEES = {jou1,jou2,"debut",1};
 
@@ -56,5 +58,9 @@ void changesold2(data* donnees) {
     std::cout << donnees->j2.select_vie_sold << std::endl;
     
 }
+
+
+// METTRE DES FLECHE AUTOUR DU SOLDAT POUR SELECTIONNER CELUI A ATTAQUER
+
 
 #endif
