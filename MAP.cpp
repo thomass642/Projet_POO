@@ -750,7 +750,6 @@ int main(int argc, char* argv[]) {
 
         // Afficher ce qui a été dessiné
         SDL_RenderPresent(renderer);
-        sleep
     }
 
 
