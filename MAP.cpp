@@ -422,7 +422,6 @@ int main(int argc, char* argv[]) {
                 } else if (isClickInsideImage(clickX, clickY, 810, yg, widthG, heightG)){
                     SDL_Log("Troupe de guerre 2!");
                     highlightedElement2 = TROUPE_DE_GUERRE2;
-                    changesold2(&DONNEES);
                 } else if (isClickInsideImage(clickX, clickY, 820, yma, widthMA, heightMA)){
                     SDL_Log("Magicien 2!");
                     highlightedElement2 = MAGICIEN2;
@@ -623,10 +622,12 @@ int main(int argc, char* argv[]) {
                     // -- vie soldats
                     if (DONNEES.j2.listesoldats.size() > 1){
                         insertImages(renderer, 810, yg, widthG, heightG, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
-                        if (isClickInsideImage(clickX, clickY, 810-widthFLg, yg + (heightG - heightFLg) / 2, widthFLg, heightFLg)){
+                        if (isClickInsideImage(clickX, clickY, 810-widthFLg, yg + (heightG - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j2.sold_select > 0){
                             std::cout << "soldat avant" << std::endl;
-                        } else if (isClickInsideImage(clickX, clickY, 810+widthG, yg + (heightG - heightFL) / 2, widthFL, heightFL)){
+                            changesold2avant(&DONNEES);
+                        } else if (isClickInsideImage(clickX, clickY, 810+widthG, yg + (heightG - heightFL) / 2, widthFL, heightFL) && DONNEES.j2.sold_select < DONNEES.j2.listesoldats.size()-1){
                             std::cout << "soldat apres" << std::endl;
+                            changesold2apres(&DONNEES);
                         }
                     }
 

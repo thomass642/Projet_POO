@@ -34,6 +34,8 @@
 #define FACTO_AMELIO_ECOLE 10
 
 
+
+
 struct data_batiment{
     float vie = 0;
     int niveau = 0;  
@@ -57,7 +59,9 @@ struct data_joueur{
     data_batiment ecole_magie; // ok
     std::vector<data_troupes_de_guerre> listesoldats; // ok
     std::vector<data_troupes_de_guerre> listemagiciens; // ok
-    float select_vie_sold = 0;
+    int sold_select;
+    int mag_select;
+    float select_vie_sold ;
     int select_niveau_sold;
     int select_degats_sold;
     float select_vie_mag;
