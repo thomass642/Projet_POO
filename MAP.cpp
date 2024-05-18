@@ -5,6 +5,11 @@
 
 #include "testmap.h"
 
+#include <iostream>
+#include <thread>
+#include <chrono>
+#include <unistd.h>
+
 // g++ -o mat MAP.cpp MAPfonction.cpp  -lSDL2 -lSDL2_image -lSDL2_ttf
 
 
@@ -785,6 +790,17 @@ int main(int argc, char* argv[]) {
             }
 
 
+            // SI IL SOIGNE
+
+            if (choix == 2 && tourjeu == MAGICIENS){
+                
+                afficherTexte(renderer, font, "Qui voulez vous soigner ?", textRect.x,textRect.y+50,{255,255,255,0});
+
+
+
+            }
+
+
 
         } else if (DONNEES.tour_joueur == 2){
 
@@ -994,6 +1010,9 @@ int main(int argc, char* argv[]) {
 
         // Afficher ce qui a été dessiné
         SDL_RenderPresent(renderer);
+
+        // Met en pause pendant 5 secondes
+        sleep(0.3);
     }
 
 
