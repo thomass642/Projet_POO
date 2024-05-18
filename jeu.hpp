@@ -5,8 +5,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
-#include "MAPfonction.h"
 #include "data.h"
+#include <thread>
+// #include "MAP.hpp"
 
 class Jeu{
     private:

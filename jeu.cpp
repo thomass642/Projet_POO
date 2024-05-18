@@ -17,7 +17,6 @@ Jeu::Jeu(std::string joueur1, std::string joueur2){ // Définition des joueurs (
 void Jeu::run(){
     // JEU
     
-    // Lancement thread
     joueur_courant = 1;
     DONNEES.j1.nomj = _joueur1->get_name();
     DONNEES.j2.nomj = _joueur2->get_name();
