@@ -1,4 +1,4 @@
-#include "MAPfonction.h"
+#include "MAPfonction.hpp"
 
 bool isClickInsideImage(int clickX, int clickY, int imageX, int imageY, int imageWidth, int imageHeight) {
     return (clickX >= imageX && clickX <= imageX + imageWidth && clickY >= imageY && clickY <= imageY + imageHeight);

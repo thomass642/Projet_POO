@@ -24,7 +24,7 @@ void Jeu::run(){
     DONNEES.j2.base.niveau = 1;
     DONNEES.j1.base.vie = FACTO_VIE_BASE;
     DONNEES.j2.base.vie = FACTO_VIE_BASE;
-
+    interface();
     std::cout << "\n\nDEBUT DE LA PARTIE\n\n";
 
     while(_joueur1->est_vivant() and _joueur2->est_vivant()){

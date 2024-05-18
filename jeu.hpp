@@ -2,10 +2,11 @@
 #define JEU_HPP
 
 #include "joueur.hpp"
+#include "MAP.hpp"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
-#include "data.h"
+#include "data.hpp"
 #include <thread>
 // #include "MAP.hpp"
 

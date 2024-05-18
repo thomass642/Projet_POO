@@ -1,18 +1,9 @@
-#include "testmap.h"
-
-#include <iostream>
-#include <thread>
-#include <chrono>
-#include <unistd.h>
-#include "MAPfonction.h"
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
-
+#include "MAP.hpp"
 // g++ -o mat MAP.cpp MAPfonction.cpp  -lSDL2 -lSDL2_image -lSDL2_ttf
 
 
-int main(int argc, char* argv[]) {
+// int main(int argc, char* argv[]) {
+int interface() {
 
     // Initialisation de SDL
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {

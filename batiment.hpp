@@ -5,8 +5,8 @@
 #include <vector>
 #include <iostream>
 #include "troupe.hpp"
-#include "DefParam.h"
-#include "data.h"
+#include "DefParam.hpp"
+#include "data.hpp"
 
 class Troupe;
 class Travailleur;

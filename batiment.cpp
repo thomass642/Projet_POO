@@ -1,5 +1,5 @@
 #include "batiment.hpp"
-#include "DefParam.h"
+#include "DefParam.hpp"
 
 // ----------------------------------------------------------------
 

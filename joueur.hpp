@@ -5,7 +5,7 @@
 #include <string>
 #include "batiment.hpp"
 #include "troupe.hpp"
-#include "data.h"
+#include "data.hpp"
 
 class Batiment;
 class Base;
