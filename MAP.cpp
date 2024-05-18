@@ -5,6 +5,7 @@
 
 #include "testmap.h"
 
+// g++ -o mat MAP.cpp MAPfonction.cpp  -lSDL2 -lSDL2_image -lSDL2_ttf
 
 
 int main(int argc, char* argv[]) {
