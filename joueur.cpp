@@ -96,6 +96,47 @@ void Joueur::jouer(Joueur& deuxieme_joueur){ // Le joueur joue son tour
 
     for(Troupe *troupe : _troupes){
         troupe->agir(*this, deuxieme_joueur);
+
+        if (joueur_courant == 1){
+            DONNEES.j1.base.nb_defenseurs = _base->getdefenseurs().size();
+            if (_base->getdefenseurs().size() > 0){
+                DONNEES.j1.base.vie_premier_defenseur = _base->getdefenseurs()[0]->getvie();
+            } else {
+                DONNEES.j1.base.vie_premier_defenseur = 0;
+            }
+            DONNEES.j1.forteresse.nb_defenseurs = _forteresse->getdefenseurs().size();
+            if (_forteresse->getdefenseurs().size() > 0){
+                DONNEES.j1.forteresse.vie_premier_defenseur = _forteresse->getdefenseurs()[0]->getvie();
+            } else {
+                DONNEES.j1.forteresse.vie_premier_defenseur = 0;
+            }
+            DONNEES.j1.ecole_magie.nb_defenseurs = _ecole_magie->getdefenseurs().size();
+            if (_ecole_magie->getdefenseurs().size() > 0){
+                DONNEES.j1.ecole_magie.vie_premier_defenseur = _ecole_magie->getdefenseurs()[0]->getvie();
+            } else {
+                DONNEES.j1.ecole_magie.vie_premier_defenseur = 0;
+            }
+        } else {
+            DONNEES.j2.base.nb_defenseurs = _base->getdefenseurs().size();
+            if (_base->getdefenseurs().size() > 0){
+                DONNEES.j2.base.vie_premier_defenseur = _base->getdefenseurs()[0]->getvie();
+            } else {
+                DONNEES.j2.base.vie_premier_defenseur = 0;
+            }
+            DONNEES.j2.forteresse.nb_defenseurs = _forteresse->getdefenseurs().size();
+            if (_forteresse->getdefenseurs().size() > 0){
+                DONNEES.j2.forteresse.vie_premier_defenseur = _forteresse->getdefenseurs()[0]->getvie();
+            } else {
+                DONNEES.j2.forteresse.vie_premier_defenseur = 0;
+            }
+            DONNEES.j2.ecole_magie.nb_defenseurs = _ecole_magie->getdefenseurs().size();
+            if (_ecole_magie->getdefenseurs().size() > 0){
+                DONNEES.j2.ecole_magie.vie_premier_defenseur = _ecole_magie->getdefenseurs()[0]->getvie();
+            } else {
+                DONNEES.j2.ecole_magie.vie_premier_defenseur = 0;
+            }
+        }
+
         if (not deuxieme_joueur.est_vivant()){
             break;
         }

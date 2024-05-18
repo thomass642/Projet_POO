@@ -254,7 +254,19 @@ void Soldat::defendre_batiment(Batiment* batiment){ // La troupe défend un bati
 void Soldat::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'action. On copie le joueur en parametre 
     int action; // Commande du joueur
     std::cout << *this << std::endl << "Veuillez saisir une action :\n\t1 : Attaquer une troupe\n\t2 : Attaquer un batiment\n\t3 : Defendre un batiment\n\tAutre : Passer son tour\n";
+    
+    if (joueur_courant == 1){
+        DONNEES.j1.select_degats_sold = _niveau * FACTO_ATTAQUE_TROUPE_SOLD;
+        DONNEES.j1.select_niveau_sold = _niveau;
+        DONNEES.j1.select_vie_sold = _vie;
+    } else {
+        DONNEES.j2.select_degats_sold = _niveau * FACTO_ATTAQUE_TROUPE_SOLD;
+        DONNEES.j2.select_niveau_sold = _niveau;
+        DONNEES.j2.select_vie_sold = _vie;
+    }
+
     action = joueur.get_action(0,4);
+
     switch (action){
     case 0:
         break;
@@ -430,6 +442,16 @@ void Soldat::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'action
             agir(joueur, deuxieme_joueur);
         }
         _type_troupe = "Defend";
+        if (joueur_courant == 1){
+            DONNEES.j1.select_degats_sold = 0;
+            DONNEES.j1.select_niveau_sold = 0;
+            DONNEES.j1.select_vie_sold = 0;
+
+        } else {
+            DONNEES.j2.select_degats_sold = 0;
+            DONNEES.j2.select_niveau_sold = 0;
+            DONNEES.j2.select_vie_sold = 0;
+        }
         break;
 
     default:
@@ -485,8 +507,20 @@ void Magicien::soigner(TroupeDeGuerre &troupe){ // On soigne la troupe en parame
 }
 
 void Magicien::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'action. On copie le joueur en parametre 
+
     int action; // Commande du joueur
     std::cout << *this << std::endl << "Veuillez saisir une action :\n\t1 : Attaquer une troupe\n\t2 : Attaquer un batiment\n\t3 : Soigner une troupe\n\tAutre : Passer son tour\n";
+    if (joueur_courant == 1){
+        DONNEES.j1.select_degats_mag = _niveau * FACTO_ATTAQUE_TROUPE_MAG;
+        DONNEES.j1.select_niveau_mag = _niveau;
+        DONNEES.j1.select_vie_mag = _vie;
+        DONNEES.j1.select_soins = _niveau * FACTO_SOIN_TROUPE;
+    } else {
+        DONNEES.j2.select_degats_mag = _niveau * FACTO_ATTAQUE_TROUPE_MAG;
+        DONNEES.j2.select_niveau_mag = _niveau;
+        DONNEES.j2.select_vie_mag = _vie;
+        DONNEES.j2.select_soins = _niveau * FACTO_SOIN_TROUPE;
+    }
     action = joueur.get_action(0,3);
     switch (action){
     case 0:
