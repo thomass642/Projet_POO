@@ -1,11 +1,13 @@
-#include "MAP.hpp"
-
 #include "testmap.h"
 
 #include <iostream>
 #include <thread>
 #include <chrono>
 #include <unistd.h>
+#include "MAPfonction.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 // g++ -o mat MAP.cpp MAPfonction.cpp  -lSDL2 -lSDL2_image -lSDL2_ttf
 
