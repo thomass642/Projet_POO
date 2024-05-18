@@ -18,6 +18,8 @@
 
 // int main(int argc, char* argv[]) {
 int interface() ;
+// int main(int argc, char* argv[]) ;
+
 
 
 #endif

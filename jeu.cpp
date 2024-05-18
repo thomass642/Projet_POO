@@ -12,11 +12,7 @@ Jeu::Jeu(std::string joueur1, std::string joueur2){ // Définition des joueurs (
         _joueur2 = new Joueur(joueur2);
     else 
         _joueur2 = new IA;
-}
 
-void Jeu::run(){
-    // JEU
-    
     joueur_courant = 1;
     DONNEES.j1.nomj = _joueur1->get_name();
     DONNEES.j2.nomj = _joueur2->get_name();
@@ -24,7 +20,23 @@ void Jeu::run(){
     DONNEES.j2.base.niveau = 1;
     DONNEES.j1.base.vie = FACTO_VIE_BASE;
     DONNEES.j2.base.vie = FACTO_VIE_BASE;
-    interface();
+
+    // DEBUT DU THREAD D INTERFACE
+    std::thread thread_interface(interface);
+    // DEBUT DU THREAD MOTEUR DE JEU
+    std::thread thread_moteur(&Jeu::run, this);
+
+    thread_interface.join();
+    thread_moteur.join();
+}
+
+void Jeu::run(){
+    // JEU
+    
+    
+
+    
+
     std::cout << "\n\nDEBUT DE LA PARTIE\n\n";
 
     while(_joueur1->est_vivant() and _joueur2->est_vivant()){
