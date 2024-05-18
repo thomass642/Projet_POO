@@ -579,6 +579,7 @@ int main(int argc, char* argv[]) {
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //// JOUEUR 1 //////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
         if ( DONNEES.tour_joueur == 1 ){
 
 
@@ -614,28 +615,46 @@ int main(int argc, char* argv[]) {
                 } else if (highlightedElement2 == FORTERESSE2){ //click sur la forteresse adverse
                     
                     // -- vie forteresse sinon defensseurs
+
                 } else if (highlightedElement2 == ECOLE_DE_MAGIE2){  //click sur ecole magie adverse
                     
                     // -- vie ecole sinon defensseurs
+
                 } else if (highlightedElement2 == TROUPE_DE_GUERRE2){  //click sur soldat adverse
 
-                    // -- vie soldats
+                   
                     if (DONNEES.j2.listesoldats.size() > 1){
                         insertImages(renderer, 810, yg, widthG, heightG, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
                         if (isClickInsideImage(clickX, clickY, 810-widthFLg, yg + (heightG - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j2.sold_select > 0){
                             std::cout << "soldat avant" << std::endl;
                             changesold2avant(&DONNEES);
+
+                            // -- vie 
+
                         } else if (isClickInsideImage(clickX, clickY, 810+widthG, yg + (heightG - heightFL) / 2, widthFL, heightFL) && DONNEES.j2.sold_select < DONNEES.j2.listesoldats.size()-1){
                             std::cout << "soldat apres" << std::endl;
                             changesold2apres(&DONNEES);
+
+                            // -- vie 
+
                         }
                     }
 
                 } else if (highlightedElement2 == MAGICIEN2){ //click sur magicien adverse
                     
                     // -- vie magiciens
+                    if (DONNEES.j2.listemagiciens.size() > 1){
+                        insertImages(renderer, 820, yma, widthMA, heightMA, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+                        if (isClickInsideImage(clickX, clickY, 820-widthFLg, yma + (heightMA - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j2.mag_select > 0){
+                            std::cout << "magicien avant" << std::endl;
+                            changemag2avant(&DONNEES);
+                        } else if (isClickInsideImage(clickX, clickY, 820+widthMA, yma + (heightMA - heightFL) / 2, widthFL, heightFL) && DONNEES.j2.mag_select < DONNEES.j2.listemagiciens.size()-1){
+                            std::cout << "magicien apres" << std::endl;
+                            changemag2apres(&DONNEES);
+                        }
+                    }
                 }
-            
+               
             }
 
         
@@ -674,7 +693,7 @@ int main(int argc, char* argv[]) {
                 afficherTexte(renderer, font, "Defendre", textRect.x + 100, textRect.y, {255,255,255,0});
                 afficherTexte(renderer, font, "Soigner", textRect.x + 200, textRect.y, {255,255,255,0});
 
-                if (isClickInsideImage(clickX, clickY, textRect.x, textRect.y, 100, 20)){
+                /*if (isClickInsideImage(clickX, clickY, textRect.x, textRect.y, 100, 20)){
                     highlightText(renderer,font,"Attaquer",{0,0,0,0},{100,0,100,0},textRect.x,textRect.y);
                     choix = 1;
                 } else if (isClickInsideImage(clickX, clickY, textRect.x+100, textRect.y, 100, 20)){
@@ -683,7 +702,7 @@ int main(int argc, char* argv[]) {
                 }else if (isClickInsideImage(clickX, clickY, textRect.x+200, textRect.y, 100, 20)){
                     highlightText(renderer,font,"Soigner",{0,0,0,0},{100,0,100,0},textRect.x+200,textRect.y);
                     choix = 2;
-                }
+                }*/
             } 
 
 
@@ -695,29 +714,53 @@ int main(int argc, char* argv[]) {
 
                 afficherTexte(renderer, font, "Qui voulez vous attaquer ?", textRect.x,textRect.y+50,{255,255,255,0});
 
-                if (isClickInsideImage(clickX, clickY, 1000, y, widthV, heightV)) { //click une le village adverse
-                    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-                    drawCircle(renderer, 1000 + y / 2 - 25, y + heightV / 2, widthV / 2 - 5);
+                if (highlightedElement2 == VILLAGE2) { //click une le village adverse
+                    
                     // -- vie base sinon defensseurs
-                } else if (isClickInsideImage(clickX, clickY, 1030, yf, widthF, heightF)){ //click sur la forteresse adverse
-                    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-                    drawCircle(renderer, 1030 + yf / 2 + 50, yf + heightF / 2, widthF / 2 );
+                    
+                } else if (highlightedElement2 == FORTERESSE2){ //click sur la forteresse adverse
+                    
                     // -- vie forteresse sinon defensseurs
-                } else if (isClickInsideImage(clickX, clickY, 1050, ym, widthM, heightM)){  //click sur ecole magie adverse
-                    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-                    drawCircle(renderer, 1050 + yf / 2 + 40, ym + heightM / 2 + 5, widthF / 2 );
-                    // -- vie ecole sinon defensseurs
-                } else if (isClickInsideImage(clickX, clickY, 810, yg, widthG, heightG)){  //click sur soldat adverse
-                    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-                    drawCircle(renderer, 810 + yg / 2 - 35, yg + heightG / 2 + 5, widthG / 2 );
-                    // -- vie soldats
-                } else if (isClickInsideImage(clickX, clickY, 820, yma, widthMA, heightMA)){ //click sur magicien adverse
-                    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-                    drawCircle(renderer, 660 + yma / 2 , yma + heightMA / 2 + 5, widthG / 2 );
-                    // -- vie magiciens
-                }
-            }
 
+                } else if (highlightedElement2 == ECOLE_DE_MAGIE2){  //click sur ecole magie adverse
+                    
+                    // -- vie ecole sinon defensseurs
+
+                } else if (highlightedElement2 == TROUPE_DE_GUERRE2){  //click sur soldat adverse
+
+                   
+                    if (DONNEES.j2.listesoldats.size() > 1){
+                        insertImages(renderer, 810, yg, widthG, heightG, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+                        if (isClickInsideImage(clickX, clickY, 810-widthFLg, yg + (heightG - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j2.sold_select > 0){
+                            std::cout << "soldat avant" << std::endl;
+                            changesold2avant(&DONNEES);
+
+                            // -- vie 
+
+                        } else if (isClickInsideImage(clickX, clickY, 810+widthG, yg + (heightG - heightFL) / 2, widthFL, heightFL) && DONNEES.j2.sold_select < DONNEES.j2.listesoldats.size()-1){
+                            std::cout << "soldat apres" << std::endl;
+                            changesold2apres(&DONNEES);
+
+                            // -- vie 
+
+                        }
+                    } 
+                } else if (highlightedElement2 == MAGICIEN2){ //click sur magicien adverse
+                    
+                    // -- vie magiciens
+                    if (DONNEES.j2.listemagiciens.size() > 1){
+                        insertImages(renderer, 820, yma, widthMA, heightMA, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+                        if (isClickInsideImage(clickX, clickY, 820-widthFLg, yma + (heightMA - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j2.mag_select > 0){
+                            std::cout << "magicien avant" << std::endl;
+                            changemag2avant(&DONNEES);
+                        } else if (isClickInsideImage(clickX, clickY, 820+widthMA, yma + (heightMA - heightFL) / 2, widthFL, heightFL) && DONNEES.j2.mag_select < DONNEES.j2.listemagiciens.size()-1){
+                            std::cout << "magicien apres" << std::endl;
+                            changemag2apres(&DONNEES);
+                        }
+                    }
+                }
+               
+            }
         
             // SI IL DEFEND 
 
@@ -725,23 +768,223 @@ int main(int argc, char* argv[]) {
 
                 afficherTexte(renderer, font, "Qui voulez vous defendre ?", textRect.x,textRect.y+50,{255,255,255,0});
 
-                if (isClickInsideImage(clickX, clickY, x, y, widthV, heightV)) { // click sur sa base
-                    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-                    drawCircle(renderer, x + y / 2 - 25, y + heightV / 2, widthV / 2 - 5);
+                if (highlightedElement1 == VILLAGE1) { // click sur sa base
+                    
                     // ++ nb defensseurs
-                } else if (isClickInsideImage(clickX, clickY, xf, yf, widthF, heightF)){ // click sur sa forteresse
-                    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-                    drawCircle(renderer, xf + yf / 2 + 50, yf + heightF / 2, widthF / 2 );
+                   
+                } else if (highlightedElement1 == FORTERESSE1){ // click sur sa forteresse
+                    
                     // ++ nb defensseurs
-                } else if (isClickInsideImage(clickX, clickY, xm, ym, widthM, heightM)){ // click sur son ecole magie
-                    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-                    drawCircle(renderer, xm + yf / 2 + 40, ym + heightM / 2 + 5, widthF / 2 );
+                    
+                } else if (highlightedElement1 == ECOLE_DE_MAGIE1){ // click sur son ecole magie
+                    
                     // ++ nb defensseurs
+                    
                 } 
             }
 
 
 
+        } else if (DONNEES.tour_joueur == 2){
+
+            /// CHOIX DU SOLDAT -----------------------------------------------------------------------------------------------------
+
+
+            if (tourjeu == SOLDATS){
+                afficherTexte(renderer, font, "Attaquer", textRect.x, textRect.y, {255,255,255,0});
+                afficherTexte(renderer, font, "Defendre", textRect.x + 150, textRect.y, {255,255,255,0});
+                /*if (isClickInsideImage(clickX, clickY, textRect.x, textRect.y, 100, 20)){
+                    highlightText(renderer,font,"Attaquer",{0,0,0,0},{100,0,100,0},textRect.x,textRect.y);
+                    
+                } else if (isClickInsideImage(clickX, clickY, textRect.x+150, textRect.y, 100, 20)){
+                    highlightText(renderer,font,"Defendre",{0,0,0,0},{100,0,100,0},textRect.x+150,textRect.y);
+                    
+                }*/
+            } 
+
+
+
+            // SI IL ATTAQUE
+
+            if (choix == 1 && tourjeu == SOLDATS){
+
+                // baisser nb ressources
+
+                afficherTexte(renderer, font, "Qui voulez vous attaquer ?", textRect.x,textRect.y+50,{255,255,255,0});
+
+                if (highlightedElement1 == VILLAGE1) { //click une le village adverse
+                    // -- vie base sinon defensseurs
+
+                    
+                } else if (highlightedElement1 == FORTERESSE1){ //click sur la forteresse adverse
+                    
+                    // -- vie forteresse sinon defensseurs
+
+                } else if (highlightedElement1 == ECOLE_DE_MAGIE1){  //click sur ecole magie adverse
+                    
+                    // -- vie ecole sinon defensseurs
+
+                } else if (highlightedElement1 == TROUPE_DE_GUERRE1){  //click sur soldat adverse
+
+                   
+                    if (DONNEES.j1.listesoldats.size() > 1){
+                        insertImages(renderer, xg, yg, widthG, heightG, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+                        if (isClickInsideImage(clickX, clickY, xg-widthFLg, yg + (heightG - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j1.sold_select > 0){
+                            std::cout << "soldat avant" << std::endl;
+                            changesold1avant(&DONNEES);
+
+                            // -- vie 
+
+                        } else if (isClickInsideImage(clickX, clickY, xg+widthG, yg + (heightG - heightFL) / 2, widthFL, heightFL) && DONNEES.j1.sold_select < DONNEES.j1.listesoldats.size()-1){
+                            std::cout << "soldat apres" << std::endl;
+                            changesold1apres(&DONNEES);
+
+                            // -- vie 
+
+                        }
+                    }
+
+                } else if (highlightedElement1 == MAGICIEN1){ //click sur magicien adverse
+                    
+                    // -- vie magiciens
+                    if (DONNEES.j1.listemagiciens.size() > 1){
+                        insertImages(renderer, xma, yma, widthMA, heightMA, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+                        if (isClickInsideImage(clickX, clickY, xma-widthFLg, yma + (heightMA - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j1.mag_select > 0){
+                            std::cout << "magicien avant" << std::endl;
+                            changemag1avant(&DONNEES);
+                        } else if (isClickInsideImage(clickX, clickY, xma+widthMA, yma + (heightMA - heightFL) / 2, widthFL, heightFL) && DONNEES.j1.mag_select < DONNEES.j1.listemagiciens.size()-1){
+                            std::cout << "magicien apres" << std::endl;
+                            changemag1apres(&DONNEES);
+                        }
+                    }
+                }
+               
+            }
+
+        
+            // SI IL DEFEND 
+
+            else if (choix == 0 && tourjeu == SOLDATS){
+
+                afficherTexte(renderer, font, "Qui voulez vous defendre ?", textRect.x,textRect.y+50,{255,255,255,0});
+
+                if (highlightedElement2 == VILLAGE2) { // click sur sa base
+                    
+                    // ++ nb defensseurs
+                   
+                } else if (highlightedElement2 == FORTERESSE2){ // click sur sa forteresse
+                    
+                    // ++ nb defensseurs
+                    
+                } else if (highlightedElement2 == ECOLE_DE_MAGIE2){ // click sur son ecole magie
+                    
+                    // ++ nb defensseurs
+                    
+                } 
+            }
+
+            else {
+                
+            }
+
+
+
+            /// CHOIX DU MAGICIEN  -------------------------------------------------------------------------------------------------
+
+
+            if (tourjeu == MAGICIENS){
+                afficherTexte(renderer, font, "Attaquer", textRect.x, textRect.y, {255,255,255,0});
+                afficherTexte(renderer, font, "Defendre", textRect.x + 100, textRect.y, {255,255,255,0});
+                afficherTexte(renderer, font, "Soigner", textRect.x + 200, textRect.y, {255,255,255,0});
+
+                /*if (isClickInsideImage(clickX, clickY, textRect.x, textRect.y, 100, 20)){
+                    highlightText(renderer,font,"Attaquer",{0,0,0,0},{100,0,100,0},textRect.x,textRect.y);
+                    choix = 1;
+                } else if (isClickInsideImage(clickX, clickY, textRect.x+100, textRect.y, 100, 20)){
+                    highlightText(renderer,font,"Defendre",{0,0,0,0},{100,0,100,0},textRect.x+100,textRect.y);
+                    choix = 0;
+                }else if (isClickInsideImage(clickX, clickY, textRect.x+200, textRect.y, 100, 20)){
+                    highlightText(renderer,font,"Soigner",{0,0,0,0},{100,0,100,0},textRect.x+200,textRect.y);
+                    choix = 2;
+                }*/
+            } 
+
+
+            // SI IL ATTAQUE
+
+            if (choix == 1 && tourjeu == MAGICIENS){
+
+                // baisser nb ressources
+
+                if (highlightedElement1 == VILLAGE1) { //click une le village adverse
+                    // -- vie base sinon defensseurs
+
+                    
+                } else if (highlightedElement1 == FORTERESSE1){ //click sur la forteresse adverse
+                    
+                    // -- vie forteresse sinon defensseurs
+
+                } else if (highlightedElement1 == ECOLE_DE_MAGIE1){  //click sur ecole magie adverse
+                    
+                    // -- vie ecole sinon defensseurs
+
+                } else if (highlightedElement1 == TROUPE_DE_GUERRE1){  //click sur soldat adverse
+
+                   
+                    if (DONNEES.j1.listesoldats.size() > 1){
+                        insertImages(renderer, xg, yg, widthG, heightG, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+                        if (isClickInsideImage(clickX, clickY, xg-widthFLg, yg + (heightG - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j1.sold_select > 0){
+                            std::cout << "soldat avant" << std::endl;
+                            changesold1avant(&DONNEES);
+
+                            // -- vie 
+
+                        } else if (isClickInsideImage(clickX, clickY, xg+widthG, yg + (heightG - heightFL) / 2, widthFL, heightFL) && DONNEES.j1.sold_select < DONNEES.j1.listesoldats.size()-1){
+                            std::cout << "soldat apres" << std::endl;
+                            changesold1apres(&DONNEES);
+
+                            // -- vie 
+
+                        }
+                    }
+
+                } else if (highlightedElement1 == MAGICIEN1){ //click sur magicien adverse
+                    
+                    // -- vie magiciens
+                    if (DONNEES.j1.listemagiciens.size() > 1){
+                        insertImages(renderer, xma, yma, widthMA, heightMA, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+                        if (isClickInsideImage(clickX, clickY, xma-widthFLg, yma + (heightMA - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j1.mag_select > 0){
+                            std::cout << "magicien avant" << std::endl;
+                            changemag1avant(&DONNEES);
+                        } else if (isClickInsideImage(clickX, clickY, xma+widthMA, yma + (heightMA - heightFL) / 2, widthFL, heightFL) && DONNEES.j1.mag_select < DONNEES.j1.listemagiciens.size()-1){
+                            std::cout << "magicien apres" << std::endl;
+                            changemag1apres(&DONNEES);
+                        }
+                    }
+                }
+               
+            }
+        
+            // SI IL DEFEND 
+
+            if (choix == 0 && tourjeu == MAGICIENS){
+
+                afficherTexte(renderer, font, "Qui voulez vous defendre ?", textRect.x,textRect.y+50,{255,255,255,0});
+
+                if (highlightedElement2 == VILLAGE2) { // click sur sa base
+                    
+                    // ++ nb defensseurs
+                   
+                } else if (highlightedElement2 == FORTERESSE2){ // click sur sa forteresse
+                    
+                    // ++ nb defensseurs
+                    
+                } else if (highlightedElement2 == ECOLE_DE_MAGIE2){ // click sur son ecole magie
+                    
+                    // ++ nb defensseurs
+                    
+                }
+            }
         }
 
 

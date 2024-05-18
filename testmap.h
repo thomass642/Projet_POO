@@ -37,10 +37,11 @@ data_troupes_de_guerre mag22 = {0.5,2,3,5};
 
 data_joueur jou2 = {"Thomas",15,6,village2,forteresse2,magie2,{sol2,sol22,sol222},{mag2,mag22},0,0,0.3,0,0,0,0,0,0};
 
-data DONNEES = {jou1,jou2,"debut",1};
+data DONNEES = {jou1,jou2,"debut",2};
 
 Tour tourjeu = SOLDATS;
 
+// choix (1 attaquer, 0 defendre, 2 soigner)
 int choix = 1; // ATTAQUER
 
 
@@ -67,7 +68,49 @@ void changesold2apres(data* donnees) {
     std::cout << donnees->j2.sold_select << std::endl;
     
 }
+void changemag2avant(data* donnees) {
+    
+    // Change les valeurs
+    donnees->j2.mag_select -= 1;
+    std::cout << donnees->j2.mag_select << std::endl;
+    
+}
+void changemag2apres(data* donnees) {
+    
+    // Change les valeurs
+    donnees->j2.mag_select += 1;
+    std::cout << donnees->j2.mag_select << std::endl;
+    
+}
 
+void changesold1avant(data* donnees) {
+    
+    // Change les valeurs
+    donnees->j1.sold_select -= 1;
+    std::cout << donnees->j1.sold_select << std::endl;
+    
+}
+void changesold1apres(data* donnees) {
+    
+    // Change les valeurs
+    donnees->j1.sold_select += 1;
+    std::cout << donnees->j1.sold_select << std::endl;
+    
+}
+void changemag1avant(data* donnees) {
+    
+    // Change les valeurs
+    donnees->j1.mag_select -= 1;
+    std::cout << donnees->j1.mag_select << std::endl;
+    
+}
+void changemag1apres(data* donnees) {
+    
+    // Change les valeurs
+    donnees->j1.mag_select += 1;
+    std::cout << donnees->j1.mag_select << std::endl;
+    
+}
 
 // METTRE DES FLECHE AUTOUR DU SOLDAT POUR SELECTIONNER CELUI A ATTAQUER
 
