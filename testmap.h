@@ -39,10 +39,10 @@ data_joueur jou2 = {"Thomas",15,6,village2,forteresse2,magie2,{sol2,sol22,sol222
 
 data DONNEES = {jou1,jou2,"debut",2};
 
-Tour tourjeu = SOLDATS;
+Tour tourjeu = MAGICIENS;
 
 // choix (1 attaquer, 0 defendre, 2 soigner)
-int choix = 1; // ATTAQUER
+int choix = 2; // ATTAQUER
 
 
 // permet de tester si les valeurs change à partir de la boucle de l'interface graph
