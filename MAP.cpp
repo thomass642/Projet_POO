@@ -1,7 +1,4 @@
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
-#include "MAPfonction.h"
+#include "MAP.hpp"
 
 #include "testmap.h"
 
@@ -14,6 +11,7 @@
 
 
 int main(int argc, char* argv[]) {
+
     // Initialisation de SDL
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         SDL_Log("Erreur lors de l'initialisation de SDL : %s", SDL_GetError());
