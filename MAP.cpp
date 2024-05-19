@@ -1,5 +1,4 @@
-#include "MAP.hpp"
-
+#include "MAPfonction.h"
 #include "testmap.h"
 
 #include <iostream>
