@@ -37,7 +37,7 @@ data_troupes_de_guerre mag22 = {0.5,2,3,5};
 
 data_joueur jou2 = {"Thomas",15,6,village2,forteresse2,magie2,{sol2,sol22,sol222},{mag2,mag22},0,0,0.3,0,0,0,0,0,0};
 
-data DONNEES = {jou1,jou2,"debut",2};
+data DONNEES = {jou1,jou2,"debut",1};
 
 Tour tourjeu = MAGICIENS;
 

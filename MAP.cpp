@@ -343,6 +343,7 @@ int main(int argc, char* argv[]) {
     int widthFLg = imageWidth/8;
     int heightFLg = imageHeight/8;
 
+
     
 
     //---------------------------------------------------------------------------------------------------------
@@ -570,8 +571,13 @@ int main(int argc, char* argv[]) {
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        if ( DONNEES.tour_joueur == 1 ) { afficherTexte(renderer, font, DONNEES.j1.nomj.c_str(), 600, 150, {200,0,200,0});}
-        else {afficherTexte(renderer, font, DONNEES.j2.nomj.c_str(), 600, 100, {255,0,0,0});}
+        if ( DONNEES.tour_joueur == 1 ) { 
+            afficherTexte(renderer, font, DONNEES.j1.nomj.c_str(), 600, 100, {100,0,50,0});
+            ressources(renderer,600,130,DONNEES.j1.ressources);
+        } else {
+            afficherTexte(renderer, font, DONNEES.j2.nomj.c_str(), 600, 100, {100,0,50,0});
+            ressources(renderer,600,130,DONNEES.j2.ressources);
+        }
         
         const char* info = DONNEES.texteinfo.c_str(); // convertir string en const char*
         
