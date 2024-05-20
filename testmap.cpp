@@ -1,10 +1,10 @@
 #include "testmap.hpp"
 
-Tour tourjeu = SOLDATS;
+Tour tourjeu;
 
-Action action = NONE_ACTION;
+Action action;
 
-Choice choice = OUI;
+Choice choice;
 
 // choix (1 attaquer, 0 defendre, 2 soigner)
 int choix = -1;

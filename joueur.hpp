@@ -8,6 +8,7 @@
 #include "batiment.hpp"
 #include "troupe.hpp"
 #include "data.hpp"
+#include "testmap.hpp"
 
 class Batiment;
 class Base;

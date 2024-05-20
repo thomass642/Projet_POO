@@ -15,7 +15,7 @@ Joueur::Joueur(std::string nom){
 
 void Joueur::jouer(Joueur& deuxieme_joueur){ // Le joueur joue son tour
     // LE JOUEUR REGARDE S'IL VEUT FORMER DES TROUPES
-    int action; // Commande  du joueur pour agir sur le jeu
+    int select; // Commande  du joueur pour agir sur le jeu
     std::vector<int> elems_to_remove;
     
     for (int i = 0; i < _troupes.size(); i++){
@@ -32,20 +32,29 @@ void Joueur::jouer(Joueur& deuxieme_joueur){ // Le joueur joue son tour
     }
 
     std::cout << *this;
+    tourjeu = NONE;
+    action = FORMATION_TROUPE;
+    choice = NONE_CHOICE;
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    
     do {
     // MISE A JOUR AFFICHAGE ICI
         DONNEES.texteinfo = "Voulez-vous former une troupe ?";
         std::cout << "Voulez-vous former une troupe ?\n\t0 : Non\n\t1 : Oui\n";
-        action = get_action(0,1);
-    } while (not (action == 0 or action == 1));
+        select = get_action(0,1);
+    } while (not (select == 0 or select == 1));
 
-    if (action == 1){
+    if (select == 1){
+        tourjeu = NONE;
+        action = FORMATION_TROUPE;
+        choice == OUI;
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
         do { // Former des troupes
             std::cout << *this;
             std::cout << "Vous avez " << _ressources << " ressources\nVeuillez selectionner la troupe a former:\n\t0 : Arreter la formation de Troupes\n\t1 : Travailleur (" << _base->cout_formation() << ")\n\t2 : Soldat (" << _forteresse->cout_formation() << ")\n\t3 : Magicien (" << _ecole_magie->cout_formation() <<  ")\n";
-            action = get_action(0,3);
+            select = get_action(0,3);
             
-            switch(action){
+            switch(select){
             case 1: // Villageois
                 if (_base->getniveau() != 0){
                     if (_base->cout_formation() <= _ressources){
@@ -91,7 +100,7 @@ void Joueur::jouer(Joueur& deuxieme_joueur){ // Le joueur joue son tour
                 break;
             }
 
-        } while(action != 0); // Tant que le joueur ne souhaite pas arreter la formation
+        } while(select != 0); // Tant que le joueur ne souhaite pas arreter la formation
     } 
 
     for(Troupe *troupe : _troupes){

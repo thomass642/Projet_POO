@@ -588,24 +588,25 @@ int interface() {
 
 
             // DEBUT JOUEUR
-
             if(tourjeu == NONE && action == FORMATION_TROUPE && choice == NONE_CHOICE){
                 afficherTexte(renderer, font, "Former troupe",550,300,{255,255,255,0});
-
                 afficherTexte(renderer, font,"Oui",550,400,{255,255,255,0});
                 afficherTexte(renderer, font,"Non",650,400,{255,255,255,0});
 
                 if(isClickInsideImage(clickX,clickY,550,400,50,30)){
-
                     std::cout << "Oui pour former des ressources!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 1;
+                    choice = OUI;
 
                 } else if(isClickInsideImage(clickX,clickY,650,400,50,30)){
-
                     std::cout << "Non pour former des ressources!" << std::endl;
-
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 0;
                 }
 
             }
+            std::cout << "tourjeu : " << tourjeu << " action : " << action << " choix : " << choice << std::endl;
 
             if (tourjeu == NONE && action == FORMATION_TROUPE && choice == OUI){
 
@@ -616,12 +617,20 @@ int interface() {
                 
                 if (isClickInsideImage(clickX,clickY,550,500,200,30)){
                     std::cout << "arret formation!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 0;
                 } else if(isClickInsideImage(clickX,clickY,550,550,200,30)){
                     std::cout << "travailleurs!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 1;
                 } else if(isClickInsideImage(clickX,clickY,550,600,200,30)){
                     std::cout << "soldat!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 2;
                 } else if(isClickInsideImage(clickX,clickY,550,650,200,30)){
                     std::cout << "mag!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 3;
                 }
             }
 
@@ -915,6 +924,7 @@ int interface() {
                     std::cout << "Oui pour former des ressources!" << std::endl;
                     clickX = 0; clickY = 0;
                     DONNEES.action = 1;
+                    choice = OUI;
                 } else if(isClickInsideImage(clickX,clickY,650,400,50,30)){
 
                     std::cout << "Non pour former des ressources!" << std::endl;
@@ -934,12 +944,20 @@ int interface() {
                 
                 if (isClickInsideImage(clickX,clickY,550,500,200,30)){
                     std::cout << "arret formation!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 0;
                 } else if(isClickInsideImage(clickX,clickY,550,550,200,30)){
                     std::cout << "travailleurs!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 1;
                 } else if(isClickInsideImage(clickX,clickY,550,600,200,30)){
                     std::cout << "soldat!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 2;
                 } else if(isClickInsideImage(clickX,clickY,550,650,200,30)){
                     std::cout << "mag!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 3;
                 }
             }
 
