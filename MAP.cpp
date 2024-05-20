@@ -337,6 +337,7 @@ int interface() {
     int widthFLg = imageWidth/8;
     int heightFLg = imageHeight/8;
 
+
     
 
     //---------------------------------------------------------------------------------------------------------
@@ -565,8 +566,13 @@ int interface() {
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        if ( DONNEES.tour_joueur == 1 ) { afficherTexte(renderer, font, DONNEES.j1.nomj.c_str(), 600, 150, {200,0,200,0});}
-        else {afficherTexte(renderer, font, DONNEES.j2.nomj.c_str(), 600, 100, {255,0,0,0});}
+        if ( DONNEES.tour_joueur == 1 ) { 
+            afficherTexte(renderer, font, DONNEES.j1.nomj.c_str(), 600, 100, {100,0,50,0});
+            ressources(renderer,600,130,DONNEES.j1.ressources);
+        } else {
+            afficherTexte(renderer, font, DONNEES.j2.nomj.c_str(), 600, 100, {100,0,50,0});
+            ressources(renderer,600,130,DONNEES.j2.ressources);
+        }
         
         const char* info = DONNEES.texteinfo.c_str(); // convertir string en const char*
         
@@ -788,13 +794,55 @@ int interface() {
                 
                 afficherTexte(renderer, font, "Qui voulez vous soigner ?", textRect.x,textRect.y+50,{255,255,255,0});
 
+                if (highlightedElement1 == TROUPE_DE_GUERRE1){
+
+                    if (DONNEES.j1.listesoldats.size() > 1){
+                        insertImages(renderer, xg, yg, widthG, heightG, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+                        if (isClickInsideImage(clickX, clickY, xg-widthFLg, yg + (heightG - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j1.sold_select > 0){
+                            std::cout << "soldat avant" << std::endl;
+                            changesold1avant(&DONNEES);
+
+                            // ++ vie 
+
+                        } else if (isClickInsideImage(clickX, clickY, xg+widthG, yg + (heightG - heightFL) / 2, widthFL, heightFL) && DONNEES.j1.sold_select < DONNEES.j1.listesoldats.size()-1){
+                            std::cout << "soldat apres" << std::endl;
+                            changesold1apres(&DONNEES);
+
+                            // ++ vie 
+
+                        }
+                    } 
+                } else if (highlightedElement1 == MAGICIEN1){
+
+                    if (DONNEES.j1.listemagiciens.size() > 1){
+                        insertImages(renderer, xma, yma, widthMA, heightMA, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+                        if (isClickInsideImage(clickX, clickY, xma-widthFLg, yma + (heightMA - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j1.mag_select > 0){
+                            std::cout << "magicien avant" << std::endl;
+                            changemag1avant(&DONNEES);
+
+                            // ++ vie 
+
+                        } else if (isClickInsideImage(clickX, clickY, xma+widthMA, yma + (heightMA - heightFL) / 2, widthFL, heightFL) && DONNEES.j1.mag_select < DONNEES.j1.listemagiciens.size()-1){
+                            std::cout << "magicien apres" << std::endl;
+                            changemag1apres(&DONNEES);
+
+                            // ++ vie 
+
+                        }
+                    } 
+                }
 
 
             }
 
 
 
-        } else if (DONNEES.tour_joueur == 2){
+        } 
+        
+        /// JOUEUR 2 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        
+        else if (DONNEES.tour_joueur == 2){
 
             /// CHOIX DU SOLDAT -----------------------------------------------------------------------------------------------------
 
@@ -993,6 +1041,51 @@ int interface() {
                     // ++ nb defensseurs
                     
                 }
+            }
+
+            if (choix == 2 && tourjeu == MAGICIENS){
+                
+                afficherTexte(renderer, font, "Qui voulez vous soigner ?", textRect.x,textRect.y+50,{255,255,255,0});
+
+                if (highlightedElement2 == TROUPE_DE_GUERRE2){
+
+                    if (DONNEES.j2.listesoldats.size() > 1){
+                        insertImages(renderer, 810, yg, widthG, heightG, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+                        if (isClickInsideImage(clickX, clickY, 810-widthFLg, yg + (heightG - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j2.sold_select > 0){
+                            std::cout << "soldat avant" << std::endl;
+                            changesold2avant(&DONNEES);
+
+                            // ++ vie 
+
+                        } else if (isClickInsideImage(clickX, clickY, 810+widthG, yg + (heightG - heightFL) / 2, widthFL, heightFL) && DONNEES.j2.sold_select < DONNEES.j2.listesoldats.size()-1){
+                            std::cout << "soldat apres" << std::endl;
+                            changesold2apres(&DONNEES);
+
+                            // ++ vie 
+
+                        }
+                    } 
+                } else if (highlightedElement2 == MAGICIEN2){
+
+                    if (DONNEES.j2.listemagiciens.size() > 1){
+                        insertImages(renderer, 820, yma, widthMA, heightMA, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+                        if (isClickInsideImage(clickX, clickY, 820-widthFLg, yma + (heightMA - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j2.mag_select > 0){
+                            std::cout << "magicien avant" << std::endl;
+                            changemag2avant(&DONNEES);
+
+                            // ++ vie 
+
+                        } else if (isClickInsideImage(clickX, clickY, 820+widthMA, yma + (heightMA - heightFL) / 2, widthFL, heightFL) && DONNEES.j2.mag_select < DONNEES.j2.listemagiciens.size()-1){
+                            std::cout << "magicien apres" << std::endl;
+                            changemag2apres(&DONNEES);
+
+                            // ++ vie 
+
+                        }
+                    } 
+                }
+
+
             }
         }
 

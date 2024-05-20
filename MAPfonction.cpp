@@ -322,6 +322,64 @@ void insertImages(SDL_Renderer* renderer, int centralX, int centralY, int centra
 }
 
 
+void ressources(SDL_Renderer* renderer, int x, int y, int ressources) {
+    // Charger l'image 
+    SDL_Surface* manSurface = IMG_Load("img/ressources.png");
+    if (manSurface == nullptr) {
+        SDL_Log("Erreur lors du chargement de l'image : %s", IMG_GetError());
+        return;
+    }
+
+    SDL_Texture* manTexture = SDL_CreateTextureFromSurface(renderer, manSurface);
+    SDL_FreeSurface(manSurface);
+    if (manTexture == nullptr) {
+        SDL_Log("Erreur lors de la création de la texture de l'image : %s", SDL_GetError());
+        return;
+    }
+
+    // Dessiner le nombre de vies restantes à côté de l'image
+    std::string lifeText = std::to_string(ressources);
+    TTF_Font* font = TTF_OpenFont("arial.ttf", 16); // Charger une police de taille 16 
+    if (font == nullptr) {
+        SDL_Log("Erreur lors du chargement de la police : %s", TTF_GetError());
+        return;
+    }
+
+    SDL_Color textColor = {255, 255, 255}; // Couleur du texte 
+    SDL_Surface* textSurface = TTF_RenderText_Solid(font, lifeText.c_str(), textColor);
+    if (textSurface == nullptr) {
+        SDL_Log("Erreur lors de la création de la surface de texte : %s", TTF_GetError());
+        TTF_CloseFont(font);
+        return;
+    }
+
+    SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+    if (textTexture == nullptr) {
+        SDL_Log("Erreur lors de la création de la texture de texte : %s", SDL_GetError());
+        SDL_FreeSurface(textSurface);
+        TTF_CloseFont(font);
+        return;
+    }
+
+    // Positionner le texte à côté de l'image
+    SDL_Rect textRect;
+    SDL_QueryTexture(textTexture, nullptr, nullptr, &textRect.w, &textRect.h);
+    textRect.x = x + 45; 
+    textRect.y = y+10;
+
+    // Dessiner l'image
+    SDL_Rect heartRect = {x, y, 40, 40};
+    SDL_RenderCopy(renderer, manTexture, nullptr, &heartRect);
+
+    // Dessiner le texte du nombre
+    SDL_RenderCopy(renderer, textTexture, nullptr, &textRect);
+
+    // Libérer
+    SDL_DestroyTexture(manTexture);
+    SDL_DestroyTexture(textTexture);
+    TTF_CloseFont(font);
+}
+
 
 /*SelectedImage selectedImage = SelectedImage::VILLAGE; // Image initialement sélectionnée
 

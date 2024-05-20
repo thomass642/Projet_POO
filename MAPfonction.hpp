@@ -48,6 +48,7 @@ void shield(SDL_Renderer* renderer, int x, int y, int defensseur);
 
 void insertImages(SDL_Renderer* renderer, int centralX, int centralY, int centralWidth, int centralHeight, SDL_Texture* leftImage, int leftWidth, int leftHeight, SDL_Texture* rightImage, int rightWidth, int rightHeight);
 
+void ressources(SDL_Renderer* renderer, int x, int y, int ressources) ;
 
 // Fonction pour changer la sélection en fonction de la flèche cliquée
 void changeSelection(bool goRight);
