@@ -7,7 +7,7 @@ Action action = NONE_ACTION;
 Choice choice = OUI;
 
 // choix (1 attaquer, 0 defendre, 2 soigner)
-int choix = 1;
+int choix = -1;
 
 
 // permet de tester si les valeurs change à partir de la boucle de l'interface graph
