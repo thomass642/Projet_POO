@@ -583,7 +583,7 @@ int interface() {
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //// JOUEUR 1 //////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
+                
         if ( DONNEES.tour_joueur == 1 ){
 
 
@@ -606,7 +606,6 @@ int interface() {
                 }
 
             }
-            std::cout << "tourjeu : " << tourjeu << " action : " << action << " choix : " << choice << std::endl;
 
             if (tourjeu == NONE && action == FORMATION_TROUPE && choice == OUI){
 
@@ -647,14 +646,17 @@ int interface() {
                     std::cout << "attaque troup!" << std::endl;
                     clickX = 0; clickY = 0;
                     DONNEES.action = 1;
+                    choix = 1;
                 } else if(isClickInsideImage(clickX,clickY,550,450,200,30)){
                     std::cout << "attaque bat!" << std::endl;
                     clickX = 0; clickY = 0;
                     DONNEES.action = 2;
+                    choix = 1;
                 } else if(isClickInsideImage(clickX,clickY,550,500,200,30)){
                     std::cout << "defendre bat!" << std::endl;
                     clickX = 0; clickY = 0;
                     DONNEES.action = 3;
+                    choix = 0;
                 } else if(isClickInsideImage(clickX,clickY,550,550,200,30)){
                     std::cout << "passe!" << std::endl;
                     clickX = 0; clickY = 0;
@@ -674,18 +676,15 @@ int interface() {
 
                 if (highlightedElement2 == VILLAGE2) { //click une le village adverse
                     // -- vie base sinon defensseurs
-                    DONNEES.action = 2;
                     std::this_thread::sleep_for(std::chrono::milliseconds(50));
                     DONNEES.action = 1;
                     
                 } else if (highlightedElement2 == FORTERESSE2){ //click sur la forteresse adverse
-                    DONNEES.action = 2;
                     std::this_thread::sleep_for(std::chrono::milliseconds(50));
                     DONNEES.action = 2;
                     // -- vie forteresse sinon defensseurs
 
                 } else if (highlightedElement2 == ECOLE_DE_MAGIE2){  //click sur ecole magie adverse
-                    DONNEES.action = 2;
                     std::this_thread::sleep_for(std::chrono::milliseconds(50));
                     DONNEES.action = 3;
                     // -- vie ecole sinon defensseurs
@@ -735,15 +734,15 @@ int interface() {
                 afficherTexte(renderer, font, "Qui voulez vous defendre ?", textRect.x,textRect.y+50,{255,255,255,0});
 
                 if (highlightedElement1 == VILLAGE1) { // click sur sa base
-                    
+                    DONNEES.action = 1;
                     // ++ nb defensseurs
                    
                 } else if (highlightedElement1 == FORTERESSE1){ // click sur sa forteresse
-                    
+                    DONNEES.action = 2;
                     // ++ nb defensseurs
                     
                 } else if (highlightedElement1 == ECOLE_DE_MAGIE1){ // click sur son ecole magie
-                    
+                    DONNEES.action = 3;
                     // ++ nb defensseurs
                     
                 } 
@@ -768,10 +767,12 @@ int interface() {
                     std::cout << "attaque troup!" << std::endl;
                     clickX = 0; clickY = 0;
                     DONNEES.action = 1;
+                    choix = 1;
                 } else if(isClickInsideImage(clickX,clickY,550,450,200,30)){
                     std::cout << "attaque bat!" << std::endl;
                     clickX = 0; clickY = 0;
                     DONNEES.action = 2;
+                    choix = 1;
                 } else if(isClickInsideImage(clickX,clickY,550,500,200,30)){
                     std::cout << "soigner troup!" << std::endl;
                     clickX = 0; clickY = 0;
@@ -793,19 +794,16 @@ int interface() {
                 afficherTexte(renderer, font, "Qui voulez vous attaquer ?", textRect.x,textRect.y+50,{255,255,255,0});
 
                 if (highlightedElement2 == VILLAGE2) { //click une le village adverse
-                    DONNEES.action = 2;
                     std::this_thread::sleep_for(std::chrono::milliseconds(50));
                     DONNEES.action = 1;
                     // -- vie base sinon defensseurs
                     
                 } else if (highlightedElement2 == FORTERESSE2){ //click sur la forteresse adverse
-                    DONNEES.action = 2;
                     std::this_thread::sleep_for(std::chrono::milliseconds(50));
                     DONNEES.action = 2;
                     // -- vie forteresse sinon defensseurs
 
                 } else if (highlightedElement2 == ECOLE_DE_MAGIE2){  //click sur ecole magie adverse
-                    DONNEES.action = 2;
                     std::this_thread::sleep_for(std::chrono::milliseconds(50));
                     DONNEES.action = 3;
                     // -- vie ecole sinon defensseurs
@@ -898,7 +896,6 @@ int interface() {
             // CHOIX TRAVAILLEUR
             // std:: cout << "je dois avoir : " << TRAVAILLEURS << " et " << NONE_ACTION << " j'ai " << tourjeu << " et " << action <<"\n";
             if (tourjeu == TRAVAILLEURS && action == NONE_ACTION){
-                std::cout << "wtf\n";
                 afficherTexte(renderer, font,"Former des ressources",550,400,{255,255,255,0});
                 afficherTexte(renderer, font,"Reparer un batiment",550,450,{255,255,255,0});
                 afficherTexte(renderer, font,"Construire/Ameliorer un batiment",550,500,{255,255,255,0});
@@ -953,7 +950,6 @@ int interface() {
 
         
         else {
-            std::cout << "tourjeu : " << tourjeu << " action : " << action << " choix : " << choice << std::endl;
 
              if (DONNEES.tour_joueur == 2){
 
@@ -1022,10 +1018,12 @@ int interface() {
                     std::cout << "attaque troup!" << std::endl;
                     clickX = 0; clickY = 0;
                     DONNEES.action = 1;
+                    choix = 1;
                 } else if(isClickInsideImage(clickX,clickY,550,450,200,30)){
                     std::cout << "attaque bat!" << std::endl;
                     clickX = 0; clickY = 0;
                     DONNEES.action = 2;
+                    choix = 1;
                 } else if(isClickInsideImage(clickX,clickY,550,500,200,30)){
                     std::cout << "defendre bat!" << std::endl;
                     clickX = 0; clickY = 0;
@@ -1049,7 +1047,6 @@ int interface() {
 
                 if (highlightedElement1 == VILLAGE1) { //click une le village adverse
                     // -- vie base sinon defensseurs
-                    DONNEES.action = 2;
                     std::this_thread::sleep_for(std::chrono::milliseconds(50));
                     DONNEES.action = 1;
 
@@ -1057,12 +1054,10 @@ int interface() {
                 } else if (highlightedElement1 == FORTERESSE1){ //click sur la forteresse adverse
                     
                     // -- vie forteresse sinon defensseurs
-                    DONNEES.action = 2;
                     std::this_thread::sleep_for(std::chrono::milliseconds(50));
                     DONNEES.action = 2;
 
                 } else if (highlightedElement1 == ECOLE_DE_MAGIE1){  //click sur ecole magie adverse
-                    DONNEES.action = 2;
                     std::this_thread::sleep_for(std::chrono::milliseconds(50));
                     DONNEES.action = 3;
                     // -- vie ecole sinon defensseurs
@@ -1112,15 +1107,15 @@ int interface() {
                 afficherTexte(renderer, font, "Qui voulez vous defendre ?", textRect.x,textRect.y+50,{255,255,255,0});
 
                 if (highlightedElement2 == VILLAGE2) { // click sur sa base
-                    
+                    DONNEES.action = 1;    
                     // ++ nb defensseurs
                    
                 } else if (highlightedElement2 == FORTERESSE2){ // click sur sa forteresse
-                    
+                    DONNEES.action = 2;
                     // ++ nb defensseurs
                     
                 } else if (highlightedElement2 == ECOLE_DE_MAGIE2){ // click sur son ecole magie
-                    
+                    DONNEES.action = 3;
                     // ++ nb defensseurs
                     
                 } 
@@ -1145,10 +1140,12 @@ int interface() {
                     std::cout << "attaque troup!" << std::endl;
                     clickX = 0; clickY = 0;
                     DONNEES.action = 1;
+                    choix = 1;
                 } else if(isClickInsideImage(clickX,clickY,550,450,200,30)){
                     std::cout << "attaque bat!" << std::endl;
                     clickX = 0; clickY = 0;
                     DONNEES.action = 2;
+                    choix = 1;
                 } else if(isClickInsideImage(clickX,clickY,550,500,200,30)){
                     std::cout << "soigner troup!" << std::endl;
                     clickX = 0; clickY = 0;
@@ -1169,18 +1166,15 @@ int interface() {
 
                 if (highlightedElement1 == VILLAGE1) { //click une le village adverse
                     // -- vie base sinon defensseurs
-                    DONNEES.action = 2;
                     std::this_thread::sleep_for(std::chrono::milliseconds(50));
                     DONNEES.action = 1;
                     
                 } else if (highlightedElement1 == FORTERESSE1){ //click sur la forteresse adverse
-                    DONNEES.action = 2;
                     std::this_thread::sleep_for(std::chrono::milliseconds(50));
                     DONNEES.action = 2;
                     // -- vie forteresse sinon defensseurs
 
                 } else if (highlightedElement1 == ECOLE_DE_MAGIE1){  //click sur ecole magie adverse
-                    DONNEES.action = 2;
                     std::this_thread::sleep_for(std::chrono::milliseconds(50));
                     DONNEES.action = 3;
                     // -- vie ecole sinon defensseurs
@@ -1222,7 +1216,6 @@ int interface() {
                
             }
         
-
 
             // SI IL SOIGNE
 

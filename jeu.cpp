@@ -20,6 +20,7 @@ Jeu::Jeu(std::string joueur1, std::string joueur2){ // Définition des joueurs (
     DONNEES.j2.base.niveau = 1;
     DONNEES.j1.base.vie = FACTO_VIE_BASE;
     DONNEES.j2.base.vie = FACTO_VIE_BASE;
+    
 
     if (JOUER_AVEC_AFFICHAGE_GRAPHIQUE){
         // DEBUT DU THREAD D INTERFACE

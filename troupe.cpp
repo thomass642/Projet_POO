@@ -74,7 +74,7 @@ void Travailleur::ameliorer_batiment(Batiment* batiment){ // On ameliore un bati
         } else if (batiment->getbatiment() == "Forteresse"){
             DONNEES.j1.forteresse.niveau = batiment->getniveau();
             DONNEES.j1.forteresse.vie = batiment->getvie();
-        } else if (batiment->getbatiment() == "Ecole de magie"){
+        } else{
             DONNEES.j1.ecole_magie.niveau = batiment->getniveau();
             DONNEES.j1.ecole_magie.vie = batiment->getvie();
         }
@@ -85,7 +85,7 @@ void Travailleur::ameliorer_batiment(Batiment* batiment){ // On ameliore un bati
         } else if (batiment->getbatiment() == "Forteresse"){
             DONNEES.j2.forteresse.niveau = batiment->getniveau();
             DONNEES.j2.forteresse.vie = batiment->getvie();
-        } else if (batiment->getbatiment() == "Ecole de magie"){
+        } else{
             DONNEES.j2.ecole_magie.niveau = batiment->getniveau();
             DONNEES.j2.ecole_magie.vie = batiment->getvie();
         }
