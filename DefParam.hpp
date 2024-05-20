@@ -5,6 +5,12 @@
 #include <vector>
 #include <string>
 
+
+
+#define JOUER_AVEC_AFFICHAGE_GRAPHIQUE true
+
+
+
 #define FACTO_VIE_BASE 300
 #define FACTO_VIE_FORTERESSE 200
 #define FACTO_VIE_ECOLE_MAGIE 100
@@ -75,6 +81,7 @@ struct data{
     data_joueur j2;
     std::string texteinfo = "debut de la partie";
     int tour_joueur = 1;
+    int action = -1;
 };
 
 #endif

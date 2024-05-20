@@ -245,7 +245,18 @@ void Joueur::show_troupes(){ // Affiche toutes les troupes avec index
 
 int Joueur::get_action(int inf, int max){ // le joueur choisit un nombre
     int action;
-    std::cin >> action;
+    if (JOUER_AVEC_AFFICHAGE_GRAPHIQUE){
+        while(DONNEES.action == -1){
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            // std::cout << "Still sleeping : " << DONNEES.action << "\n";
+        }
+        action = DONNEES.action;
+        DONNEES.action = -1;
+        std::cout << "L'action choisie est la " << action << std::endl;
+        
+    } else {
+        std::cin >> action;
+    }
     return action;
 }
 

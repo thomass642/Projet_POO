@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <string>
+#include <thread>
+#include <chrono>
 #include "batiment.hpp"
 #include "troupe.hpp"
 #include "data.hpp"
@@ -19,8 +21,8 @@ class Joueur{
         Forteresse* _forteresse;
         EcoleDeMagie* _ecole_magie;
         std::vector<Troupe*> _troupes;
-        int _ressources;
         std::string _nom_joueur;
+        int _ressources;
 
     public:
         Joueur(std::string nom);

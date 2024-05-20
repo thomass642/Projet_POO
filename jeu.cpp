@@ -21,22 +21,23 @@ Jeu::Jeu(std::string joueur1, std::string joueur2){ // Définition des joueurs (
     DONNEES.j1.base.vie = FACTO_VIE_BASE;
     DONNEES.j2.base.vie = FACTO_VIE_BASE;
 
-    // DEBUT DU THREAD D INTERFACE
-    std::thread thread_interface(interface);
-    // DEBUT DU THREAD MOTEUR DE JEU
-    std::thread thread_moteur(&Jeu::run, this);
-
-    thread_interface.join();
-    thread_moteur.join();
+    if (JOUER_AVEC_AFFICHAGE_GRAPHIQUE){
+        // DEBUT DU THREAD D INTERFACE
+        std::thread thread_interface(interface);
+        // DEBUT DU THREAD MOTEUR DE JEU
+        std::thread thread_moteur(&Jeu::run, this);
+        thread_interface.join();
+        thread_moteur.join();
+    } else {
+        // DEBUT DU THREAD MOTEUR DE JEU
+        std::thread thread_moteur(&Jeu::run, this);
+        thread_moteur.join();
+    }
 }
 
 void Jeu::run(){
     // JEU
     
-    
-
-    
-
     std::cout << "\n\nDEBUT DE LA PARTIE\n\n";
 
     while(_joueur1->est_vivant() and _joueur2->est_vivant()){

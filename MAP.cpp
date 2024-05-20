@@ -913,12 +913,15 @@ int interface() {
                 if(isClickInsideImage(clickX,clickY,550,400,50,30)){
 
                     std::cout << "Oui pour former des ressources!" << std::endl;
-
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 1;
                 } else if(isClickInsideImage(clickX,clickY,650,400,50,30)){
 
                     std::cout << "Non pour former des ressources!" << std::endl;
-
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 0;
                 }
+                std::this_thread::sleep_for(std::chrono::milliseconds(50));
 
             }
 
@@ -1207,6 +1210,15 @@ int interface() {
 
             }
 
+                if(isClickInsideImage(clickX,clickY,550,400,70,50)){
+                    std::cout << "Oui pour former des ressources!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 1;
+                } else if(isClickInsideImage(clickX,clickY,650,400,70,50)){
+                    std::cout << "Non pour former des ressources!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 0;
+                }
 
             // CHOIX FORMATION DE RESSOURCES
 
