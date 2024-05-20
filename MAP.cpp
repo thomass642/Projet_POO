@@ -645,12 +645,20 @@ int interface() {
 
                 if(isClickInsideImage(clickX,clickY,550,400,200,30)){
                     std::cout << "attaque troup!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 1;
                 } else if(isClickInsideImage(clickX,clickY,550,450,200,30)){
                     std::cout << "attaque bat!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 2;
                 } else if(isClickInsideImage(clickX,clickY,550,500,200,30)){
                     std::cout << "defendre bat!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 3;
                 } else if(isClickInsideImage(clickX,clickY,550,550,200,30)){
                     std::cout << "passe!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 0;
                 }
             }
 
@@ -666,14 +674,20 @@ int interface() {
 
                 if (highlightedElement2 == VILLAGE2) { //click une le village adverse
                     // -- vie base sinon defensseurs
-
+                    DONNEES.action = 2;
+                    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+                    DONNEES.action = 1;
                     
                 } else if (highlightedElement2 == FORTERESSE2){ //click sur la forteresse adverse
-                    
+                    DONNEES.action = 2;
+                    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+                    DONNEES.action = 2;
                     // -- vie forteresse sinon defensseurs
 
                 } else if (highlightedElement2 == ECOLE_DE_MAGIE2){  //click sur ecole magie adverse
-                    
+                    DONNEES.action = 2;
+                    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+                    DONNEES.action = 3;
                     // -- vie ecole sinon defensseurs
 
                 } else if (highlightedElement2 == TROUPE_DE_GUERRE2){  //click sur soldat adverse
@@ -752,12 +766,20 @@ int interface() {
 
                 if(isClickInsideImage(clickX,clickY,550,400,200,30)){
                     std::cout << "attaque troup!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 1;
                 } else if(isClickInsideImage(clickX,clickY,550,450,200,30)){
                     std::cout << "attaque bat!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 2;
                 } else if(isClickInsideImage(clickX,clickY,550,500,200,30)){
                     std::cout << "soigner troup!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 3;
                 } else if(isClickInsideImage(clickX,clickY,550,550,200,30)){
                     std::cout << "passe!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 0;
                 }
             }
 
@@ -771,15 +793,21 @@ int interface() {
                 afficherTexte(renderer, font, "Qui voulez vous attaquer ?", textRect.x,textRect.y+50,{255,255,255,0});
 
                 if (highlightedElement2 == VILLAGE2) { //click une le village adverse
-                    
+                    DONNEES.action = 2;
+                    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+                    DONNEES.action = 1;
                     // -- vie base sinon defensseurs
                     
                 } else if (highlightedElement2 == FORTERESSE2){ //click sur la forteresse adverse
-                    
+                    DONNEES.action = 2;
+                    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+                    DONNEES.action = 2;
                     // -- vie forteresse sinon defensseurs
 
                 } else if (highlightedElement2 == ECOLE_DE_MAGIE2){  //click sur ecole magie adverse
-                    
+                    DONNEES.action = 2;
+                    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+                    DONNEES.action = 3;
                     // -- vie ecole sinon defensseurs
 
                 } else if (highlightedElement2 == TROUPE_DE_GUERRE2){  //click sur soldat adverse
@@ -992,12 +1020,20 @@ int interface() {
 
                 if(isClickInsideImage(clickX,clickY,550,400,200,30)){
                     std::cout << "attaque troup!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 1;
                 } else if(isClickInsideImage(clickX,clickY,550,450,200,30)){
                     std::cout << "attaque bat!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 2;
                 } else if(isClickInsideImage(clickX,clickY,550,500,200,30)){
                     std::cout << "defendre bat!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 3;
                 } else if(isClickInsideImage(clickX,clickY,550,550,200,30)){
                     std::cout << "passe!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 0;
                 }
             }
 
@@ -1013,14 +1049,22 @@ int interface() {
 
                 if (highlightedElement1 == VILLAGE1) { //click une le village adverse
                     // -- vie base sinon defensseurs
+                    DONNEES.action = 2;
+                    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+                    DONNEES.action = 1;
 
                     
                 } else if (highlightedElement1 == FORTERESSE1){ //click sur la forteresse adverse
                     
                     // -- vie forteresse sinon defensseurs
+                    DONNEES.action = 2;
+                    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+                    DONNEES.action = 2;
 
                 } else if (highlightedElement1 == ECOLE_DE_MAGIE1){  //click sur ecole magie adverse
-                    
+                    DONNEES.action = 2;
+                    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+                    DONNEES.action = 3;
                     // -- vie ecole sinon defensseurs
 
                 } else if (highlightedElement1 == TROUPE_DE_GUERRE1){  //click sur soldat adverse
@@ -1099,12 +1143,20 @@ int interface() {
 
                 if(isClickInsideImage(clickX,clickY,550,400,200,30)){
                     std::cout << "attaque troup!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 1;
                 } else if(isClickInsideImage(clickX,clickY,550,450,200,30)){
                     std::cout << "attaque bat!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 2;
                 } else if(isClickInsideImage(clickX,clickY,550,500,200,30)){
                     std::cout << "soigner troup!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 3;
                 } else if(isClickInsideImage(clickX,clickY,550,550,200,30)){
                     std::cout << "passe!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 0;
                 }
             }
 
@@ -1117,14 +1169,20 @@ int interface() {
 
                 if (highlightedElement1 == VILLAGE1) { //click une le village adverse
                     // -- vie base sinon defensseurs
-
+                    DONNEES.action = 2;
+                    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+                    DONNEES.action = 1;
                     
                 } else if (highlightedElement1 == FORTERESSE1){ //click sur la forteresse adverse
-                    
+                    DONNEES.action = 2;
+                    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+                    DONNEES.action = 2;
                     // -- vie forteresse sinon defensseurs
 
                 } else if (highlightedElement1 == ECOLE_DE_MAGIE1){  //click sur ecole magie adverse
-                    
+                    DONNEES.action = 2;
+                    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+                    DONNEES.action = 3;
                     // -- vie ecole sinon defensseurs
 
                 } else if (highlightedElement1 == TROUPE_DE_GUERRE1){  //click sur soldat adverse

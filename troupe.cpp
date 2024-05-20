@@ -257,8 +257,11 @@ void Soldat::defendre_batiment(Batiment* batiment){ // La troupe défend un bati
 
 
 void Soldat::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'action. On copie le joueur en parametre 
-    int action; // Commande du joueur
-    std::cout << *this << std::endl << "Veuillez saisir une action :\n\t1 : Attaquer une troupe\n\t2 : Attaquer un batiment\n\t3 : Defendre un batiment\n\tAutre : Passer son tour\n";
+    tourjeu = SOLDATS;
+    choix =-1;
+    
+    int select; // Commande du joueur
+    std::cout << *this << std::endl << "Veuillez saisir une select :\n\t1 : Attaquer une troupe\n\t2 : Attaquer un batiment\n\t3 : Defendre un batiment\n\tAutre : Passer son tour\n";
     
     if (joueur_courant == 1){
         DONNEES.j1.select_degats_sold = _niveau * FACTO_ATTAQUE_TROUPE_SOLD;
@@ -270,9 +273,9 @@ void Soldat::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'action
         DONNEES.j2.select_vie_sold = _vie;
     }
 
-    action = joueur.get_action(0,4);
+    select = joueur.get_action(0,4);
 
-    switch (action){
+    switch (select){
     case 0:
         break;
     case 1: // Attaquer une troupe
@@ -280,12 +283,12 @@ void Soldat::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'action
         DONNEES.texteinfo = "Veuillez choisir une troupe a attaquer:";
         deuxieme_joueur.show_troupes();
         std:: cout << "Veuillez choisir l'index de la troupe a cibler (ou 0 si vous voulez passer votre tour)";
-        action = joueur.get_action(0, deuxieme_joueur.get_size_troupes());
+        select = joueur.get_action(0, deuxieme_joueur.get_size_troupes());
 
-        if (action != 0){ // Si le joueur ne souhaite pas passer son tour
-            if (action <= deuxieme_joueur.get_size_troupes()){ // Si l'index est valide
-                if (deuxieme_joueur.get_troupe(action-1).gettroupe() != "Travailleur"){
-                    attaquer_troupe(dynamic_cast<TroupeDeGuerre&>(deuxieme_joueur.get_troupe(action-1)));
+        if (select != 0){ // Si le joueur ne souhaite pas passer son tour
+            if (select <= deuxieme_joueur.get_size_troupes()){ // Si l'index est valide
+                if (deuxieme_joueur.get_troupe(select-1).gettroupe() != "Travailleur"){
+                    attaquer_troupe(dynamic_cast<TroupeDeGuerre&>(deuxieme_joueur.get_troupe(select-1)));
                     if (joueur_courant == 2){
                         DONNEES.j1.listesoldats.clear();
                         DONNEES.j1.listemagiciens.clear();
@@ -331,8 +334,8 @@ void Soldat::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'action
         break;
     case 2: // Attaquer un batiment
         std::cout << "Veuillez choisir un batiment a attaquer:\n\t0 : Passer son tour\n\t1 : Base\n\t2 : Forteresse\n\t3 : Ecole de Magie\n\tAutre Chose : Annuler\n"; 
-        action = joueur.get_action(0,4);
-        switch (action){
+        select = joueur.get_action(0,4);
+        switch (select){
         case 0: // Passer tour
             break;
         case 1: // Attaquer la base
@@ -413,10 +416,11 @@ void Soldat::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'action
         }
         break;
 
-    case 3: // Defendre un batiment 
+    case 3: // Defendre un batiment
+        choix = 0; 
         std::cout << "Veuillez choisir un batiment a defendre:\n\t1 : Base\n\t2 : Forteresse\n\t3 : Ecole de Magie\n\tAutre Chose : Annuler\n"; 
-        action = joueur.get_action(0,3);
-        if (action == 1){ // Defendre la Base 
+        select = joueur.get_action(0,3);
+        if (select == 1){ // Defendre la Base 
             defendre_batiment(joueur.get_batiment(0));
             if (joueur_courant == 1){
                 DONNEES.j1.base.nb_defenseurs = joueur.get_batiment(0)->getdefenseurs().size();
@@ -425,7 +429,7 @@ void Soldat::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'action
                 DONNEES.j2.base.nb_defenseurs = joueur.get_batiment(0)->getdefenseurs().size();
                 DONNEES.j2.base.vie_premier_defenseur = joueur.get_batiment(0)->getdefenseurs()[0]->getvie();
             }
-        } else if (action == 2){ // Defendre la Forteresse 
+        } else if (select == 2){ // Defendre la Forteresse 
             defendre_batiment(joueur.get_batiment(1));
             if (joueur_courant == 1){
                 DONNEES.j1.forteresse.nb_defenseurs = joueur.get_batiment(1)->getdefenseurs().size();
@@ -434,7 +438,7 @@ void Soldat::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'action
                 DONNEES.j2.forteresse.nb_defenseurs = joueur.get_batiment(1)->getdefenseurs().size();
                 DONNEES.j2.forteresse.vie_premier_defenseur = joueur.get_batiment(1)->getdefenseurs()[0]->getvie();
             }
-        } else if (action == 3){ // Defendre l'ecole de magie 
+        } else if (select == 3){ // Defendre l'ecole de magie 
             defendre_batiment(joueur.get_batiment(2));
             if (joueur_courant == 1){
                 DONNEES.j1.ecole_magie.nb_defenseurs = joueur.get_batiment(2)->getdefenseurs().size();
@@ -512,7 +516,8 @@ void Magicien::soigner(TroupeDeGuerre &troupe){ // On soigne la troupe en parame
 }
 
 void Magicien::agir(Joueur& joueur, Joueur& deuxieme_joueur){ // Méthode d'action. On copie le joueur en parametre 
-
+    tourjeu = MAGICIENS;
+    choix = -1;
     int action; // Commande du joueur
     std::cout << *this << std::endl << "Veuillez saisir une action :\n\t1 : Attaquer une troupe\n\t2 : Attaquer un batiment\n\t3 : Soigner une troupe\n\tAutre : Passer son tour\n";
     if (joueur_courant == 1){
