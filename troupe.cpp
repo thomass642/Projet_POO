@@ -93,10 +93,13 @@ void Travailleur::ameliorer_batiment(Batiment* batiment){ // On ameliore un bati
 }
 
 void Travailleur::agir(Joueur& joueur, Joueur& deuxieme_joueur){
-    int action; // Commande du joueur
+    tourjeu = TRAVAILLEURS;
+    action = NONE_ACTION;
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    int select; // Commande du joueur
     std::cout << *this << std::endl << "Veuillez saisir une action :\n\t1 : Chercher des ressources\n\t2 : Reparer un batiment\n\t3 : Ameliorer / Construire un batiment\n\tAutre chose : Passer son tour\n";
-    action = joueur.get_action(0,4);
-    switch (action){
+    select = joueur.get_action(0,4);
+    switch (select){
     case 1: // Chercher des ressources
         joueur.recuperer_ressources(chercher_ressources());
         break;
@@ -104,32 +107,32 @@ void Travailleur::agir(Joueur& joueur, Joueur& deuxieme_joueur){
     case 2: // Reparer un batiment
         std::cout << "Reparation d'un batiment:\nVeuillez saisir un batiment :\n\t1 : Base\n\t2 : Forteresse\n\t3 : Ecole De Magie\n\tAutre chose : Annuler\n";
         DONNEES.texteinfo = "Reparation d'un batiment:\nVeuillez saisir un batiment a reparer";
-        action = joueur.get_action(0,3);
+        select = joueur.get_action(0,3);
         
-        switch (action){
+        switch (select){
         case 1: // Reparer Base
             std::cout << "Reparation de la Base" << std::endl;
             std::cout << "Veuillez saisir le nombre de ressources a utiliser:\n\t";
-            action = joueur.get_action(0,20);
-            reparer_batiment(action, joueur.get_batiment(0));
-            joueur.recuperer_ressources(-action); // On perd le nombre de ressources utilisées
+            select = joueur.get_action(0,20);
+            reparer_batiment(select, joueur.get_batiment(0));
+            joueur.recuperer_ressources(-select); // On perd le nombre de ressources utilisées
             break;
         
         case 2: // Reparer Forteresse
             std::cout << "Reparation de la Forteresse" << std::endl;
             std::cout << "Veuillez saisir le nombre de ressources a utiliser:\n\t";
             DONNEES.texteinfo = "Veuillez saisir le nombre de ressources a utiliser:";
-            action = joueur.get_action(0,20);
-            reparer_batiment(action, joueur.get_batiment(1));
-            joueur.recuperer_ressources(-action); // On perd le nombre de ressources utilisées
+            select = joueur.get_action(0,20);
+            reparer_batiment(select, joueur.get_batiment(1));
+            joueur.recuperer_ressources(-select); // On perd le nombre de ressources utilisées
             break;
 
         case 3: // Reparer Ecole de Magie
             std::cout << "Reparation de l'Ecole de Magie" << std::endl;
             std::cout << "Veuillez saisir le nombre de ressources a utiliser:\n\t";
-            action = joueur.get_action(0,20);
-            reparer_batiment(action, joueur.get_batiment(2));
-            joueur.recuperer_ressources(-action); // On perd le nombre de ressources utilisées
+            select = joueur.get_action(0,20);
+            reparer_batiment(select, joueur.get_batiment(2));
+            joueur.recuperer_ressources(-select); // On perd le nombre de ressources utilisées
             break;
 
         default: // Annuler
@@ -145,10 +148,12 @@ void Travailleur::agir(Joueur& joueur, Joueur& deuxieme_joueur){
         break;
 
     case 3: // Ameliorer un batiment
+        tourjeu = TRAVAILLEURS;
+        action = CONST_BATIMENTS;
         std::cout << "Amelioration / Construction d'un batiment (" << joueur.get_ressources() << "):\nVeuillez saisir un batiment :\n\t1 : Base (" << joueur.cout_amelioration(0) << ")\n\t2 : Forteresse (" << joueur.cout_amelioration(1) << ")\n\t3 : Ecole De Magie (" << joueur.cout_amelioration(2) << ")\n\tAutre chose : Annuler\n";
         DONNEES.texteinfo = "Amelioration / Construction d'un batiment\n\t1 : Base (" + std::to_string(joueur.cout_amelioration(0)) + ")\n\t2 : Forteresse (" + std::to_string(joueur.cout_amelioration(1)) + ")\n\t3 : Ecole De Magie (" + std::to_string(joueur.cout_amelioration(2)) + ")";
-        action = joueur.get_action(0,3);
-        switch (action){
+        select = joueur.get_action(0,3);
+        switch (select){
         case 1: // Ameliorer Base
             if (joueur.get_ressources() >= joueur.cout_amelioration(0)){
                 std::cout << "Amelioration de la Base" << std::endl;

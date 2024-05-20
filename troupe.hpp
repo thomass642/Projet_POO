@@ -6,6 +6,7 @@
 #include "joueur.hpp"
 #include "DefParam.hpp"
 #include "data.hpp"
+#include "testmap.hpp"
 
 class Batiment;
 class Joueur;

@@ -868,17 +868,25 @@ int interface() {
 
 
             // CHOIX TRAVAILLEUR
+            // std:: cout << "je dois avoir : " << TRAVAILLEURS << " et " << NONE_ACTION << " j'ai " << tourjeu << " et " << action <<"\n";
             if (tourjeu == TRAVAILLEURS && action == NONE_ACTION){
+                std::cout << "wtf\n";
                 afficherTexte(renderer, font,"Former des ressources",550,400,{255,255,255,0});
                 afficherTexte(renderer, font,"Reparer un batiment",550,450,{255,255,255,0});
                 afficherTexte(renderer, font,"Construire/Ameliorer un batiment",550,500,{255,255,255,0});
 
                 if(isClickInsideImage(clickX,clickY,550,400,200,30)){
                     std::cout << "former des ressources!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 1;
                 } else if(isClickInsideImage(clickX,clickY,550,450,200,30)){
                     std::cout << "Reparer bat!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 2;
                 } else if(isClickInsideImage(clickX,clickY,550,500,200,30)){
                     std::cout << "const bat!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 3;
                 }
             }
 
@@ -890,12 +898,20 @@ int interface() {
 
                 if(isClickInsideImage(clickX,clickY,550,400,200,30)){
                     std::cout << "base!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 1;
                 } else if(isClickInsideImage(clickX,clickY,550,450,200,30)){
                     std::cout << "forteresse!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 2;
                 } else if(isClickInsideImage(clickX,clickY,550,500,200,30)){
                     std::cout << "ecole mag!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 3;
                 } else if(isClickInsideImage(clickX,clickY,550,550,200,30)){
                     std::cout << "annuler!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 0;
                 }
             }
 
@@ -906,9 +922,12 @@ int interface() {
         } 
         
         /// JOUEUR 2 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         
-        
-        else if (DONNEES.tour_joueur == 2){
+        else {
+            std::cout << "tourjeu : " << tourjeu << " action : " << action << " choix : " << choice << std::endl;
+
+             if (DONNEES.tour_joueur == 2){
 
 
             // DEBUT JOUEUR
@@ -1190,8 +1209,9 @@ int interface() {
                         }
                     } 
                 }
+            }
 
-
+            // std:: cout << "je dois avoir : " << TRAVAILLEURS << " et " << NONE_ACTION << " j'ai " << tourjeu << " et " << action <<"\n";
                 // CHOIX TRAVAILLEUR
             if (tourjeu == TRAVAILLEURS && action == NONE_ACTION){
                 afficherTexte(renderer, font,"Former des ressources",550,400,{255,255,255,0});
@@ -1200,10 +1220,16 @@ int interface() {
 
                 if(isClickInsideImage(clickX,clickY,550,400,200,30)){
                     std::cout << "former des ressources!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 1;
                 } else if(isClickInsideImage(clickX,clickY,550,450,200,30)){
                     std::cout << "Reparer bat!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 2;
                 } else if(isClickInsideImage(clickX,clickY,550,500,200,30)){
                     std::cout << "const bat!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 3;
                 }
             }
 
@@ -1215,31 +1241,28 @@ int interface() {
 
                 if(isClickInsideImage(clickX,clickY,550,400,200,30)){
                     std::cout << "base!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 1;
                 } else if(isClickInsideImage(clickX,clickY,550,450,200,30)){
                     std::cout << "forteresse!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 2;
                 } else if(isClickInsideImage(clickX,clickY,550,500,200,30)){
                     std::cout << "ecole mag!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 3;
                 } else if(isClickInsideImage(clickX,clickY,550,550,200,30)){
                     std::cout << "annuler!" << std::endl;
+                    clickX = 0; clickY = 0;
+                    DONNEES.action = 0;
                 }
             }
             
 
 
             }
-
-                if(isClickInsideImage(clickX,clickY,550,400,70,50)){
-                    std::cout << "Oui pour former des ressources!" << std::endl;
-                    clickX = 0; clickY = 0;
-                    DONNEES.action = 1;
-                } else if(isClickInsideImage(clickX,clickY,650,400,70,50)){
-                    std::cout << "Non pour former des ressources!" << std::endl;
-                    clickX = 0; clickY = 0;
-                    DONNEES.action = 0;
-                }
-
             // CHOIX FORMATION DE RESSOURCES
-
+            
             
         }
 
