@@ -1,6 +1,10 @@
 #include "testmap.hpp"
 
-Tour tourjeu = FORMATION_DE_RESSOURCES;
+Tour tourjeu = SOLDATS;
+
+Action action = NONE_ACTION;
+
+Choice choice = OUI;
 
 // choix (1 attaquer, 0 defendre, 2 soigner)
 int choix = 1;

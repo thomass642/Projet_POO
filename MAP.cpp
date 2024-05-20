@@ -587,20 +587,63 @@ int interface() {
         if ( DONNEES.tour_joueur == 1 ){
 
 
+            // DEBUT JOUEUR
+
+            if(tourjeu == NONE && action == FORMATION_TROUPE && choice == NONE_CHOICE){
+                afficherTexte(renderer, font, "Former troupe",550,300,{255,255,255,0});
+
+                afficherTexte(renderer, font,"Oui",550,400,{255,255,255,0});
+                afficherTexte(renderer, font,"Non",650,400,{255,255,255,0});
+
+                if(isClickInsideImage(clickX,clickY,550,400,50,30)){
+
+                    std::cout << "Oui pour former des ressources!" << std::endl;
+
+                } else if(isClickInsideImage(clickX,clickY,650,400,50,30)){
+
+                    std::cout << "Non pour former des ressources!" << std::endl;
+
+                }
+
+            }
+
+            if (tourjeu == NONE && action == FORMATION_TROUPE && choice == OUI){
+
+                afficherTexte(renderer, font,"Arreter la formation",550,500,{255,255,255,0});
+                afficherTexte(renderer, font,"Travailleurs",550,550,{255,255,255,0});
+                afficherTexte(renderer, font,"Soldats",550,600,{255,255,255,0});
+                afficherTexte(renderer, font,"Magiciens",550,650,{255,255,255,0});
+                
+                if (isClickInsideImage(clickX,clickY,550,500,200,30)){
+                    std::cout << "arret formation!" << std::endl;
+                } else if(isClickInsideImage(clickX,clickY,550,550,200,30)){
+                    std::cout << "travailleurs!" << std::endl;
+                } else if(isClickInsideImage(clickX,clickY,550,600,200,30)){
+                    std::cout << "soldat!" << std::endl;
+                } else if(isClickInsideImage(clickX,clickY,550,650,200,30)){
+                    std::cout << "mag!" << std::endl;
+                }
+            }
+
+
             /// CHOIX DU SOLDAT -----------------------------------------------------------------------------------------------------
 
+            if (tourjeu == SOLDATS && choix ==-1){
+                afficherTexte(renderer, font,"Attaquer une troupes",550,400,{255,255,255,0});
+                afficherTexte(renderer, font,"Attaquer un batiment",550,450,{255,255,255,0});
+                afficherTexte(renderer, font,"Defendre un batiment",550,500,{255,255,255,0});
+                afficherTexte(renderer, font,"Passer son tour",550,550,{255,255,255,0});
 
-            if (tourjeu == SOLDATS){
-                afficherTexte(renderer, font, "Attaquer", textRect.x, textRect.y, {255,255,255,0});
-                afficherTexte(renderer, font, "Defendre", textRect.x + 150, textRect.y, {255,255,255,0});
-                /*if (isClickInsideImage(clickX, clickY, textRect.x, textRect.y, 100, 20)){
-                    highlightText(renderer,font,"Attaquer",{0,0,0,0},{100,0,100,0},textRect.x,textRect.y);
-                    
-                } else if (isClickInsideImage(clickX, clickY, textRect.x+150, textRect.y, 100, 20)){
-                    highlightText(renderer,font,"Defendre",{0,0,0,0},{100,0,100,0},textRect.x+150,textRect.y);
-                    
-                }*/
-            } 
+                if(isClickInsideImage(clickX,clickY,550,400,200,30)){
+                    std::cout << "attaque troup!" << std::endl;
+                } else if(isClickInsideImage(clickX,clickY,550,450,200,30)){
+                    std::cout << "attaque bat!" << std::endl;
+                } else if(isClickInsideImage(clickX,clickY,550,500,200,30)){
+                    std::cout << "defendre bat!" << std::endl;
+                } else if(isClickInsideImage(clickX,clickY,550,550,200,30)){
+                    std::cout << "passe!" << std::endl;
+                }
+            }
 
 
 
@@ -692,22 +735,22 @@ int interface() {
             /// CHOIX DU MAGICIEN  -------------------------------------------------------------------------------------------------
 
 
-            if (tourjeu == MAGICIENS){
-                afficherTexte(renderer, font, "Attaquer", textRect.x, textRect.y, {255,255,255,0});
-                afficherTexte(renderer, font, "Defendre", textRect.x + 100, textRect.y, {255,255,255,0});
-                afficherTexte(renderer, font, "Soigner", textRect.x + 200, textRect.y, {255,255,255,0});
+            if (tourjeu == MAGICIENS && choix ==-1){
+                afficherTexte(renderer, font,"Attaquer une troupes",550,400,{255,255,255,0});
+                afficherTexte(renderer, font,"Attaquer un batiment",550,450,{255,255,255,0});
+                afficherTexte(renderer, font,"Soigner une troupe",550,500,{255,255,255,0});
+                afficherTexte(renderer, font,"Passer son tour",550,550,{255,255,255,0});
 
-                /*if (isClickInsideImage(clickX, clickY, textRect.x, textRect.y, 100, 20)){
-                    highlightText(renderer,font,"Attaquer",{0,0,0,0},{100,0,100,0},textRect.x,textRect.y);
-                    choix = 1;
-                } else if (isClickInsideImage(clickX, clickY, textRect.x+100, textRect.y, 100, 20)){
-                    highlightText(renderer,font,"Defendre",{0,0,0,0},{100,0,100,0},textRect.x+100,textRect.y);
-                    choix = 0;
-                }else if (isClickInsideImage(clickX, clickY, textRect.x+200, textRect.y, 100, 20)){
-                    highlightText(renderer,font,"Soigner",{0,0,0,0},{100,0,100,0},textRect.x+200,textRect.y);
-                    choix = 2;
-                }*/
-            } 
+                if(isClickInsideImage(clickX,clickY,550,400,200,30)){
+                    std::cout << "attaque troup!" << std::endl;
+                } else if(isClickInsideImage(clickX,clickY,550,450,200,30)){
+                    std::cout << "attaque bat!" << std::endl;
+                } else if(isClickInsideImage(clickX,clickY,550,500,200,30)){
+                    std::cout << "soigner troup!" << std::endl;
+                } else if(isClickInsideImage(clickX,clickY,550,550,200,30)){
+                    std::cout << "passe!" << std::endl;
+                }
+            }
 
 
             // SI IL ATTAQUE
@@ -765,27 +808,6 @@ int interface() {
                 }
                
             }
-        
-            // SI IL DEFEND 
-
-            if (choix == 0 && tourjeu == MAGICIENS){
-
-                afficherTexte(renderer, font, "Qui voulez vous defendre ?", textRect.x,textRect.y+50,{255,255,255,0});
-
-                if (highlightedElement1 == VILLAGE1) { // click sur sa base
-                    
-                    // ++ nb defensseurs
-                   
-                } else if (highlightedElement1 == FORTERESSE1){ // click sur sa forteresse
-                    
-                    // ++ nb defensseurs
-                    
-                } else if (highlightedElement1 == ECOLE_DE_MAGIE1){ // click sur son ecole magie
-                    
-                    // ++ nb defensseurs
-                    
-                } 
-            }
 
 
             // SI IL SOIGNE
@@ -833,22 +855,44 @@ int interface() {
                 }
             }
 
+            
+
 
             // CHOIX TRAVAILLEUR
+            if (tourjeu == TRAVAILLEURS && action == NONE_ACTION){
+                afficherTexte(renderer, font,"Former des ressources",550,400,{255,255,255,0});
+                afficherTexte(renderer, font,"Reparer un batiment",550,450,{255,255,255,0});
+                afficherTexte(renderer, font,"Construire/Ameliorer un batiment",550,500,{255,255,255,0});
 
-            if (tourjeu == FORMATION_DE_RESSOURCES){
-                afficherTexte(renderer, font,"Oui",550,400,{255,255,255,0});
-                afficherTexte(renderer, font,"Non",650,400,{255,255,255,0});
-
-                if(isClickInsideImage(clickX,clickY,550,400,50,30)){
-                    std::cout << "Oui pour former des ressources!" << std::endl;
-                } else if(isClickInsideImage(clickX,clickY,650,400,50,30)){
-                    std::cout << "Non pour former des ressources!" << std::endl;
+                if(isClickInsideImage(clickX,clickY,550,400,200,30)){
+                    std::cout << "former des ressources!" << std::endl;
+                } else if(isClickInsideImage(clickX,clickY,550,450,200,30)){
+                    std::cout << "Reparer bat!" << std::endl;
+                } else if(isClickInsideImage(clickX,clickY,550,500,200,30)){
+                    std::cout << "const bat!" << std::endl;
                 }
-
             }
 
+            if (tourjeu == TRAVAILLEURS && action == CONST_BATIMENTS){
+                afficherTexte(renderer, font,"Base",550,400,{255,255,255,0});
+                afficherTexte(renderer, font,"Forteresse",550,450,{255,255,255,0});
+                afficherTexte(renderer, font,"Ecole de magie",550,500,{255,255,255,0});
+                afficherTexte(renderer, font,"Annuler",550,550,{255,255,255,0});
 
+                if(isClickInsideImage(clickX,clickY,550,400,200,30)){
+                    std::cout << "base!" << std::endl;
+                } else if(isClickInsideImage(clickX,clickY,550,450,200,30)){
+                    std::cout << "forteresse!" << std::endl;
+                } else if(isClickInsideImage(clickX,clickY,550,500,200,30)){
+                    std::cout << "ecole mag!" << std::endl;
+                } else if(isClickInsideImage(clickX,clickY,550,550,200,30)){
+                    std::cout << "annuler!" << std::endl;
+                }
+            }
+
+           
+
+            
 
         } 
         
@@ -1107,17 +1151,7 @@ int interface() {
 
             // CHOIX FORMATION DE RESSOURCES
 
-            if (tourjeu == FORMATION_DE_RESSOURCES){
-                afficherTexte(renderer, font,"Oui",550,400,{255,255,255,0});
-                afficherTexte(renderer, font,"Non",650,400,{255,255,255,0});
-
-                if(isClickInsideImage(clickX,clickY,550,400,70,50)){
-                    std::cout << "Oui pour former des ressources!" << std::endl;
-                } else if(isClickInsideImage(clickX,clickY,650,400,70,50)){
-                    std::cout << "Non pour former des ressources!" << std::endl;
-                }
-
-            }
+            
         }
 
 

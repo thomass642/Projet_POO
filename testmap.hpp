@@ -12,8 +12,23 @@ enum Tour{
     TRAVAILLEURS,
     SOLDATS,
     MAGICIENS,
-    FORMATION_DE_RESSOURCES,
     NONE
+};
+
+enum Action{
+    FORMATION_DE_RESSOURCES,
+    FORMATION_TROUPE,
+    REPARER_BATIMENTS,
+    CONST_BATIMENTS,
+    ATTAQUER_TROUPE,
+    ATTAQUER_BATIMENT,
+    NONE_ACTION
+};
+
+enum Choice{
+    OUI,
+    NON,
+    NONE_CHOICE
 };
 
 // data_batiment village1 = {0.8,1,0,0};
@@ -41,6 +56,10 @@ enum Tour{
 // data DONNEES = {jou1,jou2,"debut",2};
 
 extern Tour tourjeu;
+
+extern Action action;
+
+extern Choice choice;
 
 // choix (1 attaquer, 0 defendre, 2 soigner)
 extern int choix;
