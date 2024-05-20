@@ -1,6 +1,6 @@
 #include "testmap.hpp"
 
-Tour tourjeu = MAGICIENS;
+Tour tourjeu = FORMATION_DE_RESSOURCES;
 
 // choix (1 attaquer, 0 defendre, 2 soigner)
 int choix = 1;

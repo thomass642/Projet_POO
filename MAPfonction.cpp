@@ -119,7 +119,7 @@ void drawHealthBar(SDL_Renderer* renderer, int x, int y, int width, int height, 
     SDL_RenderDrawRect(renderer, &outlineRect);
 
     // Dessiner la barre de vie intérieure (en fonction du pourcentage de vie restante)
-    int healthWidth = (int)(barWidth * healthPercentage);
+    int healthWidth = (int)(barWidth * (healthPercentage/300));
     SDL_Rect healthRect = { barX + 1, barY + 1, healthWidth - 1, barHeight - 1 };
     SDL_SetRenderDrawColor(renderer, healthColor.r, healthColor.g, healthColor.b, 255);
     SDL_RenderFillRect(renderer, &healthRect);

@@ -12,6 +12,7 @@ enum Tour{
     TRAVAILLEURS,
     SOLDATS,
     MAGICIENS,
+    FORMATION_DE_RESSOURCES,
     NONE
 };
 

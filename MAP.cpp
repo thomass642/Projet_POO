@@ -831,7 +831,20 @@ int interface() {
                         }
                     } 
                 }
+            }
 
+
+            // CHOIX TRAVAILLEUR
+
+            if (tourjeu == FORMATION_DE_RESSOURCES){
+                afficherTexte(renderer, font,"Oui",550,400,{255,255,255,0});
+                afficherTexte(renderer, font,"Non",650,400,{255,255,255,0});
+
+                if(isClickInsideImage(clickX,clickY,550,400,50,30)){
+                    std::cout << "Oui pour former des ressources!" << std::endl;
+                } else if(isClickInsideImage(clickX,clickY,650,400,50,30)){
+                    std::cout << "Non pour former des ressources!" << std::endl;
+                }
 
             }
 
@@ -1043,6 +1056,9 @@ int interface() {
                 }
             }
 
+
+            // SI IL SOIGNE
+
             if (choix == 2 && tourjeu == MAGICIENS){
                 
                 afficherTexte(renderer, font, "Qui voulez vous soigner ?", textRect.x,textRect.y+50,{255,255,255,0});
@@ -1085,6 +1101,21 @@ int interface() {
                     } 
                 }
 
+
+            }
+
+
+            // CHOIX FORMATION DE RESSOURCES
+
+            if (tourjeu == FORMATION_DE_RESSOURCES){
+                afficherTexte(renderer, font,"Oui",550,400,{255,255,255,0});
+                afficherTexte(renderer, font,"Non",650,400,{255,255,255,0});
+
+                if(isClickInsideImage(clickX,clickY,550,400,70,50)){
+                    std::cout << "Oui pour former des ressources!" << std::endl;
+                } else if(isClickInsideImage(clickX,clickY,650,400,70,50)){
+                    std::cout << "Non pour former des ressources!" << std::endl;
+                }
 
             }
         }
