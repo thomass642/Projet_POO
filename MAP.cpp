@@ -468,7 +468,7 @@ int interface() {
         //SDL_RenderCopy(renderer, textTexture, nullptr, &textRect);
 
 
-        SDL_Rect dstRectta = {450, 140, (int)widthta/1.5, (int)heightta/1.5};
+        SDL_Rect dstRectta = {450, 140, widthta/2*3, heightta/2*3};
         SDL_RenderCopy(renderer, imageTextureta, NULL, &dstRectta);
 
 
