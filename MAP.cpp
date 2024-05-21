@@ -511,7 +511,7 @@ int interface() {
         level(renderer, 1000, y+35, DONNEES.j2.base.niveau);
         shield(renderer, 1000+145, y-28, DONNEES.j2.base.nb_defenseurs);
         drawHealthBar(renderer, 1000+185, y, 100, heightV, DONNEES.j2.base.vie_premier_defenseur,FACTO_VIE_SOLDAT,DONNEES.j2.select_niveau_sold);
-        ressources(renderer,1000+widthV,y,DONNEES.j2.cout_form_base);
+        ressources(renderer,990+widthV,y,DONNEES.j2.cout_form_base);
         SDL_RenderCopy(renderer, imageTexture, NULL, &dstRect2);
 
 
@@ -537,7 +537,7 @@ int interface() {
         level(renderer, 1030, yf, DONNEES.j2.forteresse.niveau);
         shield(renderer, 1030+145, yf-28, DONNEES.j2.forteresse.nb_defenseurs);
         drawHealthBar(renderer, 1030+185, yf, 100, heightV, DONNEES.j2.forteresse.vie_premier_defenseur,FACTO_VIE_SOLDAT,DONNEES.j2.select_niveau_sold);
-        ressources(renderer,1030+widthF,yf,DONNEES.j2.cout_form_fort);
+        ressources(renderer,1030+widthF-10,yf,DONNEES.j2.cout_form_fort);
         SDL_RenderCopy(renderer, imageTexturef, NULL, &dstRectf2);
 
 
@@ -563,7 +563,7 @@ int interface() {
         level(renderer, 1050-30, ym, DONNEES.j2.ecole_magie.niveau);
         shield(renderer, 1050+115, ym-28, DONNEES.j2.ecole_magie.nb_defenseurs);
         drawHealthBar(renderer, 1050+155, ym, 100, heightV, DONNEES.j2.ecole_magie.vie_premier_defenseur,FACTO_VIE_SOLDAT,DONNEES.j2.select_niveau_sold);
-        ressources(renderer,1050+widthM,ym,DONNEES.j2.cout_form_ecole);
+        ressources(renderer,1000+widthM,ym,DONNEES.j2.cout_form_ecole);
         SDL_RenderCopy(renderer, imageTexturem, NULL, &dstRectm2);
 
 
