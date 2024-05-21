@@ -36,7 +36,7 @@ void highlightText(SDL_Renderer* renderer, TTF_Font* font, const char* text, SDL
 void afficherTexte(SDL_Renderer* renderer, TTF_Font* font, const char* texte, int x, int y, SDL_Color couleur);
 
 // Fonction pour dessiner une barre de vie
-void drawHealthBar(SDL_Renderer* renderer, int x, int y, int width, int height, float healthPercentage);
+void drawHealthBar(SDL_Renderer* renderer, int x, int y, int width, int height, float healthPercentage,int vie_max);
 
 void number(SDL_Renderer* renderer, int x, int y, int count);
 
