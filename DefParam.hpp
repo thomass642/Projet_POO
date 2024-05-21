@@ -77,6 +77,7 @@ struct data_joueur{
     int select_soins;
 };
 
+
 struct data{
     data_joueur j1;
     data_joueur j2;
