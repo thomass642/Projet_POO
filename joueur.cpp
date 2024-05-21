@@ -195,8 +195,10 @@ void Joueur::former_troupes(int batiment_index){ // L'index du batiment : 0 = ba
     
     if (joueur_courant == 1){
         DONNEES.j1.listesoldats.clear();
+        DONNEES.j1.listemagiciens.clear();
     }else{ 
         DONNEES.j2.listesoldats.clear();
+        DONNEES.j2.listemagiciens.clear();
     }
 
 

@@ -214,7 +214,7 @@ Magicien* EcoleDeMagie::former_troupes(){ // Renvoie un magicien
         mag.index = DONNEES.j1.nb_travailleurs + DONNEES.j1.listesoldats.size() + DONNEES.j1.listemagiciens.size();
         DONNEES.j1.listemagiciens.push_back(mag);
     } else{
-        mag.index = DONNEES.j1.nb_travailleurs + DONNEES.j1.listesoldats.size() + DONNEES.j1.listemagiciens.size();
+        mag.index = DONNEES.j2.nb_travailleurs + DONNEES.j2.listesoldats.size() + DONNEES.j2.listemagiciens.size();
         DONNEES.j2.listemagiciens.push_back(mag);
     }
     std:: cout << "L'Ecole de Magie de niveau " << _niveau << " a forme un magicien de niveau " << _niveau << " !" << std::endl; 
