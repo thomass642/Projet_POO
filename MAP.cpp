@@ -468,7 +468,7 @@ int interface() {
         //SDL_RenderCopy(renderer, textTexture, nullptr, &textRect);
 
 
-        SDL_Rect dstRectta = {450, 140, widthta/3*2, heightta/3*2};
+        SDL_Rect dstRectta = {440, 140, widthta/3*2, heightta/3*2};
         SDL_RenderCopy(renderer, imageTextureta, NULL, &dstRectta);
 
 
@@ -597,12 +597,13 @@ int interface() {
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         if ( DONNEES.tour_joueur == 1 ) { 
-            afficherTexte(renderer, font, DONNEES.j1.nomj.c_str(), 600, 100, {100,0,50,0});
-            ressources(renderer,600,130,DONNEES.j1.ressources);
+            afficherTexte(renderer, font, DONNEES.j1.nomj.c_str(), 600, 120, {100,0,50,0});
         } else {
-            afficherTexte(renderer, font, DONNEES.j2.nomj.c_str(), 600, 100, {100,0,50,0});
-            ressources(renderer,600,130,DONNEES.j2.ressources);
+            afficherTexte(renderer, font, DONNEES.j2.nomj.c_str(), 600, 120, {100,0,50,0});
         }
+
+        ressources(renderer,400,130,DONNEES.j1.ressources);
+        ressources(renderer,800,130,DONNEES.j2.ressources);
         
         
         const char* info = DONNEES.texteinfo.c_str(); // convertir string en const char*
@@ -1001,7 +1002,6 @@ int interface() {
             // DEBUT JOUEUR
 
             if(tourjeu == NONE && action == FORMATION_TROUPE && choice == NONE_CHOICE){
-                afficherTexte(renderer, font, "Former troupe",550,300,{255,255,255,0});
 
                 afficherTexte(renderer, font,"Oui",550,400,{255,255,255,0});
                 afficherTexte(renderer, font,"Non",650,400,{255,255,255,0});
