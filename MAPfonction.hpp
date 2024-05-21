@@ -5,6 +5,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <string>
 #include <iostream>
+#include <vector>
 
 enum Element1 {
     VILLAGE1,
@@ -54,6 +55,6 @@ void ressources(SDL_Renderer* renderer, int x, int y, int ressources) ;
 // Fonction pour changer la sélection en fonction de la flèche cliquée
 void changeSelection(bool goRight);
 
-void afficherTexte2(const std::string& texte);
+void renderTextWrapped(SDL_Renderer* renderer, TTF_Font* font, const std::string& text, int x, int y, SDL_Color color, int wrapLength) ;
 
 #endif

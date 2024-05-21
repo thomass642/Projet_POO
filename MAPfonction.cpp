@@ -380,15 +380,50 @@ void ressources(SDL_Renderer* renderer, int x, int y, int ressources) {
     TTF_CloseFont(font);
 }
 
-void afficherTexte2(const std::string& texte) {
-    int compteur = 0;
-    for (char c : texte) {
-        std::cout << c;
-        compteur++;
-        if (compteur == 20) {
-            std::cout << std::endl;
-            compteur = 0;
+void renderTextWrapped(SDL_Renderer* renderer, TTF_Font* font, const std::string& text, int x, int y, SDL_Color color, int wrapLength) {
+    std::vector<std::string> lines;
+    std::string currentLine;
+    int charCount = 0;
+
+    // Diviser le texte en lignes de wrapLength caractères
+    for (char c : text) {
+        if (charCount >= wrapLength && c == ' ') {
+            lines.push_back(currentLine);
+            currentLine.clear();
+            charCount = 0;
+        } else {
+            currentLine += c;
+            charCount++;
         }
+    }
+    if (!currentLine.empty()) {
+        lines.push_back(currentLine);
+    }
+
+    // Rendre chaque ligne
+    int currentY = y;
+    for (const std::string& line : lines) {
+        SDL_Surface* textSurface = TTF_RenderText_Solid(font, line.c_str(), color);
+        if (textSurface == nullptr) {
+            std::cout << "Unable to render text surface! SDL_ttf Error: " << TTF_GetError() << std::endl;
+            return;
+        }
+        SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+        if (textTexture == nullptr) {
+            std::cout << "Unable to create texture from rendered text! SDL Error: " << SDL_GetError() << std::endl;
+            SDL_FreeSurface(textSurface);
+            return;
+        }
+
+        int textWidth = textSurface->w;
+        int textHeight = textSurface->h;
+        SDL_FreeSurface(textSurface);
+
+        SDL_Rect renderQuad = { x, currentY, textWidth, textHeight };
+        SDL_RenderCopy(renderer, textTexture, nullptr, &renderQuad);
+        SDL_DestroyTexture(textTexture);
+
+        currentY += textHeight;
     }
 }
 

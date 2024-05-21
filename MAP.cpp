@@ -397,7 +397,6 @@ int interface() {
     int clickY ;
     clickY = -1;
 
-    auto start = std::chrono::high_resolution_clock::now();
 
     // Boucle principale
     bool running = true;
@@ -469,8 +468,8 @@ int interface() {
         //SDL_RenderCopy(renderer, textTexture, nullptr, &textRect);
 
 
-        auto now = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double> elapsed = now - start;
+        SDL_Rect dstRectta = {450, 140, widthta/1.5, heightta/1.5};
+        SDL_RenderCopy(renderer, imageTextureta, NULL, &dstRectta);
 
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -608,11 +607,10 @@ int interface() {
         
         const char* info = DONNEES.texteinfo.c_str(); // convertir string en const char*
 
-        SDL_Rect dstRectta = {500, 200, widthta, heightta};
-        SDL_RenderCopy(renderer, imageTextureta, NULL, &dstRectta);
+        renderTextWrapped(renderer, font,info,510,200,{0,0,0,0},20);
 
-        afficherTexte(renderer, font, info,500,180, {255,255,255,0});
 
+        // FAIRE APPARAITRE FLECHES
 
         if (DONNEES.j2.listesoldats.size() > 1){
             insertImages(renderer, 810, yg, widthG, heightG, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
