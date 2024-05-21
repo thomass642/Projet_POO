@@ -177,7 +177,7 @@ int interface() {
 
 
     /// Insertion ECOLE DE MAGIE NIVEAU 1
-    SDL_Surface* imageSurfacem = IMG_Load("img/ecole de magie/1.jpg");
+    SDL_Surface* imageSurfacem = IMG_Load("img/ecole de magie/ecole.png");
     if (imageSurfacem == nullptr) {
         SDL_Log("Erreur lors du chargement de l'image à insérer : %s", IMG_GetError());
         SDL_DestroyTexture(backgroundTexture);
@@ -452,11 +452,11 @@ int interface() {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, x + y / 2 - 25, y + heightV / 2, widthV / 2 - 5); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, x, y, 200, heightV, DONNEES.j1.base.vie,FACTO_VIE_BASE); 
+        drawHealthBar(renderer, x, y, 200, heightV, DONNEES.j1.base.vie,FACTO_VIE_BASE,DONNEES.j1.base.niveau); 
         number(renderer, x, y, DONNEES.j1.nb_travailleurs); // Afficher le nombre de travaileurs
         level(renderer, x, y+35, DONNEES.j1.base.niveau);
         shield(renderer, x+145, y-28, DONNEES.j1.base.nb_defenseurs);
-        drawHealthBar(renderer, x+185, y, 100, heightV, DONNEES.j1.base.vie_premier_defenseur,FACTO_VIE_SOLDAT);
+        drawHealthBar(renderer, x+185, y, 100, heightV, DONNEES.j1.base.vie_premier_defenseur,FACTO_VIE_SOLDAT, DONNEES.j1.select_niveau_sold);
         SDL_RenderCopy(renderer, imageTexture, NULL, &dstRect);
 
         SDL_Rect dstRect2 = {1000, y, widthV, heightV};
@@ -464,11 +464,11 @@ int interface() {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, 1000 + y / 2 - 25, y + heightV / 2, widthV / 2 - 5); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, 1000, y, 200, heightV, DONNEES.j2.base.vie,FACTO_VIE_BASE); 
+        drawHealthBar(renderer, 1000, y, 200, heightV, DONNEES.j2.base.vie,FACTO_VIE_BASE,DONNEES.j2.base.niveau); 
         number(renderer, 1000, y, DONNEES.j2.nb_travailleurs); // Afficher le nombre de travaileurs
         level(renderer, 1000, y+35, DONNEES.j2.base.niveau);
         shield(renderer, 1000+145, y-28, DONNEES.j2.base.nb_defenseurs);
-        drawHealthBar(renderer, 1000+185, y, 100, heightV, DONNEES.j2.base.vie_premier_defenseur,FACTO_VIE_SOLDAT);
+        drawHealthBar(renderer, 1000+185, y, 100, heightV, DONNEES.j2.base.vie_premier_defenseur,FACTO_VIE_SOLDAT,DONNEES.j2.select_niveau_sold);
         SDL_RenderCopy(renderer, imageTexture, NULL, &dstRect2);
 
 
@@ -478,10 +478,10 @@ int interface() {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, xf + yf / 2 + 50, yf + heightF / 2, widthF / 2 ); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, xf, yf, 200, heightV, DONNEES.j1.forteresse.vie,FACTO_VIE_FORTERESSE); 
+        drawHealthBar(renderer, xf, yf, 200, heightV, DONNEES.j1.forteresse.vie,FACTO_VIE_FORTERESSE,DONNEES.j1.forteresse.niveau); 
         level(renderer, xf, yf, DONNEES.j1.forteresse.niveau);
         shield(renderer, xf+145, yf-28, DONNEES.j1.forteresse.nb_defenseurs);
-        drawHealthBar(renderer, xf+185, yf, 100, heightV, DONNEES.j1.forteresse.vie_premier_defenseur,FACTO_VIE_SOLDAT);
+        drawHealthBar(renderer, xf+185, yf, 100, heightV, DONNEES.j1.forteresse.vie_premier_defenseur,FACTO_VIE_SOLDAT,DONNEES.j1.select_niveau_sold);
         SDL_RenderCopy(renderer, imageTexturef, NULL, &dstRectf);
 
         SDL_Rect dstRectf2 = {1030, yf, widthF, heightF};
@@ -489,10 +489,10 @@ int interface() {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, 1030 + yf / 2 + 50, yf + heightF / 2, widthF / 2 ); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, 1030, yf, 200, heightV, DONNEES.j2.forteresse.vie,FACTO_VIE_FORTERESSE); 
+        drawHealthBar(renderer, 1030, yf, 200, heightV, DONNEES.j2.forteresse.vie,FACTO_VIE_FORTERESSE,DONNEES.j2.forteresse.niveau); 
         level(renderer, 1030, yf, DONNEES.j2.forteresse.niveau);
         shield(renderer, 1030+145, yf-28, DONNEES.j2.forteresse.nb_defenseurs);
-        drawHealthBar(renderer, 1030+185, yf, 100, heightV, DONNEES.j2.forteresse.vie_premier_defenseur,FACTO_VIE_SOLDAT);
+        drawHealthBar(renderer, 1030+185, yf, 100, heightV, DONNEES.j2.forteresse.vie_premier_defenseur,FACTO_VIE_SOLDAT,DONNEES.j2.select_niveau_sold);
         SDL_RenderCopy(renderer, imageTexturef, NULL, &dstRectf2);
 
 
@@ -502,10 +502,10 @@ int interface() {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, xf + yf / 2 + 40, ym + heightM / 2 + 5, widthF / 2 ); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, xm-30, ym, 200, heightV, DONNEES.j1.ecole_magie.vie,FACTO_VIE_ECOLE_MAGIE); 
+        drawHealthBar(renderer, xm-30, ym, 200, heightV, DONNEES.j1.ecole_magie.vie,FACTO_VIE_ECOLE_MAGIE,DONNEES.j1.ecole_magie.niveau); 
         level(renderer, xm-30, ym, DONNEES.j1.ecole_magie.niveau);
         shield(renderer, xm+115, ym-28, DONNEES.j1.ecole_magie.nb_defenseurs);
-        drawHealthBar(renderer, xm+155, ym, 100, heightV, DONNEES.j1.ecole_magie.vie_premier_defenseur,FACTO_VIE_SOLDAT);
+        drawHealthBar(renderer, xm+155, ym, 100, heightV, DONNEES.j1.ecole_magie.vie_premier_defenseur,FACTO_VIE_SOLDAT,DONNEES.j1.select_niveau_sold);
         SDL_RenderCopy(renderer, imageTexturem, NULL, &dstRectm);
 
         SDL_Rect dstRectm2 = {1050, ym, widthM, heightM};
@@ -513,10 +513,10 @@ int interface() {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, 1050 + yf / 2 + 40, ym + heightM / 2 + 5, widthF / 2 ); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, 1050-30, ym, 200, heightV, DONNEES.j2.ecole_magie.vie,FACTO_VIE_ECOLE_MAGIE); 
+        drawHealthBar(renderer, 1050-30, ym, 200, heightV, DONNEES.j2.ecole_magie.vie,FACTO_VIE_ECOLE_MAGIE,DONNEES.j2.ecole_magie.niveau); 
         level(renderer, 1050-30, ym, DONNEES.j2.ecole_magie.niveau);
         shield(renderer, 1050+115, ym-28, DONNEES.j2.ecole_magie.nb_defenseurs);
-        drawHealthBar(renderer, 1050+155, ym, 100, heightV, DONNEES.j2.ecole_magie.vie_premier_defenseur,FACTO_VIE_SOLDAT);
+        drawHealthBar(renderer, 1050+155, ym, 100, heightV, DONNEES.j2.ecole_magie.vie_premier_defenseur,FACTO_VIE_SOLDAT,DONNEES.j2.select_niveau_sold);
         SDL_RenderCopy(renderer, imageTexturem, NULL, &dstRectm2);
 
 
@@ -526,7 +526,7 @@ int interface() {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, xg + yg / 2 - 35, yg + heightG / 2 + 5, widthG / 2 ); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, xg, yg, 200, heightV, DONNEES.j1.select_vie_sold,FACTO_VIE_SOLDAT); 
+        drawHealthBar(renderer, xg, yg, 200, heightV, DONNEES.j1.select_vie_sold,FACTO_VIE_SOLDAT,DONNEES.j1.select_niveau_sold); 
         number(renderer, xg + 130, yg - 25, DONNEES.j1.listesoldats.size()); // Afficher le nombre de troupe de guerre
         level(renderer, xg +130, yg+10, DONNEES.j1.select_niveau_sold);
         SDL_RenderCopy(renderer, imageTextureg, NULL, &dstRectg);
@@ -536,7 +536,7 @@ int interface() {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, 810 + yg / 2 - 35, yg + heightG / 2 + 5, widthG / 2 ); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, 810, yg, 200, heightV, DONNEES.j2.select_vie_sold,FACTO_VIE_SOLDAT); 
+        drawHealthBar(renderer, 810, yg, 200, heightV, DONNEES.j2.select_vie_sold,FACTO_VIE_SOLDAT,DONNEES.j2.select_niveau_sold); 
         number(renderer, 810 + 130, yg -25, DONNEES.j2.listesoldats.size()); // Afficher le nombre de troupe de guerre
         level(renderer, 810 +130, yg+10, DONNEES.j2.select_niveau_sold);
         SDL_RenderCopy(renderer, imageTextureg, NULL, &dstRectg2);
@@ -548,7 +548,7 @@ int interface() {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, (xma + yma) / 2 , yma + heightMA / 2 + 5, widthG / 2 ); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, xma, yma, 200, heightV, DONNEES.j1.select_vie_mag,FACTO_VIE_MAGICIEN); 
+        drawHealthBar(renderer, xma, yma, 200, heightV, DONNEES.j1.select_vie_mag,FACTO_VIE_MAGICIEN,DONNEES.j1.select_niveau_mag); 
         number(renderer, xma + 120, yma -25, DONNEES.j1.listemagiciens.size()); // Afficher le nombre de magicien
         level(renderer, xma +120, yma+10, DONNEES.j1.select_niveau_mag);
         SDL_RenderCopy(renderer, imageTexturema, NULL, &dstRectma);
@@ -558,7 +558,7 @@ int interface() {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, 660 + yma / 2 , yma + heightMA / 2 + 5, widthG / 2 ); // Cercle autour de l'image
         }
-        drawHealthBar(renderer, 820, yma, 200, heightV, DONNEES.j2.select_vie_mag,FACTO_VIE_MAGICIEN); 
+        drawHealthBar(renderer, 820, yma, 200, heightV, DONNEES.j2.select_vie_mag,FACTO_VIE_MAGICIEN,DONNEES.j2.select_niveau_mag); 
         number(renderer, 820 + 120, yma -25, DONNEES.j2.listemagiciens.size()); // Afficher le nombre de magicien
         level(renderer, 820+120, yma+10, DONNEES.j2.select_niveau_mag);
         SDL_RenderCopy(renderer, imageTexturema, NULL, &dstRectma2);
@@ -576,7 +576,7 @@ int interface() {
         
         const char* info = DONNEES.texteinfo.c_str(); // convertir string en const char*
         
-        afficherTexte(renderer, font, info,550,200, {255,255,255,0});
+        afficherTexte(renderer, font, info,500,180, {255,255,255,0});
 
 
 
@@ -589,7 +589,6 @@ int interface() {
 
             // DEBUT JOUEUR
             if(tourjeu == NONE && action == FORMATION_TROUPE && choice == NONE_CHOICE){
-                afficherTexte(renderer, font, "Former troupe",550,300,{255,255,255,0});
                 afficherTexte(renderer, font,"Oui",550,400,{255,255,255,0});
                 afficherTexte(renderer, font,"Non",650,400,{255,255,255,0});
 
