@@ -103,7 +103,7 @@ void afficherTexte(SDL_Renderer* renderer, TTF_Font* font, const char* texte, in
 }
 
 // Fonction pour dessiner une barre de vie
-void drawHealthBar(SDL_Renderer* renderer, int x, int y, int width, int height, float healthPercentage, int vie_max) {
+void drawHealthBar(SDL_Renderer* renderer, int x, int y, int width, int height, float healthPercentage, int vie_max, int niveau) {
     // Couleur de la barre de vie
     SDL_Color healthColor = { 0, 255, 0 }; // Vert
 
@@ -119,7 +119,7 @@ void drawHealthBar(SDL_Renderer* renderer, int x, int y, int width, int height, 
     SDL_RenderDrawRect(renderer, &outlineRect);
 
     // Dessiner la barre de vie intérieure (en fonction du pourcentage de vie restante)
-    int healthWidth = (int)(barWidth * (healthPercentage/vie_max));
+    int healthWidth = (int)(barWidth * (healthPercentage/vie_max*niveau));
     SDL_Rect healthRect = { barX + 1, barY + 1, healthWidth - 1, barHeight - 1 };
     SDL_SetRenderDrawColor(renderer, healthColor.r, healthColor.g, healthColor.b, 255);
     SDL_RenderFillRect(renderer, &healthRect);
