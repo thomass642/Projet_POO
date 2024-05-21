@@ -201,6 +201,7 @@ void Joueur::former_troupes(int batiment_index){ // L'index du batiment : 0 = ba
 
 
     int nb_trav = 0;
+    int index = 0;
     
     for (Troupe* troupe : _troupes){
         if (troupe->gettroupe() == "Travailleur"){
@@ -211,6 +212,7 @@ void Joueur::former_troupes(int batiment_index){ // L'index du batiment : 0 = ba
             sold.vie = copie->getvie();
             sold.niveau = copie->getniveau();
             sold.degats = copie->getniveau() * FACTO_ATTAQUE_TROUPE_SOLD;
+            sold.index = index;
             if (joueur_courant == 1){
                 DONNEES.j1.listesoldats.push_back(sold);
             }else{ 
@@ -224,12 +226,14 @@ void Joueur::former_troupes(int batiment_index){ // L'index du batiment : 0 = ba
             mag.niveau = copie->getniveau();
             mag.degats = copie->getniveau() * FACTO_ATTAQUE_TROUPE_MAG;
             mag.soins = copie->getniveau() * FACTO_SOIN_TROUPE;
+            mag.index = index;
             if (joueur_courant == 1){
-                DONNEES.j1.listesoldats.push_back(mag);
+                DONNEES.j1.listemagiciens.push_back(mag);
             }else{ 
-                DONNEES.j2.listesoldats.push_back(mag);
+                DONNEES.j2.listemagiciens.push_back(mag);
             }
         }
+        index++;
     }
 
     _ressources -= cout;

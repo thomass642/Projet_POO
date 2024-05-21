@@ -174,8 +174,10 @@ Soldat* Forteresse::former_troupes(){ // Renvoie un soldat
     sold.vie = _niveau * FACTO_VIE_SOLDAT;
 
     if(joueur_courant == 1){
+        sold.index = DONNEES.j1.nb_travailleurs + DONNEES.j1.listesoldats.size() + DONNEES.j1.listemagiciens.size();
         DONNEES.j1.listesoldats.push_back(sold);
     } else{
+        sold.index = DONNEES.j2.nb_travailleurs + DONNEES.j2.listesoldats.size() + DONNEES.j2.listemagiciens.size();
         DONNEES.j2.listesoldats.push_back(sold);
     }
 
@@ -209,8 +211,10 @@ Magicien* EcoleDeMagie::former_troupes(){ // Renvoie un magicien
     mag.vie = _niveau * FACTO_VIE_MAGICIEN;
 
     if(joueur_courant == 1){
+        mag.index = DONNEES.j1.nb_travailleurs + DONNEES.j1.listesoldats.size() + DONNEES.j1.listemagiciens.size();
         DONNEES.j1.listemagiciens.push_back(mag);
     } else{
+        mag.index = DONNEES.j1.nb_travailleurs + DONNEES.j1.listesoldats.size() + DONNEES.j1.listemagiciens.size();
         DONNEES.j2.listemagiciens.push_back(mag);
     }
     std:: cout << "L'Ecole de Magie de niveau " << _niveau << " a forme un magicien de niveau " << _niveau << " !" << std::endl; 

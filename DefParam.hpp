@@ -54,6 +54,7 @@ struct data_troupes_de_guerre{
     int niveau = 0;
     int degats = 0;
     int soins = 0;
+    int index = -1;
 };
 
 struct data_joueur{
