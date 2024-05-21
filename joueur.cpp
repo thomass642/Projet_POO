@@ -15,6 +15,15 @@ Joueur::Joueur(std::string nom){
 
 void Joueur::jouer(Joueur& deuxieme_joueur){ // Le joueur joue son tour
     // LE JOUEUR REGARDE S'IL VEUT FORMER DES TROUPES
+    if (joueur_courant == 1){
+        DONNEES.j1.cout_form_base = _base->cout_formation();
+        DONNEES.j1.cout_form_fort = _forteresse->cout_formation();
+        DONNEES.j1.cout_form_ecole = _ecole_magie->cout_formation();
+    } else {
+        DONNEES.j2.cout_form_base = _base->cout_formation();
+        DONNEES.j2.cout_form_fort = _forteresse->cout_formation();
+        DONNEES.j2.cout_form_ecole = _ecole_magie->cout_formation();
+    }
     int select; // Commande  du joueur pour agir sur le jeu
     std::vector<int> elems_to_remove;
     

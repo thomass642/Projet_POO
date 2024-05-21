@@ -75,6 +75,9 @@ struct data_joueur{
     int select_niveau_mag;
     int select_degats_mag;
     int select_soins;
+    int cout_form_base;
+    int cout_form_fort;
+    int cout_form_ecole;
 };
 
 
