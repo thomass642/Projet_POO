@@ -338,7 +338,33 @@ int interface() {
     int heightFLg = imageHeight/8;
 
 
-    
+    /// Insertion TAB INFO
+    SDL_Surface* imageSurfaceta = IMG_Load("img/tableau.png");
+    if (imageSurfaceta == nullptr) {
+        SDL_Log("Erreur lors du chargement de l'image à insérer : %s", IMG_GetError());
+        SDL_DestroyTexture(backgroundTexture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        return 1;
+    }
+    SDL_Texture* imageTextureta = SDL_CreateTextureFromSurface(renderer, imageSurfaceta);
+    SDL_FreeSurface(imageSurfaceta);
+    if (imageTextureta == nullptr) {
+        SDL_Log("Erreur lors de la création de la texture de l'image à insérer : %s", SDL_GetError());
+        SDL_DestroyTexture(backgroundTexture);
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        return 1;
+    }
+
+    // Récupérer les dimensions de l'image à insérer
+    SDL_QueryTexture(imageTextureta, NULL, NULL, &imageWidth, &imageHeight);
+
+    // Redimensionner l'image à insérer (par exemple, à la moitié de sa taille)
+    int widthta = imageWidth;
+    int heightta = imageHeight;
 
     //---------------------------------------------------------------------------------------------------------
     //---------------------------------------------------------------------------------------------------------
@@ -371,11 +397,14 @@ int interface() {
     int clickY ;
     clickY = -1;
 
+    auto start = std::chrono::high_resolution_clock::now();
 
     // Boucle principale
     bool running = true;
     SDL_Event event;
     while (running) {
+        clickX = -1;
+        clickY = -1;
         
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
@@ -386,6 +415,7 @@ int interface() {
                 // Si un clic de souris est détecté, obtenir les coordonnées du clic
                 clickX = event.button.x;
                 clickY = event.button.y;
+
 
 
 
@@ -428,7 +458,7 @@ int interface() {
 
             }
         }
-
+        
         // Effacer l'écran
         SDL_RenderClear(renderer);
 
@@ -439,7 +469,8 @@ int interface() {
         //SDL_RenderCopy(renderer, textTexture, nullptr, &textRect);
 
 
-
+        auto now = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> elapsed = now - start;
 
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -448,7 +479,7 @@ int interface() {
 
         // Dessiner les 2 villages niveau 1
         SDL_Rect dstRect = {x, y, widthV, heightV};
-        if (highlightedElement1 == VILLAGE1){
+        if (isClickInsideImage(clickX, clickY, x, y, widthV, heightV)){
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, x + y / 2 - 25, y + heightV / 2, widthV / 2 - 5); // Cercle autour de l'image
         }
@@ -460,7 +491,7 @@ int interface() {
         SDL_RenderCopy(renderer, imageTexture, NULL, &dstRect);
 
         SDL_Rect dstRect2 = {1000, y, widthV, heightV};
-        if (highlightedElement2 == VILLAGE2){
+        if (isClickInsideImage(clickX, clickY, 1000, y, widthV, heightV)){
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, 1000 + y / 2 - 25, y + heightV / 2, widthV / 2 - 5); // Cercle autour de l'image
         }
@@ -474,7 +505,7 @@ int interface() {
 
         // Dessiner les 2 forteresses niveau 1
         SDL_Rect dstRectf = {xf, yf, widthF, heightF};
-        if (highlightedElement1 == FORTERESSE1){
+        if (isClickInsideImage(clickX, clickY, xf, yf, widthF, heightF)){
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, xf + yf / 2 + 50, yf + heightF / 2, widthF / 2 ); // Cercle autour de l'image
         }
@@ -485,7 +516,7 @@ int interface() {
         SDL_RenderCopy(renderer, imageTexturef, NULL, &dstRectf);
 
         SDL_Rect dstRectf2 = {1030, yf, widthF, heightF};
-        if (highlightedElement2 == FORTERESSE2){
+        if (isClickInsideImage(clickX, clickY, 1030, yf, widthF, heightF)){
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, 1030 + yf / 2 + 50, yf + heightF / 2, widthF / 2 ); // Cercle autour de l'image
         }
@@ -498,7 +529,7 @@ int interface() {
 
         // Dessiner les 2 ecoles de magie niveau 1
         SDL_Rect dstRectm = {xm, ym, widthM, heightM};
-        if (highlightedElement1 == ECOLE_DE_MAGIE1){
+        if (isClickInsideImage(clickX, clickY, xm, ym, widthM, heightM)){
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, xf + yf / 2 + 40, ym + heightM / 2 + 5, widthF / 2 ); // Cercle autour de l'image
         }
@@ -509,7 +540,7 @@ int interface() {
         SDL_RenderCopy(renderer, imageTexturem, NULL, &dstRectm);
 
         SDL_Rect dstRectm2 = {1050, ym, widthM, heightM};
-        if (highlightedElement2 == ECOLE_DE_MAGIE2){
+        if (isClickInsideImage(clickX, clickY, 1050, ym, widthM, heightM)){
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, 1050 + yf / 2 + 40, ym + heightM / 2 + 5, widthF / 2 ); // Cercle autour de l'image
         }
@@ -522,7 +553,7 @@ int interface() {
 
         // Dessiner les 2 troupes de guerre niveau 1
         SDL_Rect dstRectg = {xg, yg, widthG, heightG};
-        if (highlightedElement1 == TROUPE_DE_GUERRE1){
+        if (isClickInsideImage(clickX, clickY, xg, yg, widthG, heightG)){
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, xg + yg / 2 - 35, yg + heightG / 2 + 5, widthG / 2 ); // Cercle autour de l'image
         }
@@ -532,7 +563,7 @@ int interface() {
         SDL_RenderCopy(renderer, imageTextureg, NULL, &dstRectg);
 
         SDL_Rect dstRectg2 = {810, yg, widthG, heightG};
-        if (highlightedElement2 == TROUPE_DE_GUERRE2){
+        if (isClickInsideImage(clickX, clickY, 810, yg, widthG, heightG)){
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, 810 + yg / 2 - 35, yg + heightG / 2 + 5, widthG / 2 ); // Cercle autour de l'image
         }
@@ -544,7 +575,7 @@ int interface() {
 
         // Dessiner les 2 magiciens niveau 1
         SDL_Rect dstRectma = {xma , yma, widthMA, heightMA};
-        if (highlightedElement1 == MAGICIEN1){
+        if (isClickInsideImage(clickX, clickY, xma, yma, widthMA, heightMA)){
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, (xma + yma) / 2 , yma + heightMA / 2 + 5, widthG / 2 ); // Cercle autour de l'image
         }
@@ -554,7 +585,7 @@ int interface() {
         SDL_RenderCopy(renderer, imageTexturema, NULL, &dstRectma);
 
         SDL_Rect dstRectma2 = {820, yma, widthMA, heightMA};
-        if (highlightedElement2 == MAGICIEN2){
+        if (isClickInsideImage(clickX, clickY, 820, yma, widthMA, heightMA)){
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Jaune
             drawCircle(renderer, 660 + yma / 2 , yma + heightMA / 2 + 5, widthG / 2 ); // Cercle autour de l'image
         }
@@ -574,11 +605,81 @@ int interface() {
             ressources(renderer,600,130,DONNEES.j2.ressources);
         }
         
-        const char* info = DONNEES.texteinfo.c_str(); // convertir string en const char*
         
+        const char* info = DONNEES.texteinfo.c_str(); // convertir string en const char*
+
+        SDL_Rect dstRectta = {500, 200, widthta, heightta};
+        SDL_RenderCopy(renderer, imageTextureta, NULL, &dstRectta);
+
         afficherTexte(renderer, font, info,500,180, {255,255,255,0});
 
 
+        if (DONNEES.j2.listesoldats.size() > 1){
+            insertImages(renderer, 810, yg, widthG, heightG, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+            if (isClickInsideImage(clickX, clickY, 810-widthFLg, yg + (heightG - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j2.sold_select > 0){
+                std::cout << "soldat avant" << std::endl;
+                changesold2avant(&DONNEES);
+                std::cout << DONNEES.j2.listesoldats[DONNEES.j2.sold_select].index << std::endl;
+
+                // -- vie 
+
+            } else if (isClickInsideImage(clickX, clickY, 810+widthG, yg + (heightG - heightFL) / 2, widthFL, heightFL) && DONNEES.j2.sold_select < DONNEES.j2.listesoldats.size()-1){
+                std::cout << "soldat apres" << std::endl;
+                changesold2apres(&DONNEES);
+                std::cout << DONNEES.j2.listesoldats[DONNEES.j2.sold_select].index<< std::endl;
+
+                // -- vie 
+
+            }
+        }
+
+        if (DONNEES.j2.listemagiciens.size() > 1){
+            insertImages(renderer, 820, yma, widthMA, heightMA, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+            if (isClickInsideImage(clickX, clickY, 820-widthFLg, yma + (heightMA - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j2.mag_select > 0){
+                std::cout << "magicien avant" << std::endl;
+                changemag2avant(&DONNEES);
+                std::cout << DONNEES.j2.listemagiciens[DONNEES.j2.mag_select].index << std::endl;
+
+            } else if (isClickInsideImage(clickX, clickY, 820+widthMA, yma + (heightMA - heightFL) / 2, widthFL, heightFL) && DONNEES.j2.mag_select < DONNEES.j2.listemagiciens.size()-1){
+                std::cout << "magicien apres" << std::endl;
+                changemag2apres(&DONNEES);
+                std::cout << DONNEES.j2.listemagiciens[DONNEES.j2.mag_select].index << std::endl;
+            }
+        }
+
+         if (DONNEES.j1.listesoldats.size() > 1){
+            insertImages(renderer, xg, yg, widthG, heightG, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+            if (isClickInsideImage(clickX, clickY, xg-widthFLg, yg + (heightG - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j1.sold_select > 0){
+                std::cout << "soldat avant" << std::endl;
+                changesold1avant(&DONNEES);
+                std::cout << DONNEES.j1.listesoldats[DONNEES.j1.sold_select].index << std::endl;
+
+
+                // -- vie 
+
+            } else if (isClickInsideImage(clickX, clickY, xg+widthG, yg + (heightG - heightFL) / 2, widthFL, heightFL) && DONNEES.j1.sold_select < DONNEES.j1.listesoldats.size()-1){
+                std::cout << "soldat apres" << std::endl;
+                changesold1apres(&DONNEES);
+                std::cout << DONNEES.j1.listesoldats[DONNEES.j1.sold_select].index << std::endl;
+
+                // -- vie 
+
+            }
+        }
+
+        if (DONNEES.j1.listemagiciens.size() > 1){
+            insertImages(renderer, xma, yma, widthMA, heightMA, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+            if (isClickInsideImage(clickX, clickY, xma-widthFLg, yma + (heightMA - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j1.mag_select > 0){
+                std::cout << "magicien avant" << std::endl;
+                changemag1avant(&DONNEES);
+                std::cout << DONNEES.j1.listemagiciens[DONNEES.j1.mag_select].index << std::endl;
+            } else if (isClickInsideImage(clickX, clickY, xma+widthMA, yma + (heightMA - heightFL) / 2, widthFL, heightFL) && DONNEES.j1.mag_select < DONNEES.j1.listemagiciens.size()-1){
+                std::cout << "magicien apres" << std::endl;
+                changemag1apres(&DONNEES);
+                std::cout << DONNEES.j1.listemagiciens[DONNEES.j1.mag_select].index << std::endl;
+
+            }
+        }
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -691,41 +792,12 @@ int interface() {
                 } else if (highlightedElement2 == TROUPE_DE_GUERRE2){  //click sur soldat adverse
 
                    
-                    if (DONNEES.j2.listesoldats.size() > 1){
-                        insertImages(renderer, 810, yg, widthG, heightG, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
-                        if (isClickInsideImage(clickX, clickY, 810-widthFLg, yg + (heightG - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j2.sold_select > 0){
-                            std::cout << "soldat avant" << std::endl;
-                            changesold2avant(&DONNEES);
-                            std::cout << DONNEES.j2.listesoldats[DONNEES.j2.sold_select].index << std::endl;
-
-                            // -- vie 
-
-                        } else if (isClickInsideImage(clickX, clickY, 810+widthG, yg + (heightG - heightFL) / 2, widthFL, heightFL) && DONNEES.j2.sold_select < DONNEES.j2.listesoldats.size()-1){
-                            std::cout << "soldat apres" << std::endl;
-                            changesold2apres(&DONNEES);
-                            std::cout << DONNEES.j2.listesoldats[DONNEES.j2.sold_select].index<< std::endl;
-
-                            // -- vie 
-
-                        }
-                    }
+                    
 
                 } else if (highlightedElement2 == MAGICIEN2){ //click sur magicien adverse
                     
                     // -- vie magiciens
-                    if (DONNEES.j2.listemagiciens.size() > 1){
-                        insertImages(renderer, 820, yma, widthMA, heightMA, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
-                        if (isClickInsideImage(clickX, clickY, 820-widthFLg, yma + (heightMA - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j2.mag_select > 0){
-                            std::cout << "magicien avant" << std::endl;
-                            changemag2avant(&DONNEES);
-                            std::cout << DONNEES.j2.listemagiciens[DONNEES.j2.mag_select].index << std::endl;
-
-                        } else if (isClickInsideImage(clickX, clickY, 820+widthMA, yma + (heightMA - heightFL) / 2, widthFL, heightFL) && DONNEES.j2.mag_select < DONNEES.j2.listemagiciens.size()-1){
-                            std::cout << "magicien apres" << std::endl;
-                            changemag2apres(&DONNEES);
-                            std::cout << DONNEES.j2.listemagiciens[DONNEES.j2.mag_select].index << std::endl;
-                        }
-                    }
+                    
                 }
                
             }
@@ -815,41 +887,11 @@ int interface() {
                 } else if (highlightedElement2 == TROUPE_DE_GUERRE2){  //click sur soldat adverse
 
                    
-                    if (DONNEES.j2.listesoldats.size() > 1){
-                        insertImages(renderer, 810, yg, widthG, heightG, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
-                        if (isClickInsideImage(clickX, clickY, 810-widthFLg, yg + (heightG - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j2.sold_select > 0){
-                            std::cout << "soldat avant" << std::endl;
-                            changesold2avant(&DONNEES);
-                            std::cout << DONNEES.j2.listesoldats[DONNEES.j2.sold_select].index << std::endl;
-
-                            // -- vie 
-
-                        } else if (isClickInsideImage(clickX, clickY, 810+widthG, yg + (heightG - heightFL) / 2, widthFL, heightFL) && DONNEES.j2.sold_select < DONNEES.j2.listesoldats.size()-1){
-                            std::cout << "soldat apres" << std::endl;
-                            changesold2apres(&DONNEES);
-                            std::cout << DONNEES.j2.listesoldats[DONNEES.j2.sold_select].index << std::endl;
-
-                            // -- vie 
-
-                        }
-                    } 
+                    
                 } else if (highlightedElement2 == MAGICIEN2){ //click sur magicien adverse
                     
                     // -- vie magiciens
-                    if (DONNEES.j2.listemagiciens.size() > 1){
-                        insertImages(renderer, 820, yma, widthMA, heightMA, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
-                        if (isClickInsideImage(clickX, clickY, 820-widthFLg, yma + (heightMA - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j2.mag_select > 0){
-                            std::cout << "magicien avant" << std::endl;
-                            changemag2avant(&DONNEES);
-                            std::cout << DONNEES.j2.listemagiciens[DONNEES.j2.mag_select].index << std::endl;
-
-                        } else if (isClickInsideImage(clickX, clickY, 820+widthMA, yma + (heightMA - heightFL) / 2, widthFL, heightFL) && DONNEES.j2.mag_select < DONNEES.j2.listemagiciens.size()-1){
-                            std::cout << "magicien apres" << std::endl;
-                            changemag2apres(&DONNEES);
-                            std::cout << DONNEES.j2.listemagiciens[DONNEES.j2.mag_select].index << std::endl;
-
-                        }
-                    }
+                    
                 }
                
             }
@@ -1075,42 +1117,12 @@ int interface() {
                 } else if (highlightedElement1 == TROUPE_DE_GUERRE1){  //click sur soldat adverse
 
                    
-                    if (DONNEES.j1.listesoldats.size() > 1){
-                        insertImages(renderer, xg, yg, widthG, heightG, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
-                        if (isClickInsideImage(clickX, clickY, xg-widthFLg, yg + (heightG - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j1.sold_select > 0){
-                            std::cout << "soldat avant" << std::endl;
-                            changesold1avant(&DONNEES);
-                            std::cout << DONNEES.j1.listesoldats[DONNEES.j1.sold_select].index << std::endl;
-
-
-                            // -- vie 
-
-                        } else if (isClickInsideImage(clickX, clickY, xg+widthG, yg + (heightG - heightFL) / 2, widthFL, heightFL) && DONNEES.j1.sold_select < DONNEES.j1.listesoldats.size()-1){
-                            std::cout << "soldat apres" << std::endl;
-                            changesold1apres(&DONNEES);
-                            std::cout << DONNEES.j1.listesoldats[DONNEES.j1.sold_select].index << std::endl;
-
-                            // -- vie 
-
-                        }
-                    }
+                   
 
                 } else if (highlightedElement1 == MAGICIEN1){ //click sur magicien adverse
                     
                     // -- vie magiciens
-                    if (DONNEES.j1.listemagiciens.size() > 1){
-                        insertImages(renderer, xma, yma, widthMA, heightMA, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
-                        if (isClickInsideImage(clickX, clickY, xma-widthFLg, yma + (heightMA - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j1.mag_select > 0){
-                            std::cout << "magicien avant" << std::endl;
-                            changemag1avant(&DONNEES);
-                            std::cout << DONNEES.j1.listemagiciens[DONNEES.j1.mag_select].index << std::endl;
-                        } else if (isClickInsideImage(clickX, clickY, xma+widthMA, yma + (heightMA - heightFL) / 2, widthFL, heightFL) && DONNEES.j1.mag_select < DONNEES.j1.listemagiciens.size()-1){
-                            std::cout << "magicien apres" << std::endl;
-                            changemag1apres(&DONNEES);
-                            std::cout << DONNEES.j1.listemagiciens[DONNEES.j1.mag_select].index << std::endl;
-
-                        }
-                    }
+                    
                 }
                
             }
@@ -1198,41 +1210,12 @@ int interface() {
                 } else if (highlightedElement1 == TROUPE_DE_GUERRE1){  //click sur soldat adverse
 
                    
-                    if (DONNEES.j1.listesoldats.size() > 1){
-                        insertImages(renderer, xg, yg, widthG, heightG, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
-                        if (isClickInsideImage(clickX, clickY, xg-widthFLg, yg + (heightG - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j1.sold_select > 0){
-                            std::cout << "soldat avant" << std::endl;
-                            changesold1avant(&DONNEES);
-                            std::cout << DONNEES.j1.listesoldats[DONNEES.j1.sold_select].index << std::endl;
-
-                            // -- vie 
-
-                        } else if (isClickInsideImage(clickX, clickY, xg+widthG, yg + (heightG - heightFL) / 2, widthFL, heightFL) && DONNEES.j1.sold_select < DONNEES.j1.listesoldats.size()-1){
-                            std::cout << "soldat apres" << std::endl;
-                            changesold1apres(&DONNEES);
-                            std::cout << DONNEES.j1.listesoldats[DONNEES.j1.sold_select].index << std::endl;
-
-                            // -- vie 
-
-                        }
-                    }
+                   
 
                 } else if (highlightedElement1 == MAGICIEN1){ //click sur magicien adverse
                     
                     // -- vie magiciens
-                    if (DONNEES.j1.listemagiciens.size() > 1){
-                        insertImages(renderer, xma, yma, widthMA, heightMA, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
-                        if (isClickInsideImage(clickX, clickY, xma-widthFLg, yma + (heightMA - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j1.mag_select > 0){
-                            std::cout << "magicien avant" << std::endl;
-                            changemag1avant(&DONNEES);
-                            std::cout << DONNEES.j1.listemagiciens[DONNEES.j1.mag_select].index << std::endl;
-
-                        } else if (isClickInsideImage(clickX, clickY, xma+widthMA, yma + (heightMA - heightFL) / 2, widthFL, heightFL) && DONNEES.j1.mag_select < DONNEES.j1.listemagiciens.size()-1){
-                            std::cout << "magicien apres" << std::endl;
-                            changemag1apres(&DONNEES);
-                            std::cout << DONNEES.j1.listemagiciens[DONNEES.j1.mag_select].index << std::endl;
-                        }
-                    }
+                  
                 }
                
             }

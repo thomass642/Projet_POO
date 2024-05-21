@@ -380,6 +380,17 @@ void ressources(SDL_Renderer* renderer, int x, int y, int ressources) {
     TTF_CloseFont(font);
 }
 
+void afficherTexte2(const std::string& texte) {
+    int compteur = 0;
+    for (char c : texte) {
+        std::cout << c;
+        compteur++;
+        if (compteur == 20) {
+            std::cout << std::endl;
+            compteur = 0;
+        }
+    }
+}
 
 /*SelectedImage selectedImage = SelectedImage::VILLAGE; // Image initialement sélectionnée
 
