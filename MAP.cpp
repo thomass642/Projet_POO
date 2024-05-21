@@ -66,6 +66,17 @@ int interface() {
         return 1;
     }
 
+    TTF_Font* font2 = TTF_OpenFont("arial.ttf", 30); // Utilisez le chemin approprié vers votre fichier de police
+
+    if (font2 == nullptr) {
+        SDL_Log("Erreur lors du chargement de la police : %s", TTF_GetError());
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        TTF_Quit();
+        SDL_Quit();
+        return 1;
+    }
+
     // Créez une surface noire pour le rendu du texte
     SDL_Surface* textSurface = TTF_RenderText_Solid(font, "Welcome dans la partie !", {255, 255, 255}); // Couleur blanche
     if (textSurface == nullptr) {
@@ -597,9 +608,9 @@ int interface() {
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         if ( DONNEES.tour_joueur == 1 ) { 
-            afficherTexte(renderer, font, DONNEES.j1.nomj.c_str(), 600, 120, {100,0,50,0});
+            afficherTexte(renderer, font2, DONNEES.j1.nomj.c_str(), 600, 120, {100,0,50,0});
         } else {
-            afficherTexte(renderer, font, DONNEES.j2.nomj.c_str(), 600, 120, {100,0,50,0});
+            afficherTexte(renderer, font2, DONNEES.j2.nomj.c_str(), 580, 120, {100,0,50,0});
         }
 
         ressources(renderer,400,130,DONNEES.j1.ressources);
