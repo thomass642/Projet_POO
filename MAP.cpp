@@ -789,13 +789,42 @@ int interface() {
 
                 } else if (highlightedElement2 == TROUPE_DE_GUERRE2){  //click sur soldat adverse
 
-                   
+                   if (DONNEES.j2.listesoldats.size() > 1){
+                        insertImages(renderer, 810, yg, widthG, heightG, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+                        if (isClickInsideImage(clickX, clickY, 810-widthFLg, yg + (heightG - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j2.sold_select > 0){
+                            std::cout << "soldat avant" << std::endl;
+                            changesold2avant(&DONNEES);
+                            std::cout << DONNEES.j2.listesoldats[DONNEES.j2.sold_select].index << std::endl;
+
+                            // -- vie 
+
+                        } else if (isClickInsideImage(clickX, clickY, 810+widthG, yg + (heightG - heightFL) / 2, widthFL, heightFL) && DONNEES.j2.sold_select < DONNEES.j2.listesoldats.size()-1){
+                            std::cout << "soldat apres" << std::endl;
+                            changesold2apres(&DONNEES);
+                            std::cout << DONNEES.j2.listesoldats[DONNEES.j2.sold_select].index<< std::endl;
+
+                            // -- vie 
+
+                        }
+                    }
                     
 
                 } else if (highlightedElement2 == MAGICIEN2){ //click sur magicien adverse
                     
                     // -- vie magiciens
-                    
+                    if (DONNEES.j2.listemagiciens.size() > 1){
+                        insertImages(renderer, 820, yma, widthMA, heightMA, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+                        if (isClickInsideImage(clickX, clickY, 820-widthFLg, yma + (heightMA - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j2.mag_select > 0){
+                            std::cout << "magicien avant" << std::endl;
+                            changemag2avant(&DONNEES);
+                            std::cout << DONNEES.j2.listemagiciens[DONNEES.j2.mag_select].index << std::endl;
+
+                        } else if (isClickInsideImage(clickX, clickY, 820+widthMA, yma + (heightMA - heightFL) / 2, widthFL, heightFL) && DONNEES.j2.mag_select < DONNEES.j2.listemagiciens.size()-1){
+                            std::cout << "magicien apres" << std::endl;
+                            changemag2apres(&DONNEES);
+                            std::cout << DONNEES.j2.listemagiciens[DONNEES.j2.mag_select].index << std::endl;
+                        }
+                    }
                 }
                
             }
@@ -883,12 +912,42 @@ int interface() {
                     // -- vie ecole sinon defensseurs
 
                 } else if (highlightedElement2 == TROUPE_DE_GUERRE2){  //click sur soldat adverse
+                    if (DONNEES.j2.listesoldats.size() > 1){
+                        insertImages(renderer, 810, yg, widthG, heightG, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+                        if (isClickInsideImage(clickX, clickY, 810-widthFLg, yg + (heightG - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j2.sold_select > 0){
+                            std::cout << "soldat avant" << std::endl;
+                            changesold2avant(&DONNEES);
+                            std::cout << DONNEES.j2.listesoldats[DONNEES.j2.sold_select].index << std::endl;
 
+                            // -- vie 
+
+                        } else if (isClickInsideImage(clickX, clickY, 810+widthG, yg + (heightG - heightFL) / 2, widthFL, heightFL) && DONNEES.j2.sold_select < DONNEES.j2.listesoldats.size()-1){
+                            std::cout << "soldat apres" << std::endl;
+                            changesold2apres(&DONNEES);
+                            std::cout << DONNEES.j2.listesoldats[DONNEES.j2.sold_select].index<< std::endl;
+
+                            // -- vie 
+
+                        }
+                    }
                    
                     
                 } else if (highlightedElement2 == MAGICIEN2){ //click sur magicien adverse
                     
                     // -- vie magiciens
+                    if (DONNEES.j2.listemagiciens.size() > 1){
+                        insertImages(renderer, 820, yma, widthMA, heightMA, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+                        if (isClickInsideImage(clickX, clickY, 820-widthFLg, yma + (heightMA - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j2.mag_select > 0){
+                            std::cout << "magicien avant" << std::endl;
+                            changemag2avant(&DONNEES);
+                            std::cout << DONNEES.j2.listemagiciens[DONNEES.j2.mag_select].index << std::endl;
+
+                        } else if (isClickInsideImage(clickX, clickY, 820+widthMA, yma + (heightMA - heightFL) / 2, widthFL, heightFL) && DONNEES.j2.mag_select < DONNEES.j2.listemagiciens.size()-1){
+                            std::cout << "magicien apres" << std::endl;
+                            changemag2apres(&DONNEES);
+                            std::cout << DONNEES.j2.listemagiciens[DONNEES.j2.mag_select].index << std::endl;
+                        }
+                    }
                     
                 }
                
@@ -1113,13 +1172,43 @@ int interface() {
                     // -- vie ecole sinon defensseurs
 
                 } else if (highlightedElement1 == TROUPE_DE_GUERRE1){  //click sur soldat adverse
+                    if (DONNEES.j1.listesoldats.size() > 1){
+                        insertImages(renderer, xg, yg, widthG, heightG, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+                        if (isClickInsideImage(clickX, clickY, xg-widthFLg, yg + (heightG - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j1.sold_select > 0){
+                            std::cout << "soldat avant" << std::endl;
+                            changesold1avant(&DONNEES);
+                            std::cout << DONNEES.j1.listesoldats[DONNEES.j1.sold_select].index << std::endl;
 
-                   
-                   
+
+                            // -- vie 
+
+                        } else if (isClickInsideImage(clickX, clickY, xg+widthG, yg + (heightG - heightFL) / 2, widthFL, heightFL) && DONNEES.j1.sold_select < DONNEES.j1.listesoldats.size()-1){
+                            std::cout << "soldat apres" << std::endl;
+                            changesold1apres(&DONNEES);
+                            std::cout << DONNEES.j1.listesoldats[DONNEES.j1.sold_select].index << std::endl;
+
+                            // -- vie 
+
+                        }
+                    }
 
                 } else if (highlightedElement1 == MAGICIEN1){ //click sur magicien adverse
                     
                     // -- vie magiciens
+        
+                    if (DONNEES.j1.listemagiciens.size() > 1){
+                        insertImages(renderer, xma, yma, widthMA, heightMA, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+                        if (isClickInsideImage(clickX, clickY, xma-widthFLg, yma + (heightMA - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j1.mag_select > 0){
+                            std::cout << "magicien avant" << std::endl;
+                            changemag1avant(&DONNEES);
+                            std::cout << DONNEES.j1.listemagiciens[DONNEES.j1.mag_select].index << std::endl;
+                        } else if (isClickInsideImage(clickX, clickY, xma+widthMA, yma + (heightMA - heightFL) / 2, widthFL, heightFL) && DONNEES.j1.mag_select < DONNEES.j1.listemagiciens.size()-1){
+                            std::cout << "magicien apres" << std::endl;
+                            changemag1apres(&DONNEES);
+                            std::cout << DONNEES.j1.listemagiciens[DONNEES.j1.mag_select].index << std::endl;
+
+                        }
+                    }
                     
                 }
                
@@ -1207,12 +1296,45 @@ int interface() {
 
                 } else if (highlightedElement1 == TROUPE_DE_GUERRE1){  //click sur soldat adverse
 
-                   
+                   if (DONNEES.j1.listesoldats.size() > 1){
+                        insertImages(renderer, xg, yg, widthG, heightG, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+                        if (isClickInsideImage(clickX, clickY, xg-widthFLg, yg + (heightG - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j1.sold_select > 0){
+                            std::cout << "soldat avant" << std::endl;
+                            changesold1avant(&DONNEES);
+                            std::cout << DONNEES.j1.listesoldats[DONNEES.j1.sold_select].index << std::endl;
+
+
+                            // -- vie 
+
+                        } else if (isClickInsideImage(clickX, clickY, xg+widthG, yg + (heightG - heightFL) / 2, widthFL, heightFL) && DONNEES.j1.sold_select < DONNEES.j1.listesoldats.size()-1){
+                            std::cout << "soldat apres" << std::endl;
+                            changesold1apres(&DONNEES);
+                            std::cout << DONNEES.j1.listesoldats[DONNEES.j1.sold_select].index << std::endl;
+
+                            // -- vie 
+
+                        }
+                    }
                    
 
                 } else if (highlightedElement1 == MAGICIEN1){ //click sur magicien adverse
                     
                     // -- vie magiciens
+                    if (DONNEES.j1.listemagiciens.size() > 1){
+                        insertImages(renderer, xma, yma, widthMA, heightMA, imageTextureflg, widthFLg, heightFLg, imageTexturefl, widthFL, heightFL);
+                        if (isClickInsideImage(clickX, clickY, xma-widthFLg, yma + (heightMA - heightFLg) / 2, widthFLg, heightFLg) && DONNEES.j1.mag_select > 0){
+                            std::cout << "magicien avant" << std::endl;
+                            changemag1avant(&DONNEES);
+                            std::cout << DONNEES.j1.listemagiciens[DONNEES.j1.mag_select].index << std::endl;
+                        } else if (isClickInsideImage(clickX, clickY, xma+widthMA, yma + (heightMA - heightFL) / 2, widthFL, heightFL) && DONNEES.j1.mag_select < DONNEES.j1.listemagiciens.size()-1){
+                            std::cout << "magicien apres" << std::endl;
+                            changemag1apres(&DONNEES);
+                            std::cout << DONNEES.j1.listemagiciens[DONNEES.j1.mag_select].index << std::endl;
+
+                        }
+                    }
+                    
+                
                   
                 }
                
