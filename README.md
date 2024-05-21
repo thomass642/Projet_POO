@@ -12,4 +12,4 @@ Vous aurez chacun votre tour la possibilité de réaliser ces actions, si vos re
 
 A vous de jouer !
 
-
+Si vous voulez jouer avec le terminal, il suffit d'aller dans le fichier DefParam.hpp et de mettre "false" à la place de "true" dans cette ligne : "#define JOUER_AVEC_AFFICHAGE_GRAPHIQUE true"
